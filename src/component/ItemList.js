@@ -12,7 +12,7 @@ class ItemList extends React.Component {
     return (
       <div className="ItemList row">
           {
-              listItem.map((i)=>(<Item name="/image/dong2.gif"/>)
+              listItem.map((i,key)=>(<Item key={key} name="/image/dong2.gif"/>)
                   
               )
           }

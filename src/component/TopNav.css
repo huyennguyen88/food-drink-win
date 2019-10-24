@@ -1,4 +1,7 @@
 .Menu img{
-    width: 100px;
-    height: 100px;
+    width: 70px;
+    height: 70px;
+}
+.Menu nav{
+    background-image: url(covernav.png);
 }

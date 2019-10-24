@@ -6,7 +6,7 @@ import Footer from './component/Footer'
 class App extends React.Component {
   render(){
     return (
-      <div className="App">
+      <div className="App container">
         <TopNav/>
         <Main/>
         <Footer/>
