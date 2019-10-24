@@ -1,0 +1,24 @@
+import React from 'react';
+import './ItemList.css';
+import Item from './Item'
+class ItemList extends React.Component {
+    constructor(props){
+        super(props);
+        
+        
+    }
+  render(){
+    var listItem = [0,1,2,3,4,5]
+    return (
+      <div className="ItemList row">
+          {
+              listItem.map((i)=>(<Item name="/image/dong2.gif"/>)
+                  
+              )
+          }
+      </div>
+    );
+  }
+
+}
+export default ItemList;
