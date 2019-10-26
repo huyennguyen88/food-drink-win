@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 import './TopNav.css';
 import Main from './Main';
+import CartSmall from './CartSmall';
 class TopNav extends React.Component {
     render() {
         return (
@@ -69,7 +70,8 @@ class Menu extends React.Component {
 class SubMenu extends React.Component {
     render() {
         return (
-            <div className="SubMenu d-flex justify-content-between my-3">
+            <Router>
+<div className="SubMenu d-flex justify-content-between my-3">
                 <div>
                     <form className="form-inline my-2 my-lg-0">
                         <div className="input-group ">
@@ -94,15 +96,25 @@ class SubMenu extends React.Component {
                     </form>
                 </div>
                 <div className="d-flex flex-row justify-content-end">
-                    <div className="d-flex mx-2">
+                    <div className="d-flex mx-1">
+                         <Link to="/cart">
+                         <button type="button" className="btn btn-outline-success">My cart
+                           
+                           </button>
+                         </Link>
+                      
+                    </div>
+                    <div className="d-flex mx-1">
                         <button type="button" className="btn btn-warning">Login</button>
                     </div>
                     <div className="d-flex ">
-                        <button type="button" className="btn btn-outline-warning">Sign up</button>
+                        <button type="button" className="btn btn-info">Sign up</button>
                     </div>
                 </div>
 
             </div>
+            </Router>
+            
         );
 
     }

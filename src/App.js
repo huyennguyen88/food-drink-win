@@ -10,6 +10,7 @@ import TopNav from './component/TopNav'
 import Main from './component/Main'
 import Footer from './component/Footer'
 import ItemDetail from './component/ItemDetail';
+import CartPage from './component/CartPage';
 
 class App extends React.Component {
   render() {
@@ -19,6 +20,7 @@ class App extends React.Component {
           <TopNav />
             <Route exact path="/" component={Main} />
             <Route exact path="/item" component={ItemDetail} />
+            <Route exact path="/cart" component={CartPage}/>
           <Footer />
         </div>
       </Router>
