@@ -1,14 +1,16 @@
 import React from 'react';
 import './Main.css';
 import BigImage from './BigImage'
-import ItemList from './ItemList'
+import TabList from './TabList'
+import Pagination from './Pagination';
 class Main extends React.Component {
   render(){
     return (
       <div className="Main container">
           <div className="row">
-            <LeftBar/>
+            {/* <LeftBar/> */}
             <MainM/>
+            
           </div>
       </div>
     );
@@ -17,7 +19,7 @@ class Main extends React.Component {
 class LeftBar extends React.Component{
   render(){
     var style = {
-      backgroundColor: "rgb(147, 42, 3)"
+      backgroundColor: "rgb(237, 75, 3)"
     }
     return (
       <div className="LeftBar col-lg-3">
@@ -34,9 +36,10 @@ class LeftBar extends React.Component{
 class MainM extends React.Component{
   render(){
     return (
-      <div className="Main col-lg-9">
+      <div className="Main ">
         <BigImage/>
-        <ItemList/>
+        <TabList/>
+        <Pagination/>
       </div>
     );
   }

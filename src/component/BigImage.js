@@ -15,10 +15,10 @@ class BigImage extends React.Component {
               <img className="d-block img-fluid" src="./image/mi.jpg" alt="First slide"/>
             </div>
             <div className="carousel-item">
-              <img className="d-block img-fluid" src="./image/water.jpg" alt="Second slide"/>
+              <img className="d-block img-fluid" src="./image/coverimg.jpg" alt="Second slide"/>
             </div>
             <div className="carousel-item">
-              <img className="d-block img-fluid" src="./image/ram.jpg" alt="Third slide"/>
+              <img className="d-block img-fluid" src="./image/cocktail.jpg" alt="Third slide"/>
             </div>
           </div>
           <a className="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
