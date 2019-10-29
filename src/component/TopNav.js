@@ -98,7 +98,7 @@ class SubMenu extends React.Component {
                 <div className="d-flex flex-row justify-content-end">
                     <div className="d-flex mx-1">
                          <Link to="/cart">
-                         <button type="button" className="btn btn-outline-success">My cart
+                         <button type="button" className="btn btn-outline-success">My cart <i class="fas fa-shopping-cart"></i>
                            
                            </button>
                          </Link>
