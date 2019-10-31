@@ -1,5 +1,4 @@
 import React from 'react';
-import './Main.css';
 import BigImage from './BigImage'
 import TabList from './TabList'
 import Pagination from './Pagination';

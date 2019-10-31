@@ -1,5 +1,4 @@
 import React from 'react';
-import './Item.css';
 import ItemDetail from './ItemDetail';
 import {
     BrowserRouter as Router,

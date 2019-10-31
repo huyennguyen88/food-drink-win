@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Login from './LogSign'
-import Logged from './Logged'
 export default class SubMenu extends Component {
     constructor(props)
     {
@@ -21,7 +20,7 @@ export default class SubMenu extends Component {
                         <button className="btn btn-success my-2 my-sm-0" type="submit">Search</button>
                     </form>
                 </div>
-                <Login></Login>
+                <Login changepage = {this.props.changepage}></Login>
             </div>
         );
     }
