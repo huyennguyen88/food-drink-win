@@ -1,10 +1,6 @@
 import React, { Component } from 'react'
 
 export default class Login extends Component {
-    fn = () =>
-    {
-        this.props.parentCallback("home");
-    }
     render() {
         return (
             <>

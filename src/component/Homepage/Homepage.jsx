@@ -1,18 +1,18 @@
 import React, { Component } from 'react'
-import TopNav from './TopNav.jsx'
+import TopNav from './TopNav/TopNav.jsx'
 import Main from './Main'
-import Footer from './Footer'
-import Login from './Loginpage/Login'
-import Signup from './Loginpage/Signup'
+import Footer from './Footer/Footer'
+import Login from './TopNav/Loginpage/Login'
+import Signup from './TopNav/Loginpage/Signup'
 export default class Homepage extends Component {
     constructor(props)
     {
         super(props)
-        this.state ={
-            ispage: "home",
+        this.state = {
+            ispage:"home",
         }
     }
-    callback = (data) =>
+    whichpages=(data) => 
     {
         this.setState({ispage:data})
     }
@@ -22,15 +22,15 @@ export default class Homepage extends Component {
             case "home":
                 return <Main/>
             case "login":
-                return <Login parentCallback ={this.callback}/>
+                return <Login changepage ={this.whichpages}/>
             case "signup":
-                return <Signup parentCallback ={this.callback}/>
+                return <Signup changepage ={this.whichpages}/>
         }
     }
     render() {
         return (
             <div>
-                <TopNav parentCallback ={this.callback}/>
+                <TopNav changepage ={this.whichpages}/>
                 {
                     this.Checkpage()
                 }
