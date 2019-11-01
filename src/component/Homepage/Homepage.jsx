@@ -1,40 +1,40 @@
 import React, { Component } from 'react'
-import TopNav from './TopNav/TopNav.jsx'
+import TopNav from '../Shared/TopNav/TopNav'
 import Main from './Main'
-import Footer from './Footer/Footer'
-import Login from './TopNav/Loginpage/Login'
-import Signup from './TopNav/Loginpage/Signup'
+import Footer from '../Shared/Footer/Footer'
+import Login from '../Shared/TopNav/Loginpage/Login'
+import Signup from '../Shared/TopNav/Loginpage/Signup'
+import CartPage from '../Cart/CartPage'
+import {
+    Switch,
+    Route,
+} from 'react-router-dom';
+import ItemDetail from '../ItemDetailPage/ItemDetail'
 export default class Homepage extends Component {
-    constructor(props)
-    {
-        super(props)
-        this.state = {
-            ispage:"home",
-        }
-    }
-    whichpages=(data) => 
-    {
-        this.setState({ispage:data})
-    }
-    Checkpage = () =>
-    {
-        switch(this.state.ispage){
-            case "home":
-                return <Main/>
-            case "login":
-                return <Login changepage ={this.whichpages}/>
-            case "signup":
-                return <Signup changepage ={this.whichpages}/>
-        }
-    }
     render() {
         return (
+
             <div>
-                <TopNav changepage ={this.whichpages}/>
-                {
-                    this.Checkpage()
-                }
-                <Footer/>
+                <TopNav changepage={this.whichpages} />
+                <Switch>
+                    <Route path="/item">
+                        <ItemDetail/>
+                    </Route>
+                    <Route path="/cart">
+                        <CartPage/>
+                    </Route>
+                    <Route path="/login">
+                        <Login/>
+                    </Route>
+                    <Route path="/signup">
+                        <Signup/>
+                    </Route>
+                    <Route path="/">
+                        <Main/>
+                    </Route>
+                </Switch>
+
+                <Footer />
             </div>
         )
     }

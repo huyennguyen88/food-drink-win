@@ -26,7 +26,7 @@ class Preview extends React.Component {
         return (
             <div className="preview col-md-6">
                 <div className="preview-pic tab-content">
-                    <div className="tab-pane active" id="pic-1"><img src="./image/dong2.gif" /></div>
+                    <div className="tab-pane active" id="pic-1"><img alt="abc" src="./image/dong2.gif" /></div>
                 </div>
             </div>
         );

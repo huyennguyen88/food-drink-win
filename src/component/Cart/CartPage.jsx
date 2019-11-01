@@ -1,5 +1,4 @@
 import React from 'react';
-import CartItem from './CartItem';
 import ItemCartList from './ItemCartList';
 import OrderCheck from './OrderCheck';
 

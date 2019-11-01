@@ -12,7 +12,7 @@ class Comment extends React.Component {
                             <div className="card-body">
                                 <hr/>
                                 <div className="media">
-                                    <a href="#" className="float-left">
+                                    <a href="abc" className="float-left">
                                         <img src="https://bootdey.com/img/Content/user_1.jpg" alt="" className="rounded-circle mr-3" />
                                     </a>
                                     <div className="media-body">

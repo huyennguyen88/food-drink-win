@@ -10,10 +10,10 @@ class BigImage extends React.Component {
           </ol>
           <div className="carousel-inner" role="listbox">
             <div className="carousel-item active">
-              <img style = {style} className="d-block img-fluid" src="./image/mi.jpg" alt="First slide"/>
+              <img style = {style} className="d-block img-fluid" src="./image/coverimg.jpg" alt="First slide"/>
             </div>
             <div className="carousel-item">
-              <img style = {style} className="d-block img-fluid" src="./image/coverimg.jpg" alt="Second slide"/>
+              <img style = {style} className="d-block img-fluid" src="./image/mi.jpg" alt="Second slide"/>
             </div>
             <div className="carousel-item">
               <img style = {style} className="d-block img-fluid" src="./image/cocktail.jpg" alt="Third slide"/>

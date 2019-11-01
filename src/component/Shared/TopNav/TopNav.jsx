@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import Menu from './MainMenu'
+import MainMenu from './MainMenu'
 import SubMenu from './SubMenu'
 export default class TopNav extends Component {
     render() {
         return (
             <div className="TopNav">
-                <Menu />
+                <MainMenu />
                 <SubMenu changepage = {this.props.changepage}/>
             </div>
         );

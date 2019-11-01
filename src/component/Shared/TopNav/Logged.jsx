@@ -1,10 +1,6 @@
 import React, { Component } from 'react'
 
 export default class Logged extends Component {
-    constructor(props)
-    {
-        super(props)
-    }
     render() {
         return (
             <div className="d-flex flex-row justify-content-end">
