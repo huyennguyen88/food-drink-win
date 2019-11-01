@@ -4,7 +4,7 @@ import './App.css';
 import {
   BrowserRouter as Router,
 } from 'react-router-dom';
-import Homepage from './component/Homepage/Homepage'
+import Homepage from './components/Homepage/Homepage'
 class App extends React.Component {
   render() {
     return (
