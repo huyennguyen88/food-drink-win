@@ -10,8 +10,7 @@ class ItemList extends React.Component
     return (
       <div className="ItemList row my-4">
           {
-              listItem.map((i,key)=>(<Item key={key} name="/image/dong2.gif"/>)
-                  
+              listItem.map((i,key)=>(<Item key={key} name="/image/dong2.gif"/>)    
               )
           }
       </div>
