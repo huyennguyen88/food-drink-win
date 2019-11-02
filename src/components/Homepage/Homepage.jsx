@@ -10,6 +10,7 @@ import {
     Route,
 } from 'react-router-dom';
 import ItemDetail from '../ItemDetailPage/ItemDetail'
+import UserProfile from '../UserProfile/UserProfile'
 export default class Homepage extends Component {
     render() {
         return (
@@ -29,11 +30,13 @@ export default class Homepage extends Component {
                     <Route path="/signup">
                         <Signup/>
                     </Route>
+                    <Route path="/profile">
+                        <UserProfile/>
+                    </Route>
                     <Route path="/">
                         <Main/>
                     </Route>
                 </Switch>
-
                 <Footer />
             </div>
         )

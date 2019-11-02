@@ -1,4 +1,7 @@
 import React, { Component } from 'react'
+import {
+ Link
+} from 'react-router-dom';
 export default class Login extends Component {
     render() {
         return (
@@ -24,7 +27,7 @@ export default class Login extends Component {
                                 </div>
                             </div>
                             <div className="form-group ">
-                                <button type="submit" className="btn btn-info">Login</button>
+                                <Link to="/profile"> <button type="submit" className="btn btn-info">Login</button></Link>
                                 <button type="reset" className="btn btn-warning mx-2">Cancel</button>
                             </div>
                         </form>
