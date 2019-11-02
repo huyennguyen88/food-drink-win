@@ -10,13 +10,13 @@ class BigImage extends React.Component {
           </ol>
           <div className="carousel-inner" role="listbox">
             <div className="carousel-item active">
-              <img style = {style.img} className="d-block img-fluid" src="./image/mi.jpg" alt="First slide"/>
+              <img style = {style} className="d-block img-fluid" src="./image/coverimg.jpg" alt="First slide"/>
             </div>
             <div className="carousel-item">
-              <img style = {style.img} className="d-block img-fluid" src="./image/coverimg.jpg" alt="Second slide"/>
+              <img style = {style} className="d-block img-fluid" src="./image/mi.jpg" alt="Second slide"/>
             </div>
             <div className="carousel-item">
-              <img style = {style.img} className="d-block img-fluid" src="./image/cocktail.jpg" alt="Third slide"/>
+              <img style = {style} className="d-block img-fluid" src="./image/cocktail.jpg" alt="Third slide"/>
             </div>
           </div>
           <a className="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -33,8 +33,8 @@ class BigImage extends React.Component {
 }
 export default BigImage;
 const style = {
-  BigImage:{
+
     width:"100%",
     height:"400px"
-          }
+          
 }

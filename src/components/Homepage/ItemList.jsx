@@ -2,9 +2,6 @@ import React from 'react';
 import Item from './Item'
 class ItemList extends React.Component
  {
-    constructor(props){
-        super(props);
-    }
   render(){
     var listItem = [0,1,2,3,4,5,6,7]
     return (

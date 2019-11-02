@@ -16,7 +16,7 @@ class OrderCheck extends React.Component {
                             <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
                                 <h5 class="font-weight-bold">$400.00</h5>
                             </li>
-                        </ul><a href="#" class="btn btn-warning rounded-pill py-2 btn-block">Procceed to checkout</a>
+                        </ul><a href="abc" class="btn btn-warning rounded-pill py-2 btn-block">Procceed to checkout</a>
                     </div>
                 </div>
 
