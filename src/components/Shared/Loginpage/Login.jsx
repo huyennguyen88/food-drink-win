@@ -19,7 +19,7 @@ export default class Login extends React.Component {
                     </div>
                     <div className="d-flex flex-row justify-content-end">
                         <div className ="d-flex mx-2"><button className="btn btn-warning">Login</button></div>
-                        <div className ="d-flex"><button className="btn btn-outline-warning" onClick = {this.fn}>Cancel</button></div>
+                        <div className ="d-flex"><button className="btn btn-outline-warning" >Cancel</button></div>
                     </div>
                 </form>
             </>

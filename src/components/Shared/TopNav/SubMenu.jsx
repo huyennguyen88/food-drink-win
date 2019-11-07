@@ -27,7 +27,7 @@ export default class SubMenu extends Component {
                         <button className="btn btn-success my-2 my-sm-0" type="submit">Search</button>
                     </form>
                 </div>
-                <Login changepage = {this.props.changepage}></Login>
+                <Login/>
             </div>
         );
     }

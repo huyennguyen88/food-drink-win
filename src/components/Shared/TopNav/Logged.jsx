@@ -8,7 +8,7 @@ export default class Logged extends Component {
                     <label>ueihgnurt@gmail.com</label>
                 </div>
                 <div className="d-flex mx-2">
-                    <button className="btn btn-outline-warning" onClick = {this.log}>Logout</button>
+                    <button className="btn btn-outline-warning" >Logout</button>
                 </div>
             </div>
         )
