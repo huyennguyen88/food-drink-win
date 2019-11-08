@@ -15,6 +15,8 @@ class ItemDetail extends React.Component {
         let product = this.props.product;
         return (
             <div>
+
+
             <div className="ItemDetail">
                 <div className="card card-detail border-light">
                     <div className="container-fliud">
