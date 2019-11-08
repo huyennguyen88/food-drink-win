@@ -1,8 +1,18 @@
 import React from 'react';
 import './ItemDetail.css';
-import Comment from './Comment' 
+import Comment from './Comment'
+import {connect} from 'react-redux'
+import * as actions from './../../actions/index'
 class ItemDetail extends React.Component {
+    constructor(props){
+        super(props)
+    }
+    componentDidMount(){
+        var id = this.props.match.params.id
+        this.props.productShow(id);
+    }
     render() {
+        let product = this.props.product;
         return (
             <div>
 
@@ -11,8 +21,8 @@ class ItemDetail extends React.Component {
                 <div className="card card-detail border-light">
                     <div className="container-fliud">
                         <div className="wrapper row">
-                            <Preview />
-                            <DetailInfo/>
+                            <Preview img={product.image}/>
+                            <DetailInfo product={product}/>
                         </div>
                     </div>
                 </div>
@@ -28,7 +38,7 @@ class Preview extends React.Component {
         return (
             <div className="preview col-md-6">
                 <div className="preview-pic tab-content">
-                    <div className="tab-pane active" id="pic-1"><img alt="abc" src="./image/dong2.gif" /></div>
+                    <div className="tab-pane active" id="pic-1"><img alt="abc" src={"./../../image/"+this.props.img} /></div>
                 </div>
             </div>
         );
@@ -36,11 +46,16 @@ class Preview extends React.Component {
 }
 class DetailInfo extends React.Component{
     render(){
+        let {product} = this.props
+        console.log(product)
         return(
             <div className="details col-md-6">
-            <p className="h2">Ramen</p>
+            <p className="h2">{product.name}</p>
             <div className="rating">
                 <div className="stars">
+                {
+                    
+                }
                     <span className="fa fa-star checked"></span>
                     <span className="fa fa-star checked"></span>
                     <span className="fa fa-star checked"></span>
@@ -49,8 +64,8 @@ class DetailInfo extends React.Component{
                 </div>
                 <span className="review-no">41 reviews</span>
             </div>
-            <p className="product-description">Suspendisse quos? Tempus cras iure temporibus? Eu laudantium cubilia sem sem! Repudiandae et! Massa senectus enim minim sociosqu delectus posuere.</p>
-            <h4 className="price">current price: <span>$180</span></h4>
+            <p className="product-description">{product.description}</p>
+            <h4 className="price">current price: <span>${product.price}</span></h4>
             <p className="vote"><strong>91%</strong> of buyers enjoyed this product! <strong>(87 votes)</strong></p>
             <div className="action">
                 <button className="btn btn-success mx-1" type="button">Add to cart</button>
@@ -60,4 +75,16 @@ class DetailInfo extends React.Component{
         );
     }
 }
-export default ItemDetail;
+const mapStateToProps = (state) =>{
+    return{
+        product: state.products
+    }
+}
+const mapDispatchToProps = (dispatch,props) =>{
+    return {
+        productShow : (id)=>{
+            dispatch(actions.productShowRequest(id))
+        }
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(ItemDetail);

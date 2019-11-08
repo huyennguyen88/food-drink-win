@@ -8,6 +8,7 @@ import CartPage from '../Cart/CartPage'
 import {
     Switch,
     Route,
+    BrowserRouter as Router,
 } from 'react-router-dom';
 import ItemDetail from '../ItemDetailPage/ItemDetail'
 export default class Homepage extends Component {
@@ -17,8 +18,7 @@ export default class Homepage extends Component {
             <div>
                 <TopNav changepage={this.whichpages} />
                 <Switch>
-                    <Route path="/item">
-                        <ItemDetail/>
+                    <Route path="/products/:id" component={ItemDetail} >
                     </Route>
                     <Route path="/cart">
                         <CartPage/>
