@@ -5,6 +5,8 @@ class ItemDetail extends React.Component {
     render() {
         return (
             <div>
+
+
             <div className="ItemDetail">
                 <div className="card card-detail border-light">
                     <div className="container-fliud">
