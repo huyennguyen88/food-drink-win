@@ -35,10 +35,7 @@ class ItemList extends React.Component
     // console.log(products)
     return (
       <div className="ItemList row my-4">
-          {
-              listItem.map((i,key)=>(<Item key={key} name="/image/dong2.gif"/>)    
-              )
-          }
+         {listItem}
       </div>
     );
   }
