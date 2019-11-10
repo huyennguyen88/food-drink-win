@@ -4,9 +4,6 @@ import Comment from './Comment'
 import {connect} from 'react-redux'
 import * as actions from './../../actions/index'
 class ItemDetail extends React.Component {
-    constructor(props){
-        super(props)
-    }
     componentDidMount(){
         var id = this.props.match.params.id
         this.props.productShow(id);
