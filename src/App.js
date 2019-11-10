@@ -5,6 +5,8 @@ import './App.css';
 import {
   BrowserRouter as Router,
 } from 'react-router-dom';
+import {connect} from 'react-redux'
+import * as actions from './actions/index'
 import Homepage from './components/Homepage/Homepage'
 import { create } from 'domain';
 class App extends React.Component {
@@ -27,8 +29,6 @@ class App extends React.Component {
           <Homepage />
         </div>
       </Router>
-
-
     );
   }
 }
