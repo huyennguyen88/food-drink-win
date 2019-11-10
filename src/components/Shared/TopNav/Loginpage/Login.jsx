@@ -1,5 +1,33 @@
 import React, { Component } from 'react'
+import callApi from './../../../../utils/apiCaller'
 export default class Login extends Component {
+    constructor(props){
+        super(props);
+        this.state ={
+            email: '',
+            password: '',
+            isLogged: false,
+        }
+    } 
+    onChange =(e) => {
+        let target = e.target
+        let name = target.name
+        let value = target.value
+        this.setState({
+            [name]: value
+        })
+    }
+    onSubmit = (e) => {
+        e.preventDefault();
+        console.log(this.state)
+        callApi("users/sign_in","POST",{
+            email: this.state.email,
+            password: this.state.password
+        }).then(res=>{
+            
+            console.log(res)
+        })
+    }
     render() {
         return (
             <div className="Login container">
@@ -12,7 +40,7 @@ export default class Login extends Component {
                                     <div className="input-group-prepend">
                                         <span className="input-group-text"> <i className="fa fa-user" /> </span>
                                     </div>
-                                    <input name="email"className="form-control" placeholder="Enter email" type="email" />
+                                    <input onKeyUp={this.onChange} name="email"className="form-control" placeholder="Enter email" type="email" />
                                 </div>
                             </div>
                             <div className="form-group">
@@ -20,11 +48,11 @@ export default class Login extends Component {
                                     <div className="input-group-prepend">
                                         <span className="input-group-text"> <i className="fa fa-lock" /> </span>
                                     </div>
-                                    <input className="form-control" placeholder="Enter password" type="password" />
+                                    <input onKeyUp={this.onChange} name="password" className="form-control" placeholder="Enter password" type="password" />
                                 </div>
                             </div>
                             <div className="form-group ">
-                                <button type="submit" className="btn btn-info">Login</button>
+                                <button onClick={this.onSubmit}type="submit" className="btn btn-info">Login</button>
                                 <button type="reset" className="btn btn-warning mx-2">Cancel</button>
                             </div>
                         </form>
