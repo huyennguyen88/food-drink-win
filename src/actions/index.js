@@ -1,4 +1,7 @@
 import * as types from './../constants/ActionTypes'
+export const allItem = ()=>{
+    return {
+        type: types.ALL_ITEM
 import callApi from './../utils/apiCaller'
 import axios from 'axios'
 export const fetchProductsRequest = (dispatch)=>{
