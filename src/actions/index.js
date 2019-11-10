@@ -1,3 +1,4 @@
+
 import * as types from './../constants/ActionTypes'
 import callApi from './../utils/apiCaller'
 export const fetchProductsRequest = (dispatch)=>{
@@ -7,6 +8,7 @@ export const fetchProductsRequest = (dispatch)=>{
         })
     }
 }
+
 export const fetchFoodsRequest = (dispatch)=>{
     return (dispatch) => {
         return callApi('products','GET',null).then(res=>{
