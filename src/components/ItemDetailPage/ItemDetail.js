@@ -7,6 +7,7 @@ class ItemDetail extends React.Component {
     componentDidMount() {
         var id = this.props.match.params.id
         this.props.productShow(id);
+        console.log(this.props.product)
     }
     render() {
         let product = this.props.product;
@@ -33,7 +34,7 @@ class Preview extends React.Component {
         return (
             <div className="preview col-md-6">
                 <div className="preview-pic tab-content">
-                    <div className="tab-pane active" id="pic-1"><img alt="abc" src={"./../../image/" + this.props.img} /></div>
+                    <div className="tab-pane active" id="pic-1"><img alt="abc" src={this.props.img} /></div>
                 </div>
             </div>
         );
