@@ -1,10 +1,33 @@
+
 import * as types from './../constants/ActionTypes'
 import callApi from './../utils/apiCaller'
-import axios from 'axios'
 export const fetchProductsRequest = (dispatch)=>{
     return (dispatch) => {
         return callApi('products','GET',null).then(res=>{
             dispatch(fetchProducts(res.data));
+        })
+    }
+}
+
+export const fetchFoodsRequest = (dispatch)=>{
+    return (dispatch) => {
+        return callApi('products','GET',null).then(res=>{
+            var products = res.data;
+            var foods = products.filter((item)=>{
+                return item.classify===true
+            })
+            dispatch(fetchFoods(foods));
+        })
+    }
+}
+export const fetchDrinksRequest = (dispatch)=>{
+    return (dispatch) => {
+        return callApi('products','GET',null).then(res=>{
+            var products = res.data;
+            var drinks = products.filter((item)=>{
+                return item.classify===false
+            })
+            dispatch(fetchDrinks(drinks));
         })
     }
 }
@@ -14,12 +37,26 @@ export const fetchProducts = (products)=>{
         products
     }
 }
+export const fetchFoods = (foods)=>{
+    return {
+        type: types.SHOW_FOOD,
+        foods
+    }
+}
+export const fetchDrinks = (drinks)=>{
+    return {
+        type: types.SHOW_DRINK,
+        drinks
+    }
+}
 export const productShowRequest = (id)=>{
     return (dispatch) => {
         return callApi('products/'+id,'GET',null).then(res=>{
-            // console.log(res.data);
+            // console.log(res.data)
             dispatch(productShow(res.data));
-        })
+        }).catch(err=>{
+            console.log(err)
+        })                                                                                                                                                                                        
     }
 }
 export const productShow = (product)=>{
