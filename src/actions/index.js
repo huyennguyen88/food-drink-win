@@ -1,6 +1,5 @@
 import * as types from './../constants/ActionTypes'
 import callApi from './../utils/apiCaller'
-import axios from 'axios'
 export const fetchProductsRequest = (dispatch)=>{
     return (dispatch) => {
         return callApi('products','GET',null).then(res=>{
@@ -26,5 +25,38 @@ export const productShow = (product)=>{
     return{
         type: types.PRODUCT_SHOW,
         product
+    }
+}
+export const logInRequest = (email,password) =>{
+    return (dispatch)=>{
+        return callApi("users/sign_in","POST",{
+            email: email,
+            password: password
+        }).then(res=>{
+            dispatch(logIn(res.data));
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
+}
+export const logIn = (user) => {
+    return{
+        type: types.LOG_IN,
+        user
+    }
+}
+export const profileRequest = (token)=>{
+    return (dispatch) =>{
+        return callApi("/users/"+token,"GET",{
+            authentication_token: token
+        }).then(res=>{
+            dispatch(profile(res.data));
+        })
+    }
+}
+export const profile = (user)=>{
+    return{
+        type: types.INFO,
+        user
     }
 }

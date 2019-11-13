@@ -1,5 +1,4 @@
 import * as types from "./../constants/ActionTypes"
-import axios from "axios";
 var initialState = [];
 var myReducer = (state =initialState,action)=>{
     switch(action.type){
