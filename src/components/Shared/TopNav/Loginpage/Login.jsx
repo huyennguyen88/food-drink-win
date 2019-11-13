@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import callApi from './../../../../utils/apiCaller'
 import { connect } from 'react-redux';
 import * as actions from './../../../../actions/index'
-import { useHistory } from "react-router-dom";
+import { Link,withRouter } from "react-router-dom";
 class Login extends Component {
     constructor(props){
         super(props);
@@ -24,6 +24,8 @@ class Login extends Component {
     }
     onSubmit = async (e) => {
         e.preventDefault();
+        this.props.history.push("/");
+        // console.log(this.props  )
         let {email,password} = this.state
         await this.props.logIn(email,password)
         let {user} = this.props.state
@@ -40,7 +42,7 @@ class Login extends Component {
                 token: user.authentication_token
             })
         }
-
+        
     }
     
     render() {
@@ -68,7 +70,7 @@ class Login extends Component {
                                 </div>
                             </div>
                             <div className="form-group ">
-                                <button onClick={this.onSubmit}type="submit" className="btn btn-info" >Login</button>
+                                <Link to="/profile"><button onClick={this.onSubmit}type="submit" className="btn btn-info" >Login</button></Link>
                                 <button type="reset" className="btn btn-warning mx-2">Cancel</button>
                             </div>
                         </form>
@@ -96,4 +98,4 @@ const mapDispatchToProps = (dispatch,props)=>{
         }
     }
 }
-export default connect(mapStateToProps,mapDispatchToProps)(Login);
+export default connect(mapStateToProps,mapDispatchToProps)(withRouter((Login)));

@@ -2,7 +2,7 @@ import React from 'react'
 import CartButton from "./CartButton";
 import { Link } from "react-router-dom";
 import {connect} from 'react-redux'
-class Login extends React.Component {
+class LoginSign extends React.Component {
     constructor(props){
         super(props);
         this.state = {
@@ -11,6 +11,9 @@ class Login extends React.Component {
     }
     logOut = ()=>{
         localStorage.removeItem('token');
+        this.setState({
+            token: ''
+        })
     }
     onProfile = ()=>{
 
@@ -35,7 +38,7 @@ class Login extends React.Component {
                             <Link to="/profile" ><button type="button" className="btn btn-primary" onClick={this.onProfile}>Profile</button></Link>
                     </div>
                     <div className="d-flex ">
-                            <Link to="/home" onClick={this.logOut}><button type="button" className="btn btn-danger" >Log out</button></Link>
+                            <Link to="/" onClick={this.logOut}><button type="button" className="btn btn-danger" >Log out</button></Link>
                     </div>
                     
                     </>
@@ -45,4 +48,4 @@ class Login extends React.Component {
     }
 }
 
-export default Login
+export default LoginSign

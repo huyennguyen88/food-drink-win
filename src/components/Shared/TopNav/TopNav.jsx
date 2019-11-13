@@ -6,7 +6,7 @@ export default class TopNav extends Component {
         return (
             <div className="TopNav">
                 <MainMenu />
-                <SubMenu/>
+                <SubMenu {...this.props}/>
             </div>
         );
     }

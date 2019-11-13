@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 // import './UserProfileStyle.css';
 import {connect} from 'react-redux'
 import * as actions from './../../actions/index'
-
+import img from '../../image/avatar.jpg'
 class UserProfile extends Component {
     constructor(props){
         super(props);
@@ -43,7 +43,7 @@ class UserProfile extends Component {
                     <div className="col-sm-4">
 
                         <div className="text-center">
-                            <img src="/image/avatar.jpg"/>
+                            <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail"/>
                             
                             <h6>Upload a different photo...</h6>
                             <input type="file" style={{marginLeft: "20%"}}/>

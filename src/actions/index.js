@@ -60,3 +60,27 @@ export const profile = (user)=>{
         user
     }
 }
+// export const signUpRequest  = (name) =>{
+//     return (dispatch) => {
+//         return callApi("/users","POST",{
+//             // name: user.userName,
+//             // email: user.email,
+//             // phone: user.phone,
+//             // password: user.password,
+//         }).then(res=>{
+//             dispatch(profile(res.data));
+//         })
+//     }
+// }
+export const signUpRequest = (token)=>{
+    return (dispatch) =>{
+        return callApi("/users/1","GET",{
+            authentication_token: token
+        }).then(res=>{
+            dispatch(profile(res.data));
+        })
+    }
+}
+export const signUp  = (user) =>{
+    
+}

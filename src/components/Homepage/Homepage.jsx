@@ -8,14 +8,24 @@ import CartPage from '../Cart/CartPage'
 import {
     Switch,
     Route,
-    // BrowserRouter as Router,
+    BrowserRouter as Router,
 } from 'react-router-dom';
 import ItemDetail from '../ItemDetailPage/ItemDetail'
 import UserProfile from '../UserProfile/UserProfile'
 export default class Homepage extends Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            token: ''
+        }
+    }
+    componentDidMount(){
+    }
     render() {
+        // let token = JSON.parse(localStorage.getItem('token'));
+        // console.log(token)
         return (
-
+            <Router>
             <div>
                 <TopNav changepage={this.whichpages} />
                 <Switch>
@@ -39,6 +49,7 @@ export default class Homepage extends Component {
                 </Switch>
                 <Footer />
             </div>
+            </Router>
         )
     }
 }
