@@ -13,9 +13,12 @@ class ItemList extends React.Component
   componentWillMount(){
     this.props.fetchAPI();    
   }
+<<<<<<< HEAD
   componentDidMount(){
     
   }
+=======
+>>>>>>> c547c3e322b8a1088daaf3bc7d1a4e35c1a6bedc
   render(){
     // var listItem = [0,1,2,3,4,5,6,7]
     if(this.props.state.products.length > 0){
