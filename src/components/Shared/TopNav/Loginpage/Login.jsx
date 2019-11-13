@@ -1,8 +1,5 @@
 import React, { Component } from 'react'
 import callApi from './../../../../utils/apiCaller'
-import {
- Link
-} from 'react-router-dom';
 export default class Login extends Component {
     constructor(props){
         super(props);

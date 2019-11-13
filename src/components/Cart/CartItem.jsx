@@ -1,10 +1,6 @@
 import React from 'react';
 
 class CartItem extends React.Component {
-    constructor(props)
-    {
-        super(props)
-    }
     remove = () =>{
         var Cart = []
         Cart = JSON.parse(localStorage.getItem('cartItem'));
