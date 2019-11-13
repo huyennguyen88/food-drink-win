@@ -31,19 +31,31 @@ class UserProfile extends Component {
             // console.log(this.state.profile) //callback
         }))
     }
+    onChange =(e) => {
+        let target = e.target
+        let name = target.name
+        let value = target.value
+        this.setState({
+            profile:{
+                [name]: value
+            }
+            
+        })
+        console.log(this.state)
+    }
     render() {
         // console.log(this.props.profileInfo)
         let {profile} = this.state
         return (
             <div className="container bootstrap snippet">
                 <div className="row">
-                    <div className="col-sm-10" style={{marginLeft:"6%"}}><h1>{profile.userName}</h1></div>
+                    <div className="col-sm-10" style={{marginLeft:"10%"}}><h1>{profile.userName}</h1></div>
                 </div>
                 <div className="row">
                     <div className="col-sm-4">
 
                         <div className="text-center">
-                            <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail"/>
+                            <img style={{width: "90%"}} src={img} class="avatar img-circle img-thumbnail"/>
                             
                             <h6>Upload a different photo...</h6>
                             <input type="file" style={{marginLeft: "20%"}}/>
@@ -78,14 +90,28 @@ class UserProfile extends Component {
                                             <div className="form-group">
                                                 <div className="col-xs-6">
                                                     <label ><h4>Username</h4></label>
-                                                    <input type="text" className="form-control" name="name" id="first_name" defaultValue={profile.userName} placeholder="username" title="enter your first name if any." />
+                                                    <input 
+                                                        type="text" 
+                                                        className="form-control" 
+                                                        name="userName" 
+                                                        defaultValue={profile.userName} 
+                                                        placeholder="User name" 
+                                                        onClick={this.onChange}
+                                                    />
                                                 </div>
                                             </div>
                                             <div className="form-group">
 
                                                 <div className="col-xs-6">
                                                     <label><h4>Email</h4></label>
-                                                    <input type="email" className="form-control" name="email" id="email" defaultValue={profile.email} placeholder="you@email.com" title="enter your email." />
+                                                    <input 
+                                                        readOnly  
+                                                        type="email" 
+                                                        className="form-control" 
+                                                        name="email" 
+                                                        defaultValue={profile.email} 
+                                                        placeholder="you@email.com"
+                                                    />
                                                 </div>
                                             </div>
 
@@ -93,7 +119,14 @@ class UserProfile extends Component {
                                             <div className="form-group">
                                                 <div className="col-xs-6">
                                                     <label><h4>Mobile</h4></label>
-                                                    <input type="text" className="form-control" name="mobile" id="mobile" defaultValue={profile.phone} placeholder="enter mobile number" title="enter your mobile number if any." />
+                                                    <input 
+                                                        type="text" 
+                                                        className="form-control"
+                                                         name="phone"  
+                                                         defaultValue={profile.phone} 
+                                                         placeholder="enter mobile number" 
+                                                         onClick={this.onChange}
+                                                    />
                                                 </div>
                                             </div>
                                             <div className="form-group">
@@ -107,15 +140,26 @@ class UserProfile extends Component {
                                         <div className="col-sm-6">
                                             <div className="form-group">
                                                 <div className="col-xs-6">
-                                                    <label ><h4>Password</h4></label>
-                                                    <input type="password" className="form-control" name="password" id="password" placeholder="password" title="enter your password." />
+                                                    <label><h4>Password</h4></label>
+                                                    <input 
+                                                        type="password" 
+                                                        className="form-control" 
+                                                        name="password"
+                                                        placeholder="password" 
+                                                        onClick={this.onChange} 
+                                                    />
                                                 </div>
                                             </div>
                                             <div className="form-group">
-
                                                 <div className="col-xs-6">
                                                     <label><h4>Verify</h4></label>
-                                                    <input type="password" className="form-control" name="password2" id="password2" placeholder="password confirmation" title="enter your password2." />
+                                                    <input 
+                                                        type="password" 
+                                                        className="form-control" 
+                                                        name="passwordConfirm"
+                                                        placeholder="password confirmation" 
+                                                        onClick={this.onChange} 
+                                                    />
                                                 </div>
                                             </div>
 

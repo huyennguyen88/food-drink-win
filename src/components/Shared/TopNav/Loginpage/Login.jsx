@@ -24,13 +24,12 @@ class Login extends Component {
     }
     onSubmit = async (e) => {
         e.preventDefault();
-        this.props.history.push("/");
-        // console.log(this.props  )
         let {email,password} = this.state
         await this.props.logIn(email,password)
         let {user} = this.props.state
         if(user.length === 0)  
         {
+            alert("invalid email or password")
             return;
         }
         else{
@@ -41,6 +40,7 @@ class Login extends Component {
                 password: '???????',
                 token: user.authentication_token
             })
+            this.props.history.push("/");
         }
         
     }

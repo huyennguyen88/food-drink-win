@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import * as actions from './../../../../actions/index'
+import { Link,withRouter } from "react-router-dom";
 class Signup extends Component {
     constructor(props){
 
@@ -21,12 +22,17 @@ class Signup extends Component {
             [name]: value
         })
     }
-    onSubmit = (e) => {
+    onSubmit = async (e) => {
         e.preventDefault();
         let user = this.state
-        console.log(JSON.stringify(user));
-        
-        this.props.signUp(user)
+        await this.props.signUp(user)
+        let {newUser} = this.props
+        if(newUser.length === 0){
+            alert('invalid password or email')
+            return;
+        }
+        localStorage.setItem('token',JSON.stringify(newUser.authentication_token))
+        this.props.history.push("/");
     }
     render() {
         return (
@@ -76,7 +82,9 @@ class Signup extends Component {
                                 </div>
                             </div>
                             <div className="form-group ">
-                                <button type="submit" className="btn btn-info" onClick={this.onSubmit}>SignUp</button>
+                                <Link to="/">
+                                    <button type="submit" className="btn btn-info" onClick={this.onSubmit}>SignUp</button>
+                                </Link>
                                 <button type="reset" className="btn btn-warning mx-2">Cancel</button>
                             </div>
                             
@@ -94,15 +102,14 @@ const style = {
 }
 const mapStateToProps = (state)=>{
     return{
-        state: state
+        newUser: state.user
     }
 }
 const mapDispatchToProps = (dispatch,props)=>{
-   
     return{
-      signUp: (name)=>{
-        dispatch(actions.signUp(name))
-      }
+        signUp: (user) => {
+            return dispatch(actions.signUpRequest(user));
+        }
     }
 }
-export default connect(mapStateToProps,mapDispatchToProps)(Signup);
+export default connect(mapStateToProps,mapDispatchToProps)(withRouter(Signup));

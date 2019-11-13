@@ -10,6 +10,9 @@ var myReducer = (state =initialState,action)=>{
         case types.INFO:
             state = action.user;
             return state;
+        case types.SIGN_UP:
+            state = action.user;
+            return state
         default: return state; 
     }
 }

@@ -2,6 +2,7 @@ import React from 'react'
 import CartButton from "./CartButton";
 import { Link } from "react-router-dom";
 import {connect} from 'react-redux'
+
 class LoginSign extends React.Component {
     constructor(props){
         super(props);
@@ -29,7 +30,7 @@ class LoginSign extends React.Component {
                             <Link to="/login"><button type="button" className="btn btn-warning" >Login</button></Link>
                         </div>
                         <div className="d-flex ">
-                            <Link to="/signup" > <button type="button" className="btn btn-info" >Sign up</button></Link>
+                            <Link to="/signup"><button type="button" className="btn btn-info" >Sign up</button></Link>
                         </div>
                     </>
                 :
