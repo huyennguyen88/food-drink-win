@@ -1,3 +1,4 @@
+
 import * as types from './../constants/ActionTypes'
 import callApi from './../utils/apiCaller'
 export const fetchProductsRequest = (dispatch)=>{
@@ -50,7 +51,6 @@ export const fetchDrinks = (drinks)=>{
 export const productShowRequest = (id)=>{
     return (dispatch) => {
         return callApi('products/'+id,'GET',null).then(res=>{
-            // console.log(res.data);
             dispatch(productShow(res.data));
         })
     }
