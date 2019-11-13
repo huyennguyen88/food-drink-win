@@ -1,16 +1,9 @@
 import React, { Component } from 'react'
 import callApi from './../../../../utils/apiCaller'
-<<<<<<< HEAD
 import { connect } from 'react-redux';
 import * as actions from './../../../../actions/index'
 import { useHistory } from "react-router-dom";
 class Login extends Component {
-=======
-import {
- Link
-} from 'react-router-dom';
-export default class Login extends Component {
->>>>>>> c547c3e322b8a1088daaf3bc7d1a4e35c1a6bedc
     constructor(props){
         super(props);
         this.state ={
@@ -75,11 +68,7 @@ export default class Login extends Component {
                                 </div>
                             </div>
                             <div className="form-group ">
-<<<<<<< HEAD
                                 <button onClick={this.onSubmit}type="submit" className="btn btn-info" >Login</button>
-=======
-                                <button onClick={this.onSubmit}type="submit" className="btn btn-info">Login</button>
->>>>>>> c547c3e322b8a1088daaf3bc7d1a4e35c1a6bedc
                                 <button type="reset" className="btn btn-warning mx-2">Cancel</button>
                             </div>
                         </form>

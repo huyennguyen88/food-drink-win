@@ -1,10 +1,4 @@
 import * as types from './../constants/ActionTypes'
-<<<<<<< HEAD
-=======
-export const allItem = ()=>{
-    return {
-        type: types.ALL_ITEM
->>>>>>> c547c3e322b8a1088daaf3bc7d1a4e35c1a6bedc
 import callApi from './../utils/apiCaller'
 export const fetchProductsRequest = (dispatch)=>{
     return (dispatch) => {
