@@ -62,3 +62,17 @@ export const productShow = (product)=>{
         product
     }
 }
+export const fetchCategoriesRequest =(dispatch)=>{
+    return (dispatch) =>{
+        return callApi('categories','GET',null).then(res=>{
+       
+            dispatch(showCategories(res.data))
+        })
+    }
+}
+export const showCategories =(categories)=>{
+    return {
+        type: types.ALL_CATEGORIES,
+        categories
+    }
+}
