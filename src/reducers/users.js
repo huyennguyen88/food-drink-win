@@ -16,7 +16,6 @@ var myReducer = (state =initialState,action)=>{
             return state;
         case types.SIGN_UP:
             state = action.newUser;
-            console.log(state)
             return state
         default: return state; 
     }

@@ -39,13 +39,33 @@ class UserProfile extends Component {
     }
     onSubmit = async (e)=>{
         e.preventDefault();
-        let user = this.state;
+        let user;
+        if(this.state.password !== ''){
+            user = this.state;
+        }
+        else{
+             user = {
+                userName: this.state.userName,
+                email: this.state.email,
+                phone: this.state.phone,
+            }
+        }
         if(user.password !== user.passwordConfirm){
             alert("password to password confirmation ga onaji janai!!!")
             return;
         }
+        if(this.state.userName === '' ){
+            alert("name can't be blank")
+            return;
+        }
         else{
             await this.props.updateProfile(user)
+            alert("Update sucess")
+            this.setState({
+                userName: user.userName,
+                email: user.email,
+                phone: user.phone,
+            })
         }
     }
     render() {
