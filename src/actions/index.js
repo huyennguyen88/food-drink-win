@@ -92,5 +92,30 @@ export const loadReviews =(reviews)=>{
     }
 }
 export const fetchUser = (id)=>{
-    
+    return (dispatch)=>{
+        return callApi('users/mini/'+id,'GET',null).then((res)=>{
+            console.log("alo",res.data)
+            dispatch(getUser(res.data));
+        })
+    }
+}
+export const getUser =(user)=>{
+    return{
+        type : types.GET_USER,
+        user
+    }
+}
+
+export const fetchReviewUsers = (product_id)=>{
+    return (dispatch)=>{
+        return callApi('products/'+product_id+'/commentedUsers','GET',null).then((res)=>{
+            dispatch(getReviewUsers(res.data));
+        })
+    }
+}
+export const getReviewUsers =(users)=>{
+    return{
+        type : types.GET_REVIEW_USERS,
+        users
+    }
 }

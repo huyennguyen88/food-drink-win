@@ -8,27 +8,46 @@ class ItemDetail extends React.Component {
         var id = this.props.match.params.id
         this.props.productShow(id);
         this.props.loadReviews(id);
+        this.props.loadReviewUsers(id);
     }
     render() {
-        let {product, reviews} = this.props;
-        let listComment = reviews.map((item,index)=>{
-            return <Comment key={index} comment={item.comment}/>
-        })
+        var { product, reviews, users } = this.props;
+
+
         return (
             <div className="ItemDetail">
-                <div className="card card-detail border-light">
-                    <div className="container-fliud">
+                <div className="card card-detail">
+                    <div className="container">
                         <div className="wrapper row">
-                            <Preview img={product.image}/>
-                            <DetailInfo product={product}/>
+                            <Preview img={product.image} />
+                            <DetailInfo product={product} />
                         </div>
                     </div>
                 </div>
-                {listComment}
-                <textarea className="form-control border-info" placeholder="Write a comment..." rows="3"></textarea>
-                                <br/>
+                <p className="h4 text-info">{reviews.length} Comments</p>
+                <div className="d-flex  mt-3">
+                    <div className="comment-wrapper">
+                        <div className="card ">
+                            <div className="card-body">
+
+                                {
+                                    reviews.map((item, index) => {
+                                        var cmtUser = users.find((u) => {
+                                            return u.id === item.user_id
+                                        })
+                                        return <Comment key={index} review={item} user={cmtUser} />
+                                    })
+                                }
+
+                                <textarea className="form-control border-info" placeholder="Write a comment..." rows="3"></textarea>
+                                <br />
                                 <button type="button" className="btn btn-info float-right">Post</button>
                                 <div className="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
         );
@@ -46,20 +65,19 @@ class Preview extends React.Component {
     }
 }
 class DetailInfo extends React.Component {
-    addToCart =() =>
-    {
+    addToCart = () => {
         let { product } = this.props
         var Cart = JSON.parse(localStorage.getItem('cartItem'))
-        var item =Cart.find((item) =>{
-            if(item.name === product.name)return item
+        var item = Cart.find((item) => {
+            if (item.name === product.name) return item
             return false
         })
-        item==null?Cart.push(product):item.quantity++
-        localStorage.setItem('cartItem',JSON.stringify(Cart));
+        item == null ? Cart.push(product) : item.quantity++
+        localStorage.setItem('cartItem', JSON.stringify(Cart));
     }
     render() {
-        let { product } = this.props   
-        return (                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+        let { product } = this.props
+        return (
             <div className="details col-md-6">
                 <p className="h2">{product.name}</p>
                 <div className="rating">
@@ -79,7 +97,7 @@ class DetailInfo extends React.Component {
                 <h4 className="price">current price: <span>${product.price}</span></h4>
                 <p className="vote"><strong>91%</strong> of buyers enjoyed this product! <strong>(87 votes)</strong></p>
                 <div className="action">
-                    <button className="btn btn-success mx-1" type="button" onClick = {this.addToCart}>Add to cart</button>
+                    <button className="btn btn-success mx-1" type="button" onClick={this.addToCart}>Add to cart</button>
                     <button className="btn btn-danger" type="button"><span className="fa fa-heart"></span></button>
                 </div>
             </div>
@@ -89,7 +107,8 @@ class DetailInfo extends React.Component {
 const mapStateToProps = (state) => {
     return {
         product: state.products,
-        reviews: state.reviews
+        reviews: state.reviews,
+        users: state.users
     }
 }
 const mapDispatchToProps = (dispatch, props) => {
@@ -97,8 +116,11 @@ const mapDispatchToProps = (dispatch, props) => {
         productShow: (id) => {
             dispatch(actions.productShowRequest(id))
         },
-        loadReviews: (id)=>{
+        loadReviews: (id) => {
             dispatch(actions.fetchReviews(id))
+        },
+        loadReviewUsers: (id) => {
+            dispatch(actions.fetchReviewUsers(id))
         }
     }
 }
