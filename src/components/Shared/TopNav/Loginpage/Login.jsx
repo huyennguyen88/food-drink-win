@@ -46,12 +46,18 @@ class Login extends Component {
         }
         
     }
-    
+    checkLogin = ()=>{
+        let token = localStorage.getItem('token');
+        if (token === null) return false;
+        return true;
+    }
     render() {
         
         return (
             <div className="Login container">
-                <div className="card mx-auto text-center mb-3" style={style.card} >
+                {
+                    !this.checkLogin()? 
+                    <div className="card mx-auto text-center mb-3" style={style.card} >
                     <div className="card-header bg-info h3">Login</div>
                     <div className="card-body">
                         <form>
@@ -78,7 +84,11 @@ class Login extends Component {
                         </form>
                     </div>
                 </div>
-            </div>
+                 :
+                 <h1>Dang nhap roi</h1>
+                }
+
+               </div>
 
         )
     }
