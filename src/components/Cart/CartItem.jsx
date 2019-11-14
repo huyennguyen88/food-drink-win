@@ -1,10 +1,6 @@
 import React from 'react';
 
 class CartItem extends React.Component {
-    constructor(props)
-    {
-        super(props)
-    }
     remove = () =>{
         var Cart = []
         Cart = JSON.parse(localStorage.getItem('cartItem'));
@@ -18,7 +14,8 @@ class CartItem extends React.Component {
                     <div className="p-2">
                         <img src="./image/dong1.gif" alt="" width="70" className="img-fluid rounded shadow-sm" />
                         <div className="ml-3 d-inline-block align-middle">
-        <h5 className="mb-0"> <a href="abc" className="text-dark d-inline-block align-middle">{this.props.Item.name}</a></h5><span className="text-muted font-weight-normal font-italic d-block">Category: {this.props.Item.category}</span>
+                        <h5 className="mb-0"> <a href="abc" className="text-dark d-inline-block align-middle">{this.props.Item.name}</a></h5>
+                        {/* <span className="text-muted font-weight-normal font-italic d-block">Category: {this.props.Item.category}</span> */}
                         </div>
                     </div>
                 </th>

@@ -1,7 +1,6 @@
 import React from 'react';
 import {
     Link,
-    useParams
 } from 'react-router-dom';
 
 class Item extends React.Component {
@@ -17,7 +16,7 @@ class Item extends React.Component {
                                 <a className="text-success" href="abc">{this.props.name}</a>
                             </h4>
                             <p className="h5 text-danger">${this.props.price}</p>
-                            <p className="card-text">{this.props.description}</p>
+                            <p className="card-text">ByeNow</p>
                         </div>
                         <div className="card-footer bg-warning">
                             <small className="text-muted">★ ★ ★ ★ ☆</small>

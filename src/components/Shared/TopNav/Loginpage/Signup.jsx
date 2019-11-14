@@ -107,6 +107,7 @@ const style = {
 const mapStateToProps = (state)=>{
     return{
         newUser: state
+
     }
 }
 const mapDispatchToProps = (dispatch,props)=>{

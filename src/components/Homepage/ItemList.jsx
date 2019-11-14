@@ -1,13 +1,12 @@
 import React from 'react';
 import Item from './Item'
-import {connect} from 'react-redux'
-import * as actions from './../../actions/index'
-class ItemList extends React.Component
-{
+import { connect } from 'react-redux'
+class ItemList extends React.Component {
   constructor(props){
     super(props)
-    this.state = {
-      products: []
+ 
+    this.state  ={
+      products : this.props.products
     }
   }
   componentWillMount(){
@@ -44,16 +43,9 @@ class ItemList extends React.Component
   }
 
 }
-const mapStateToProps = (state)=>{
-  return{
-    state: state
+const mapStateToProps = (state) => {
+  return {
+    products: state.products
   }
 }
-const mapDispatchToProps = (dispatch, props)=>{
-  return{
-    fetchAPI: () => {
-      dispatch(actions.fetchProductsRequest());
-    }
-  }
-}
-export default connect(mapStateToProps,mapDispatchToProps)(ItemList);
+export default connect(mapStateToProps, null)(ItemList);
