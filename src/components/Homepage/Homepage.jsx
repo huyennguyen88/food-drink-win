@@ -8,7 +8,6 @@ import CartPage from '../Cart/CartPage'
 import {
     Switch,
     Route,
-    BrowserRouter as Router,
 } from 'react-router-dom';
 import ItemDetail from '../ItemDetailPage/ItemDetail'
 import UserProfile from '../UserProfile/UserProfile'

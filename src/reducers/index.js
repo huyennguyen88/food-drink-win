@@ -1,8 +1,12 @@
 import {combineReducers} from 'redux';
 import products from './products'
-import user from './users'
+import categories from './categories';
+import items from './items';
+import users from './users';
 const myReducer = combineReducers({
     products,
-    user
+    items,
+    users,
+    categories
 });
 export default myReducer

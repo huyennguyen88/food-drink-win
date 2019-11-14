@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import * as actions from './../../../../actions/index'
 import { Link,withRouter } from "react-router-dom";
 class Login extends Component {
+class Login extends Component {
+
     constructor(props){
         super(props);
         this.state ={
@@ -46,7 +48,6 @@ class Login extends Component {
         }
         
     }
-    
     render() {
         
         return (
