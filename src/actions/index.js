@@ -52,7 +52,6 @@ export const fetchDrinks = (drinks)=>{
 export const productShowRequest = (id)=>{
     return (dispatch) => {
         return callApi('products/'+id,'GET',null).then(res=>{
-            // console.log(res.data)
             dispatch(productShow(res.data));
         }).catch(err=>{
             console.log(err)
@@ -77,5 +76,18 @@ export const showCategories =(categories)=>{
     return {
         type: types.ALL_CATEGORIES,
         categories
+    }
+}
+export const fetchReviews =(product_id)=>{
+    return (dispatch)=>{
+        return callApi('products/'+product_id+'/reviews','GET',null).then((res)=>{
+            dispatch(loadReviews(res.data));
+        })
+    }
+}
+export const loadReviews =(reviews)=>{
+    return{
+        type: types.LOAD_REVIEWS,
+        reviews
     }
 }

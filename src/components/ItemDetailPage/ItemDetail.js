@@ -7,10 +7,13 @@ class ItemDetail extends React.Component {
     componentDidMount() {
         var id = this.props.match.params.id
         this.props.productShow(id);
-        console.log(this.props.product)
+        this.props.loadReviews(id);
     }
     render() {
-        let product = this.props.product;
+        let {product, reviews} = this.props;
+        let listComment = reviews.map((item,index)=>{
+            return <Comment key={index} comment={item.comment}/>
+        })
         return (
             <div className="ItemDetail">
                 <div className="card card-detail border-light">
@@ -21,7 +24,11 @@ class ItemDetail extends React.Component {
                         </div>
                     </div>
                 </div>
-                <Comment />
+                {listComment}
+                <textarea className="form-control border-info" placeholder="Write a comment..." rows="3"></textarea>
+                                <br/>
+                                <button type="button" className="btn btn-info float-right">Post</button>
+                                <div className="clearfix"></div>
             </div>
 
         );
@@ -44,7 +51,7 @@ class DetailInfo extends React.Component {
         let { product } = this.props
         var Cart = JSON.parse(localStorage.getItem('cartItem'))
         var item =Cart.find((item) =>{
-            if(item.name == product.name)return item
+            if(item.name === product.name)return item
             return false
         })
         item==null?Cart.push(product):item.quantity++
@@ -81,13 +88,17 @@ class DetailInfo extends React.Component {
 }
 const mapStateToProps = (state) => {
     return {
-        product: state.products
+        product: state.products,
+        reviews: state.reviews
     }
 }
 const mapDispatchToProps = (dispatch, props) => {
     return {
         productShow: (id) => {
             dispatch(actions.productShowRequest(id))
+        },
+        loadReviews: (id)=>{
+            dispatch(actions.fetchReviews(id))
         }
     }
 }

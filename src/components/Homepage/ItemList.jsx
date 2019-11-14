@@ -4,13 +4,21 @@ import { connect } from 'react-redux'
 class ItemList extends React.Component {
   constructor(props){
     super(props)
- 
+    
     this.state  ={
-      products : this.props.products
+      products : []
     }
   }
+  
+  componentWillReceiveProps(nextProps){
+
+    this.setState({
+      products: nextProps.products
+    })
+  }
   render() {
-    var {products} = this.props
+    // console.log(this.state);
+    var {products} = this.state
     if (products.length > 0) {
       var listItem = products.map((p, index) => {
         return <Item key={index} id={p.id} name={p.name} price={p.price} img={p.image} description={p.description}/>
