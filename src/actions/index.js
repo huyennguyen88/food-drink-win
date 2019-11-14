@@ -91,3 +91,6 @@ export const loadReviews =(reviews)=>{
         reviews
     }
 }
+export const fetchUser = (id)=>{
+    
+}

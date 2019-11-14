@@ -3,8 +3,6 @@ import './App.css';
 import {
   BrowserRouter as Router,
 } from 'react-router-dom';
-import {connect} from 'react-redux'
-import * as actions from './actions/index'
 import Homepage from './components/Homepage/Homepage'
 class App extends React.Component {
   render() {
