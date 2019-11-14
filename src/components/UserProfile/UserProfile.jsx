@@ -7,26 +7,24 @@ class UserProfile extends Component {
     constructor(props){
         super(props);
         this.state = {
-            profile: {
-                userName: "",
-                email: "",
-                phone: "",
-            }
+            userName: "",
+            email: "",
+            phone: "",
+            password: "",
+            passwordConfirm: "",
         }
     }
     componentWillMount(){
         let token = JSON.parse(localStorage.getItem('token'))
         this.props.watchProfile(token);
     }
-     componentWillReceiveProps(nextProps){
+    componentWillReceiveProps(nextProps){
         let  profile =  nextProps.profile;
         this.setState({
-            profile: {
                 userName: profile.name,
                 email: profile.email,
                 phone: profile.phone,
-                avatar: profile.avatar
-            }   
+                avatar: profile.avatar,
         },(()=>{
             // console.log(this.state.profile) //callback
         }))
@@ -36,26 +34,32 @@ class UserProfile extends Component {
         let name = target.name
         let value = target.value
         this.setState({
-            profile:{
-                [name]: value
-            }
-            
+            [name]: value
         })
-        console.log(this.state)
+    }
+    onSubmit = async (e)=>{
+        e.preventDefault();
+        let user = this.state;
+        if(user.password !== user.passwordConfirm){
+            alert("password to password confirmation ga onaji janai!!!")
+            return;
+        }
+        else{
+            await this.props.updateProfile(user)
+        }
     }
     render() {
-        // console.log(this.props.profileInfo)
-        let {profile} = this.state
+        let profile = this.state
         return (
             <div className="container bootstrap snippet">
                 <div className="row">
-                    <div className="col-sm-10" style={{marginLeft:"10%"}}><h1>{profile.userName}</h1></div>
+                    <div className="col-sm-10" style={{marginLeft:"7%"}}><h1>My Profile</h1></div>
                 </div>
                 <div className="row">
                     <div className="col-sm-4">
 
                         <div className="text-center">
-                            <img style={{width: "90%"}} src={img} class="avatar img-circle img-thumbnail"/>
+                            <img style={{width: "90%"}} src={img} className="avatar img-circle img-thumbnail"/>
                             
                             <h6>Upload a different photo...</h6>
                             <input type="file" style={{marginLeft: "20%"}}/>
@@ -96,7 +100,7 @@ class UserProfile extends Component {
                                                         name="userName" 
                                                         defaultValue={profile.userName} 
                                                         placeholder="User name" 
-                                                        onClick={this.onChange}
+                                                        onKeyUp={this.onChange}
                                                     />
                                                 </div>
                                             </div>
@@ -125,28 +129,32 @@ class UserProfile extends Component {
                                                          name="phone"  
                                                          defaultValue={profile.phone} 
                                                          placeholder="enter mobile number" 
-                                                         onClick={this.onChange}
+                                                         onKeyUp={this.onChange}
                                                     />
                                                 </div>
                                             </div>
                                             <div className="form-group">
                                                 <div className="col-xs-12">
                                                     <br />
-                                                    <button className="btn btn-lg btn-success mx-2" type="submit"><i className="glyphicon glyphicon-ok-sign"></i>Save</button>
-                                                    <button className="btn btn-warning btn-lg" type="reset"><i className="glyphicon glyphicon-repeat"></i> Reset</button>
+                                                    <button onClick={this.onSubmit}className="btn btn-lg btn-success mx-2" type="submit">
+                                                        <i className="glyphicon glyphicon-ok-sign"></i>Save
+                                                    </button>
+                                                    <button className="btn btn-warning btn-lg" type="reset">
+                                                        <i className="glyphicon glyphicon-repeat"></i> Reset
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
                                         <div className="col-sm-6">
                                             <div className="form-group">
                                                 <div className="col-xs-6">
-                                                    <label><h4>Password</h4></label>
+                                                    <label><h4>New Password</h4></label>
                                                     <input 
                                                         type="password" 
                                                         className="form-control" 
                                                         name="password"
                                                         placeholder="password" 
-                                                        onClick={this.onChange} 
+                                                        onKeyUp={this.onChange} 
                                                     />
                                                 </div>
                                             </div>
@@ -158,7 +166,7 @@ class UserProfile extends Component {
                                                         className="form-control" 
                                                         name="passwordConfirm"
                                                         placeholder="password confirmation" 
-                                                        onClick={this.onChange} 
+                                                        onKeyUp={this.onChange} 
                                                     />
                                                 </div>
                                             </div>
@@ -187,6 +195,9 @@ const mapStateToProps = (state)=>{
     return{
       watchProfile: (token) => {
         dispatch(actions.profileRequest(token));
+      },
+      updateProfile: (user) => {
+        dispatch(actions.updateProfileRequest(user))
       }
     }
   }

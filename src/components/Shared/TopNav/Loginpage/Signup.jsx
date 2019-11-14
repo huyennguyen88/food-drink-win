@@ -26,13 +26,17 @@ class Signup extends Component {
         e.preventDefault();
         let user = this.state
         await this.props.signUp(user)
-        let {newUser} = this.props
-        if(newUser.length === 0){
-            alert('invalid password or email')
-            return;
-        }
-        localStorage.setItem('token',JSON.stringify(newUser.authentication_token))
-        this.props.history.push("/");
+        let newUser = this.props.newUser
+        console.log(newUser)
+        // if(user === null || user.authentication_token === undefined){
+        //     alert('invalid password or email')
+        //     return;
+        // }
+        // else 
+        // {
+        //     localStorage.setItem('token',JSON.stringify(newUser.authentication_token))
+        //     this.props.history.push("/");
+        // }
     }
     render() {
         return (
@@ -101,14 +105,15 @@ const style = {
     }
 }
 const mapStateToProps = (state)=>{
+    // console.log(state)
     return{
-        newUser: state.user
+        newUser: state.newUser
     }
 }
 const mapDispatchToProps = (dispatch,props)=>{
     return{
-        signUp: (user) => {
-            return dispatch(actions.signUpRequest(user));
+        signUp: (newUser) => {
+            return dispatch(actions.signUpRequest(newUser));
         }
     }
 }

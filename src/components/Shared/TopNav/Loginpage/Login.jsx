@@ -27,7 +27,7 @@ class Login extends Component {
         let {email,password} = this.state
         await this.props.logIn(email,password)
         let {user} = this.props.state
-        if(user.length === 0)  
+        if(user === null || user.authentication_token === undefined)  
         {
             alert("invalid email or password")
             return;
@@ -40,6 +40,8 @@ class Login extends Component {
                 password: '???????',
                 token: user.authentication_token
             })
+            // user = null;
+            // console.log(user)
             this.props.history.push("/");
         }
         

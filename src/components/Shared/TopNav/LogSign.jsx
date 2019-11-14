@@ -2,7 +2,7 @@ import React from 'react'
 import CartButton from "./CartButton";
 import { Link } from "react-router-dom";
 import {connect} from 'react-redux'
-
+import * as actions from  './../../../actions/index'
 class LoginSign extends React.Component {
     constructor(props){
         super(props);
@@ -11,7 +11,8 @@ class LoginSign extends React.Component {
         }
     }
     logOut = ()=>{
-        localStorage.removeItem('token');
+        // localStorage.removeItem('token');
+        this.props.logOut();
         this.setState({
             token: ''
         })
@@ -48,5 +49,16 @@ class LoginSign extends React.Component {
         )
     }
 }
-
-export default LoginSign
+const mapStateToProps = (state)=>{
+    return{
+        state: state
+    }
+}
+const mapDispatchToProps = (dispatch,props)=>{
+    return{
+        logOut: () => {
+            return dispatch(actions.logOut());
+        }
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(LoginSign)
