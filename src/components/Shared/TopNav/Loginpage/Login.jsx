@@ -1,12 +1,19 @@
 import React, { Component } from 'react'
 import callApi from './../../../../utils/apiCaller'
-export default class Login extends Component {
+import { connect } from 'react-redux';
+import * as actions from './../../../../actions/index'
+import { Link,withRouter } from "react-router-dom";
+class Login extends Component {
+class Login extends Component {
+
     constructor(props){
         super(props);
         this.state ={
             email: '',
+            name: '',
             password: '',
             isLogged: false,
+            token: '',
         }
     } 
     onChange =(e) => {
@@ -17,18 +24,32 @@ export default class Login extends Component {
             [name]: value
         })
     }
-    onSubmit = (e) => {
+    onSubmit = async (e) => {
         e.preventDefault();
-        console.log(this.state)
-        callApi("users/sign_in","POST",{
-            email: this.state.email,
-            password: this.state.password
-        }).then(res=>{
-            
-            console.log(res)
-        })
+        let {email,password} = this.state
+        await this.props.logIn(email,password)
+        let {user} = this.props.state
+        if(user === null || user.authentication_token === undefined)  
+        {
+            alert("invalid email or password")
+            return;
+        }
+        else{
+            this.setState({
+                email: user.email,
+                name: user.name,
+                isLogged: true,
+                password: '???????',
+                token: user.authentication_token
+            })
+            // user = null;
+            // console.log(user)
+            this.props.history.push("/");
+        }
+        
     }
     render() {
+        
         return (
             <div className="Login container">
                 <div className="card mx-auto text-center mb-3" style={style.card} >
@@ -52,7 +73,7 @@ export default class Login extends Component {
                                 </div>
                             </div>
                             <div className="form-group ">
-                                <button onClick={this.onSubmit}type="submit" className="btn btn-info">Login</button>
+                                <Link to="/profile"><button onClick={this.onSubmit}type="submit" className="btn btn-info" >Login</button></Link>
                                 <button type="reset" className="btn btn-warning mx-2">Cancel</button>
                             </div>
                         </form>
@@ -68,3 +89,16 @@ const style={
         width:"25rem"
     }
 }
+const mapStateToProps = (state)=>{
+    return{
+        state: state
+    }
+}
+const mapDispatchToProps = (dispatch,props)=>{
+    return{
+        logIn: (email,password) => {
+            return dispatch(actions.logInRequest(email,password));
+        }
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(withRouter((Login)));
