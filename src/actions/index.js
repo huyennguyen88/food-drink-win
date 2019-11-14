@@ -126,7 +126,6 @@ export const signUp  = (newUser) =>{
     }
 }
 export const updateProfileRequest = (user) =>{
-    console.log(user)
     return (dispatch) =>{
         return callApi("users/update", "PUT",{
             name: user.userName,
@@ -134,8 +133,9 @@ export const updateProfileRequest = (user) =>{
             phone: user.phone,
             password: user.password,
         }).then(res=>{
-            console.log(res)
-            //dispatch(actions.updateProfile(res.data))
+            if(res){
+                dispatch(updateProfile(res.data))
+            }
         })
     }
 }
