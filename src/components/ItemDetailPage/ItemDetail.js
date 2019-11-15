@@ -3,12 +3,17 @@ import './ItemDetail.css';
 import Comment from './Comment'
 import { connect } from 'react-redux'
 import * as actions from './../../actions/index'
+import classNames  from "classnames";
 class ItemDetail extends React.Component {
-    componentDidMount() {
+    constructor(props){
+        super(props)
         var id = this.props.match.params.id
         this.props.productShow(id);
         this.props.loadReviews(id);
         this.props.loadReviewUsers(id);
+    }
+    componentDidMount() {
+      
     }
     render() {
         var { product, reviews, users } = this.props;
@@ -76,22 +81,23 @@ class DetailInfo extends React.Component {
         localStorage.setItem('cartItem', JSON.stringify(Cart));
     }
     render() {
-        let { product } = this.props
+        var { product } = this.props
+        var rate = product.rate
+        var rating = [false, false, false, false, false]
+        for (let i = 0; i < rate; i++) {
+            rating[i] = true
+        }
+        var stars = rating.map((item, index) => {
+            return <span key={index} className={classNames('fa','fa-star',{checked:item})}></span>
+        })
         return (
             <div className="details col-md-6">
                 <p className="h2">{product.name}</p>
                 <div className="rating">
                     <div className="stars">
-                        {
-
-                        }
-                        <span className="fa fa-star checked"></span>
-                        <span className="fa fa-star checked"></span>
-                        <span className="fa fa-star checked"></span>
-                        <span className="fa fa-star"></span>
-                        <span className="fa fa-star"></span>
+                        {stars}
                     </div>
-                    <span className="review-no">41 reviews</span>
+                    <span className="review-no">{product.reviews}</span>
                 </div>
                 <p className="product-description">{product.description}</p>
                 <h4 className="price">current price: <span>${product.price}</span></h4>
