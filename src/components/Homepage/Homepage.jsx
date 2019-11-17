@@ -12,9 +12,16 @@ import {
 import ItemDetail from '../ItemDetailPage/ItemDetail'
 import UserProfile from '../UserProfile/UserProfile'
 export default class Homepage extends Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            token: ''
+        }
+    }
+    componentDidMount(){
+    }
     render() {
         return (
-
             <div>
                 <TopNav changepage={this.whichpages} />
                 <Switch>

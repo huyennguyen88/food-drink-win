@@ -1,136 +1,223 @@
 import React, { Component } from 'react'
-// import './UserProfileStyle.css';
-export default class UserProfile extends Component {
-
-        
-        
+import {connect} from 'react-redux'
+import * as actions from './../../actions/index'
+import img from '../../image/avatar.jpg'
+class UserProfile extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            userName: "",
+            email: "",
+            phone: "",
+            password: "",
+            passwordConfirm: "",
+        }
+    }
+    componentWillMount(){
+        let token = JSON.parse(localStorage.getItem('token'))
+        this.props.watchProfile(token);
+    }
+    componentWillReceiveProps(nextProps){
+        let  profile =  nextProps.profile;
+        this.setState({
+                userName: profile.name,
+                email: profile.email,
+                phone: profile.phone,
+                avatar: profile.avatar,
+        },(()=>{
+            // console.log(this.state.profile) //callback
+        }))
+    }
+    onChange =(e) => {
+        let target = e.target
+        let name = target.name
+        let value = target.value
+        this.setState({
+            [name]: value
+        })
+    }
+    onSubmit = async (e)=>{
+        e.preventDefault();
+        let user;
+        if(this.state.password !== ''){
+            user = this.state;
+        }
+        else{
+             user = {
+                userName: this.state.userName,
+                email: this.state.email,
+                phone: this.state.phone,
+            }
+        }
+        if(user.password !== user.passwordConfirm){
+            alert("password to password confirmation ga onaji janai!!!")
+            return;
+        }
+        if(this.state.userName === '' ){
+            alert("name can't be blank")
+            return;
+        }
+        else{
+            await this.props.updateProfile(user)
+            alert("Update sucess")
+            this.setState({
+                userName: user.userName,
+                email: user.email,
+                phone: user.phone,
+            })
+        }
+    }
     render() {
-        
+        let profile = this.state
         return (
-<div class="container bootstrap snippet">
-    <div class="row">
-  		<div class="col-sm-10"><h1>User name</h1></div>
-    	<div class="col-sm-2"><a href="/users" class="pull-right"><img title="profile image" class="img-circle img-responsive" src="http://www.gravatar.com/avatar/28fd20ccec6865e2d5f0e1f4446eb7bf?s=100" alt="abc"/></a></div>
-    </div>
-    <div class="row">
-  		<div class="col-sm-4">
-              
-      <div class="text-center">
-        <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar"/>
-        <h6>Upload a different photo...</h6>
-        <input type="file" class="text-center center-block file-upload"/>
-      </div><hr/><br/>
+            <div className="container bootstrap snippet">
+                <div className="row">
+                    <div className="col-sm-10" style={{marginLeft:"7%"}}><h1>My Profile</h1></div>
+                </div>
+                <div className="row">
+                    <div className="col-sm-4">
 
-          <ul class="list-group">
-            <li class="list-group-item text-muted">Activity <i class="fa fa-dashboard fa-1x"></i></li>
-            <li class="list-group-item text-right"><span class="pull-left"><strong>Shares</strong></span> 125</li>
-            <li class="list-group-item text-right"><span class="pull-left"><strong>Likes</strong></span> 13</li>
-            <li class="list-group-item text-right"><span class="pull-left"><strong>Posts</strong></span> 37</li>
-            <li class="list-group-item text-right"><span class="pull-left"><strong>Followers</strong></span> 78</li>
-          </ul> 
-               
-          <div class="panel panel-default">
-            <div class="panel-heading">Social Media</div>
-            <div class="panel-body">
-            	<i class="fa fa-facebook fa-2x"></i> <i class="fa fa-github fa-2x"></i> <i class="fa fa-twitter fa-2x"></i> <i class="fa fa-pinterest fa-2x"></i> <i class="fa fa-google-plus fa-2x"></i>
-            </div>
-          </div>
-          
-        </div>
-    	<div class="col-sm-8">
-            <ul class="nav nav-tabs">
-                <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
-              </ul>
+                        <div className="text-center">
+                            <img style={{width: "90%"}} src={img} className="avatar img-circle img-thumbnail" alt="abc"/>
+                            
+                            <h6>Upload a different photo...</h6>
+                            <input type="file" style={{marginLeft: "20%"}}/>
+                        </div><hr /><br />
 
-        
-          <div class="tab-content">
-            <div class="tab-pane active" id="home">
-                <hr/>
-                  <form class="form" action="##" method="post" id="registrationForm">
-                  <div class="row">
-                  <div class="col-sm-6">
-                      <div class="form-group">
-                          <div class="col-xs-6">
-                              <label for="first_name"><h4>First name</h4></label>
-                              <input type="text" class="form-control" name="first_name" id="first_name" placeholder="first name" title="enter your first name if any."/>
-                          </div>
-                      </div>
-                      <div class="form-group">
-                          
-                          <div class="col-xs-6">
-                              <label for="email"><h4>Email</h4></label>
-                              <input type="email" class="form-control" name="email" id="email" placeholder="you@email.com" title="enter your email."/>
-                          </div>
-                      </div>
-          
-                      <div class="form-group">
-                          
-                          <div class="col-xs-6">
-                              <label for="phone"><h4>Phone</h4></label>
-                              <input type="text" class="form-control" name="phone" id="phone" placeholder="enter phone" title="enter your phone number if any."/>
-                          </div>
-                      </div>
-          
-                      <div class="form-group">
-                          <div class="col-xs-6">
-                             <label for="mobile"><h4>Mobile</h4></label>
-                              <input type="text" class="form-control" name="mobile" id="mobile" placeholder="enter mobile number" title="enter your mobile number if any."/>
-                          </div>
-                      </div>
-                      <div class="form-group">
-                           <div class="col-xs-12">
-                                <br/>
-                              	<button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
-                               	<button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>
+                        <ul className="list-group">
+                            <li className="list-group-item text-muted">Activity <i className="fa fa-dashboard fa-1x"></i></li>
+                            <li className="list-group-item text-right"><span className="pull-left"><strong>Shares</strong></span> 125</li>
+                            <li className="list-group-item text-right"><span className="pull-left"><strong>Likes</strong></span> 13</li>
+                            <li className="list-group-item text-right"><span className="pull-left"><strong>Posts</strong></span> 37</li>
+                            <li className="list-group-item text-right"><span className="pull-left"><strong>Followers</strong></span> 78</li>
+                        </ul>
+
+                        <div className="panel panel-default">
+                            <div className="panel-heading mx-2"> Social Media</div>
+                            <div className="panel-body">
+                                <i className="fab fa-facebook-f fa-2x mx-2"></i>
+                                <i className="fab fa-instagram fa-2x mx-2 "></i>
+                                <i className="fab fa-twitter fa-2x mx-2"></i>
+                                <i className="fab fa-pinterest fa-2x mx-2"></i>
+                                <i className="fab fa-google-plus fa-2x mx-2"></i>
                             </div>
-                      </div>
-                      </div>
-                      <div class="col-sm-6">
-                      
-                      <div class="form-group">
-                          
-                          <div class="col-xs-6">
-                            <label for="last_name"><h4>Last name</h4></label>
-                              <input type="text" class="form-control" name="last_name" id="last_name" placeholder="last name" title="enter your last name if any."/>
-                          </div>
-                      </div>
-                      <div class="form-group">
-                          
-                          <div class="col-xs-6">
-                              <label for="email"><h4>Location</h4></label>
-                              <input type="email" class="form-control" id="location" placeholder="somewhere" title="enter a location"/>
-                          </div>
-                      </div>
-                      
-                      
-                      <div class="form-group">
-                          <div class="col-xs-6">
-                              <label for="password"><h4>Password</h4></label>
-                              <input type="password" class="form-control" name="password" id="password" placeholder="password" title="enter your password."/>
-                          </div>
-                      </div>
-                      <div class="form-group">
-                          
-                          <div class="col-xs-6">
-                            <label for="password2"><h4>Verify</h4></label>
-                              <input type="password" class="form-control" name="password2" id="password2" placeholder="password2" title="enter your password2."/>
-                          </div>
-                      </div>
-                      
-                      </div>
-                      </div>
-              	</form>
-              
-              <hr/>
-              
-             </div>
-             {/*  */}
-               
-              </div>
-          </div>
+                        </div>
 
-        </div>
-    </div>               
+                    </div>
+                    <div className="col-sm-8">
+                        <div className="tab-content">
+                            <div className="tab-pane active" id="home">
+                                <form className="form" action="##" method="post" id="registrationForm">
+                                    <div className="row">
+                                        <div className="col-sm-6">
+                                            <div className="form-group">
+                                                <div className="col-xs-6">
+                                                    <label ><h4>Username</h4></label>
+                                                    <input 
+                                                        type="text" 
+                                                        className="form-control" 
+                                                        name="userName" 
+                                                        defaultValue={profile.userName} 
+                                                        placeholder="User name" 
+                                                        onKeyUp={this.onChange}
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div className="form-group">
+
+                                                <div className="col-xs-6">
+                                                    <label><h4>Email</h4></label>
+                                                    <input 
+                                                        readOnly  
+                                                        type="email" 
+                                                        className="form-control" 
+                                                        name="email" 
+                                                        defaultValue={profile.email} 
+                                                        placeholder="you@email.com"
+                                                    />
+                                                </div>
+                                            </div>
+
+
+                                            <div className="form-group">
+                                                <div className="col-xs-6">
+                                                    <label><h4>Mobile</h4></label>
+                                                    <input 
+                                                        type="text" 
+                                                        className="form-control"
+                                                         name="phone"  
+                                                         defaultValue={profile.phone} 
+                                                         placeholder="enter mobile number" 
+                                                         onKeyUp={this.onChange}
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div className="form-group">
+                                                <div className="col-xs-12">
+                                                    <br />
+                                                    <button onClick={this.onSubmit}className="btn btn-lg btn-success mx-2" type="submit">
+                                                        <i className="glyphicon glyphicon-ok-sign"></i>Save
+                                                    </button>
+                                                    <button className="btn btn-warning btn-lg" type="reset">
+                                                        <i className="glyphicon glyphicon-repeat"></i> Reset
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="col-sm-6">
+                                            <div className="form-group">
+                                                <div className="col-xs-6">
+                                                    <label><h4>New Password</h4></label>
+                                                    <input 
+                                                        type="password" 
+                                                        className="form-control" 
+                                                        name="password"
+                                                        placeholder="password" 
+                                                        onKeyUp={this.onChange} 
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div className="form-group">
+                                                <div className="col-xs-6">
+                                                    <label><h4>Verify</h4></label>
+                                                    <input 
+                                                        type="password" 
+                                                        className="form-control" 
+                                                        name="passwordConfirm"
+                                                        placeholder="password confirmation" 
+                                                        onKeyUp={this.onChange} 
+                                                    />
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </form>
+
+                                <hr />
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         )
     }
 }
+const mapStateToProps = (state)=>{
+    return{
+      profile: state.user
+    }
+  }
+  const mapDispatchToProps = (dispatch, props)=>{
+    return{
+      watchProfile: (token) => {
+        dispatch(actions.profileRequest(token));
+      },
+      updateProfile: (user) => {
+        dispatch(actions.updateProfileRequest(user))
+      }
+    }
+  }
+export default connect(mapStateToProps,mapDispatchToProps)(UserProfile)

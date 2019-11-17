@@ -1,7 +1,20 @@
 import React, { Component } from 'react'
-import Login from './LogSign'
+import LogSign from './LogSign'
 export default class SubMenu extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            token:''
+        }
+    }
+    componentWillMount(){
+        let token = JSON.parse(localStorage.getItem('token'));
+        this.setState({
+            token: token
+        })
+    }
     render() {
+        
         return (
             <div className="SubMenu d-flex justify-content-between my-3">
                 <div>
@@ -27,7 +40,7 @@ export default class SubMenu extends Component {
                         <button className="btn btn-success my-2 my-sm-0" type="submit">Search</button>
                     </form>
                 </div>
-                <Login/>
+                <LogSign/>
             </div>
         );
     }

@@ -1,9 +1,6 @@
 import React from 'react';
 import './Comment.css';
 class Comment extends React.Component {
-    constructor(props) {
-        super(props)
-    }
     render() {
         var { review, user } = this.props
         return (
