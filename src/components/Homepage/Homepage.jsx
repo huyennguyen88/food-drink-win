@@ -24,7 +24,6 @@ export default class Homepage extends Component {
         // let token = JSON.parse(localStorage.getItem('token'));
         // console.log(token)
         return (
-            <Router>
             <div>
                 <TopNav changepage={this.whichpages} />
                 <Switch>
@@ -48,7 +47,6 @@ export default class Homepage extends Component {
                 </Switch>
                 <Footer />
             </div>
-            </Router>
         )
     }
 }

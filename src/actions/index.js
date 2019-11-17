@@ -52,7 +52,6 @@ export const fetchDrinks = (drinks)=>{
 export const productShowRequest = (id)=>{
     return (dispatch) => {
         return callApi('products/'+id,'GET',null).then(res=>{
-            // console.log(res.data)
             dispatch(productShow(res.data));
         }).catch(err=>{
             console.log(err)
@@ -143,7 +142,7 @@ export const updateProfile = (user) =>{
     return{
         type: types.UPDATE_PROFILE,
         user
-          }
+    }
 }
 export const fetchCategoriesRequest =(dispatch)=>{
     return (dispatch) =>{
@@ -157,5 +156,46 @@ export const showCategories =(categories)=>{
     return {
         type: types.ALL_CATEGORIES,
         categories
+    }
+}
+export const fetchReviews =(product_id)=>{
+    return (dispatch)=>{
+        return callApi('products/'+product_id+'/reviews','GET',null).then((res)=>{
+            dispatch(loadReviews(res.data));
+        })
+    }
+}
+export const loadReviews =(reviews)=>{
+    return{
+        type: types.LOAD_REVIEWS,
+        reviews
+    }
+}
+export const fetchUser = (id)=>{
+    return (dispatch)=>{
+        return callApi('users/mini/'+id,'GET',null).then((res)=>{
+            console.log("alo",res.data)
+            dispatch(getUser(res.data));
+        })
+    }
+}
+export const getUser =(user)=>{
+    return{
+        type : types.GET_USER,
+        user
+    }
+}
+
+export const fetchReviewUsers = (product_id)=>{
+    return (dispatch)=>{
+        return callApi('products/'+product_id+'/commentedUsers','GET',null).then((res)=>{
+            dispatch(getReviewUsers(res.data));
+        })
+    }
+}
+export const getReviewUsers =(users)=>{
+    return{
+        type : types.GET_REVIEW_USERS,
+        users
     }
 }

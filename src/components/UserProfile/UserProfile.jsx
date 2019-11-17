@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-// import './UserProfileStyle.css';
 import {connect} from 'react-redux'
 import * as actions from './../../actions/index'
 import img from '../../image/avatar.jpg'
@@ -79,7 +78,7 @@ class UserProfile extends Component {
                     <div className="col-sm-4">
 
                         <div className="text-center">
-                            <img style={{width: "90%"}} src={img} className="avatar img-circle img-thumbnail"/>
+                            <img style={{width: "90%"}} src={img} className="avatar img-circle img-thumbnail" alt="abc"/>
                             
                             <h6>Upload a different photo...</h6>
                             <input type="file" style={{marginLeft: "20%"}}/>
