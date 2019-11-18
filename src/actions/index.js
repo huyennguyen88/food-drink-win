@@ -1,9 +1,12 @@
 import * as types from './../constants/ActionTypes'
 import callApi from './../utils/apiCaller'
+import { type } from 'os'
 export const fetchProductsRequest = (dispatch)=>{
     return (dispatch) => {
         return callApi('products','GET',null).then(res=>{
-            dispatch(fetchProducts(res.data));
+            if(res){
+                dispatch(fetchProducts(res.data));
+            }
         })
     }
 }
@@ -24,6 +27,42 @@ export const productShowRequest = (id)=>{
 export const productShow = (product)=>{
     return{
         type: types.PRODUCT_SHOW,
+        product
+    }
+}
+export const categoriesRequest = ()=>{
+    return (dispatch) => {
+        return callApi('categories','GET',null).then(res=>{
+            if(res) dispatch(categories(res.data));
+        })
+    }
+}
+export const categories = (categories)=>{
+    return{
+        type: types.FETCH_CATEGORY,
+        categories
+    }
+}
+export const productCreateRequest = (product) =>{
+    return (dispatch) => {
+        return callApi('products/','POST',{
+            name: product.name,
+            image: product.image,
+            price: product.price,
+            classify: product.classify,
+            category_id: product.category_id,
+            quantity: product.quantity,
+            description: product.description,
+        }).then(res=>{
+            if(res) {
+                dispatch(productCreate(res.data))
+            }
+        })
+    }
+}
+export const productCreate = (product) =>{
+    return{
+        type: types.CREATE_PRODUCT,
         product
     }
 }
@@ -105,5 +144,21 @@ export const updateProfile = (user) =>{
     return{
         type: types.UPDATE_PROFILE,
         user
+    }
+}
+// toogle form
+export const toggleForm = () =>{
+    return{
+        type: types.TOOGLE_FORM
+    }
+}
+export const openForm = () =>{
+    return{
+        type: types.OPEN_FORM
+    }
+}
+export const closeForm = () =>{
+    return{
+        type: types.CLOSE_FORM
     }
 }

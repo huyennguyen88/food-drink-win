@@ -8,6 +8,8 @@ var myReducer = (state =initialState,action)=>{
         case types.PRODUCT_SHOW:
             state  = action.product
             return state;
+        case types.CREATE_PRODUCT:
+            return state
         default: return state; 
     }
 }

@@ -1,7 +1,12 @@
 export const FETCH_PRODUCTS ='FETCH_PRODUCTS';
 export const PRODUCT_SHOW = 'PRODUCT_SHOW';
+export const CREATE_PRODUCT = 'CREATE_PRODUCT';
+export const FETCH_CATEGORY = 'FETCH_CATEGORY';
 export const LOG_IN = 'LOG_IN';
 export const LOG_OUT = 'LOG_OUT';
 export const SIGN_UP = 'SIGN_UP';
 export const INFO = 'INFO';
 export const UPDATE_PROFILE = 'UPDATE_PROFILE';
+export const TOOGLE_FORM = 'TOOGLE_FORM'
+export const OPEN_FORM = 'OPEN_FORM'
+export const CLOSE_FORM = 'CLOSE_FORM'
