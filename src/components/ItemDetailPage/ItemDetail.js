@@ -1,19 +1,22 @@
 import React from 'react';
 import './ItemDetail.css';
+import Quantity from "./Quantity";
 import Comment from './Comment'
 import { connect } from 'react-redux'
 import * as actions from './../../actions/index'
-import classNames  from "classnames";
+import classNames from "classnames";
+
 class ItemDetail extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props)
         var id = this.props.match.params.id
         this.props.productShow(id);
         this.props.loadReviews(id);
         this.props.loadReviewUsers(id);
+
     }
     componentDidMount() {
-      
+
     }
     render() {
         var { product, reviews, users } = this.props;
@@ -70,6 +73,7 @@ class Preview extends React.Component {
     }
 }
 class DetailInfo extends React.Component {
+
     addToCart = () => {
         let { product } = this.props
         var Cart = JSON.parse(localStorage.getItem('cartItem'))
@@ -80,7 +84,9 @@ class DetailInfo extends React.Component {
         item == null ? Cart.push(product) : item.quantity++
         localStorage.setItem('cartItem', JSON.stringify(Cart));
     }
+
     render() {
+
         var { product } = this.props
         var rate = product.rate
         var rating = [false, false, false, false, false]
@@ -88,7 +94,7 @@ class DetailInfo extends React.Component {
             rating[i] = true
         }
         var stars = rating.map((item, index) => {
-            return <span key={index} className={classNames('fa','fa-star',{checked:item})}></span>
+            return <span key={index} className={classNames('fa', 'fa-star', { checked: item })}></span>
         })
         return (
             <div className="details col-md-6">
@@ -102,8 +108,13 @@ class DetailInfo extends React.Component {
                 <p className="product-description">{product.description}</p>
                 <h4 className="price">current price: <span>${product.price}</span></h4>
                 <p className="vote"><strong>91%</strong> of buyers enjoyed this product! <strong>(87 votes)</strong></p>
-                <div className="action">
-                    <button className="btn btn-success mx-1" type="button" onClick={this.addToCart}>Add to cart</button>
+
+                <Quantity current={0}/>
+                <div>
+                    <button className="btn btn-outline-success mx-1" type="button" onClick={this.addToCart}>
+                    <i className="fas fa-shopping-cart" aria-hidden="true"></i>
+                         Add to cart</button>
+                    <button className="btn btn-warning mx-1" type="button" onClick={this.addToCart}>Bye now</button>
                     <button className="btn btn-danger" type="button"><span className="fa fa-heart"></span></button>
                 </div>
             </div>

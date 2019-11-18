@@ -4,12 +4,13 @@ import CartItem from './CartItem';
 
 class ItemCartList extends React.Component {
   render() {
-    var Cart = []
-    Cart = JSON.parse(localStorage.getItem('cartItem'));
+    var Cart = [
+    ]
+    //Cart = JSON.parse(localStorage.getItem('cartItem'));
     if(Cart!=null)return (
       <>
        {
-           Cart.map((item)=>(<tr><CartItem Item = {item}/></tr>))
+           Cart.map((item,index)=>(<tr key={index} ><CartItem Item = {item}/></tr>))
        }
       </>
     );

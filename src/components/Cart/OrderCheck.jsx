@@ -15,18 +15,18 @@ class OrderCheck extends React.Component {
         }
         return (
             <>
-                <div class="col-lg-6">
-                    <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Order summary </div>
-                    <div class="p-4">
+                <div className="col-lg-6">
+                    <div className="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Order summary </div>
+                    <div className="p-4">
 
-                        <ul class="list-unstyled mb-4">
-                            <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Quantity</strong>
-                                <h5 class="font-weight-bold">{quantity}</h5>
+                        <ul className="list-unstyled mb-4">
+                            <li className="d-flex justify-content-between py-3 border-bottom"><strong className="text-muted">Quantity</strong>
+                                <h5 className="font-weight-bold">{quantity}</h5>
                             </li>
-                            <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
-                                <h5 class="font-weight-bold">${total}</h5>
+                            <li className="d-flex justify-content-between py-3 border-bottom"><strong className="text-muted">Total</strong>
+                                <h5 className="font-weight-bold">${total}</h5>
                             </li>
-                        </ul><a href="abc" class="btn btn-warning rounded-pill py-2 btn-block">Procceed to checkout</a>
+                        </ul><a href="abc" className="btn btn-warning rounded-pill py-2 btn-block">Procceed to checkout</a>
                     </div>
                 </div>
 

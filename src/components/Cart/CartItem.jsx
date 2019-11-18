@@ -1,4 +1,5 @@
 import React from 'react';
+import Quantity from '../ItemDetailPage/Quantity';
 
 class CartItem extends React.Component {
     remove = () =>{
@@ -20,7 +21,9 @@ class CartItem extends React.Component {
                     </div>
                 </th>
                 <td className="border-0 align-middle"><strong>${this.props.Item.price}</strong></td>
-                <td className="border-0 align-middle"><strong>{this.props.Item.quantity}</strong></td>
+                <td className="border-0 align-middle">
+                    <Quantity current={this.props.Item.quantity}/>
+                </td>
                 <td className="border-0 align-middle"><a onClick ={this.remove} href="cart" className="text-dark"><i className="fa fa-trash"></i></a></td>
             </>
         );
