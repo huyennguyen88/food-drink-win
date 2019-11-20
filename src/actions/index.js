@@ -1,4 +1,3 @@
-
 import * as types from './../constants/ActionTypes'
 import callApi from './../utils/apiCaller'
 export const fetchProductsRequest = (dispatch)=>{
@@ -125,17 +124,45 @@ export const signUp  = (newUser) =>{
         newUser
     }
 }
+export const UPCart = (token,id,q) =>{
+    return (dispatch) =>{
+        return callApi("carts/" + token +"/update","POST",{
+            Item_id:id,
+            quantity:q
+        }).then(res =>{
+            if(res)dispatch(UPcart(res.data))
+        })
+    }
+}
+export const UPcart = (cart) =>{
+    return{
+        type: types.UP_CART,
+        cart
+    }
+}
 export const getCartReq = (id) =>{
     return (dispatch) =>{
-        return callApi("carts/" + id +"getCart","GET",null).then(res =>{
-            console.log(res.data)
-            dispatch(getCart(res.data))
+        return callApi("carts/" + id +"/getCart","GET",null).then(res =>{
+            if(res)dispatch(getCart(res.data))
         })
     }
 }
 export const getCart = (cart) =>{
     return{
         type: types.GET_CART,
+        cart
+    }
+}
+export const deleteItemReq = (token,id) =>{
+    return (dispatch) =>{
+        return callApi("carts/" + token +"/delete","POST",{Item_id:id}).then(res => {
+            if(res)dispatch(DelItemfromCart(res.data))
+        })
+    }
+}
+export const DelItemfromCart = (cart) =>{
+    return{
+        type: types.DELETE,
         cart
     }
 }

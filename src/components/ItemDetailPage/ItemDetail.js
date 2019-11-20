@@ -75,7 +75,10 @@ class DetailInfo extends React.Component {
         let { product } = this.props
         let item = {
             id: product.id,
-            quantity:this.state.quantity
+            price: product.price,
+            quantity:this.state.quantity,
+            name: product.name,
+            image: product.img
         }
         if(token){
             await this.props.add(token,item)
@@ -83,7 +86,7 @@ class DetailInfo extends React.Component {
         else{
             let cart = JSON.parse(localStorage.getItem('cartItem'))
             cart.push(item)
-            localStorage.setItem('getCart',JSON.stringify(cart))
+            localStorage.setItem('cartItem',JSON.stringify(cart))
         }
     }
     plus = () => {

@@ -14,3 +14,5 @@ export const GET_CART = 'GET_CART';
 export const SIGN_UP = 'SIGN_UP'
 export const INFO = 'INFO'
 export const UPDATE_PROFILE = 'UPDATE_PROFILE'
+export const DELETE = 'DELETE'
+export const UP_CART = 'UP_CART'

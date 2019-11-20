@@ -19,8 +19,6 @@ export default class Homepage extends Component {
             token: ''
         }
     }
-    componentDidMount(){
-    }
     render() {
         return (
             <div>

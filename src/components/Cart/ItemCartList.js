@@ -1,28 +1,31 @@
 import React from 'react';
 import CartItem from './CartItem';
-import { connect } from 'react-redux'
+import {connect} from 'react-redux'
 import * as actions from './../../actions/index'
 class ItemCartList extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      Cart: JSON.parse(localStorage.getItem('cartItem'))?JSON.parse(localStorage.getItem('cartItem')):[]
+      Cart: null,
+      token: JSON.parse(localStorage.getItem('token'))
     }
   }
-  componentWillMount(){
-    let token = JSON.parse(localStorage.getItem('token'))
-    this.props.getCart(token)
-  }
   componentWillReceiveProps(nextProps){
-    let token = JSON.parse(localStorage.getItem('token'))
     let miniCart = nextProps.cart
-    if(token){
-      miniCart.push(this.state.Cart)
+    if(this.state.token){
+      let localCart = JSON.parse(localStorage.getItem('cartItem'))
+      if(localCart)miniCart.push(localCart)
       this.setState({
         Cart:miniCart
       }) 
       localStorage.setItem('cartItem',JSON.stringify(''))
     }
+  }
+  delete = (item) =>
+  {
+    let miniCart = this.state.Cart
+    miniCart.pop(item)
+    this.setState({Cart:miniCart})
   }
   render() {
     if(this.state.Cart===null || this.state.Cart === [])return (
@@ -33,27 +36,21 @@ class ItemCartList extends React.Component {
     else return(
       <>
        {
-           this.state.Cart.map((item,index)=>(<tr key={index} ><CartItem Item = {item}/></tr>))
+           this.state.Cart.map((item,index)=>(
+           <CartItem Item = {item} UnMount ={this.delete} />
+           ))
        }
       </>
     )
   }
 }
 const mapStateToProps = (NextProps) => {
-
   return {
-      product: NextProps.products,
       cart: NextProps.cart
   }
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-      productShow: (id) => {
-          dispatch(actions.productShowRequest(id))
-      },
-      getCart: (id) =>{
-          dispatch(actions.getCartReq(id))
-      },
       add: (id,item) =>{
         dispatch(actions.addToCart(id,item))
       }
