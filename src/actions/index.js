@@ -1,14 +1,14 @@
-
 import * as types from './../constants/ActionTypes'
 import callApi from './../utils/apiCaller'
 export const fetchProductsRequest = (dispatch)=>{
     return (dispatch) => {
         return callApi('products','GET',null).then(res=>{
             dispatch(fetchProducts(res.data));
+        }).catch(err=>{
+            console.log(err)
         })
     }
 }
-
 export const fetchFoodsRequest = (dispatch)=>{
     return (dispatch) => {
         return callApi('products','GET',null).then(res=>{
@@ -124,7 +124,64 @@ export const signUp  = (newUser) =>{
         newUser
     }
 }
+export const UPCart = (token,id,q) =>{
+    return (dispatch) =>{
+        return callApi("carts/" + token +"/update","POST",{
+            Item_id:id,
+            quantity:q
+        }).then(res =>{
+            if(res)dispatch(UPcart(res.data))
+        })
+    }
+}
+export const UPcart = (cart) =>{
+    return{
+        type: types.UP_CART,
+        cart
+    }
+}
+export const getCartReq = (id) =>{
+    return (dispatch) =>{
+        return callApi("carts/" + id +"/getCart","GET",null).then(res =>{
+            if(res)dispatch(getCart(res.data))
+        })
+    }
+}
+export const getCart = (cart) =>{
+    return{
+        type: types.GET_CART,
+        cart
+    }
+}
+export const deleteItemReq = (token,id) =>{
+    return (dispatch) =>{
+        return callApi("carts/" + token +"/delete","POST",{Item_id:id}).then(res => {
+            if(res)dispatch(DelItemfromCart(res.data))
+        })
+    }
+}
+export const DelItemfromCart = (cart) =>{
+    return{
+        type: types.DELETE,
+        cart
+    }
+}
+export const addToCart = (id,item) =>{
+    return (dispatch) =>{
+        return callApi("carts/" + id + "/addProduct","POST",{
+            product_id:item.id,
+            quantity:item.quantity
+        })
+    }
+}
+export const addCart = (cart) =>{
+    return{
+        type:types.ADD_CART,
+        cart
+    }
+}
 export const updateProfileRequest = (user) =>{
+    console.log(user)
     return (dispatch) =>{
         return callApi("users/update", "PUT",{
             name: user.userName,

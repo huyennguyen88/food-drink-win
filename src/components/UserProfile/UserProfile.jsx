@@ -210,7 +210,7 @@ const mapStateToProps = (state)=>{
       profile: state.user
     }
   }
-  const mapDispatchToProps = (dispatch, props)=>{
+  const mapDispatchToProps = (dispatch)=>{
     return{
       watchProfile: (token) => {
         dispatch(actions.profileRequest(token));

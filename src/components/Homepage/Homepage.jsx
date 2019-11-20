@@ -8,6 +8,7 @@ import CartPage from '../Cart/CartPage'
 import {
     Switch,
     Route,
+    BrowserRouter as Router,
 } from 'react-router-dom';
 import ItemDetail from '../ItemDetailPage/ItemDetail'
 import UserProfile from '../UserProfile/UserProfile'
@@ -17,8 +18,6 @@ export default class Homepage extends Component {
         this.state = {
             token: ''
         }
-    }
-    componentDidMount(){
     }
     render() {
         // let token = JSON.parse(localStorage.getItem('token'));

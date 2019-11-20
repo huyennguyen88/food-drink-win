@@ -37,8 +37,6 @@ class TabList extends React.Component {
 
 }
 const mapStateToProps = state =>{
-  // console.log(state.products);
-  
   return{
     products: state.products
   }
