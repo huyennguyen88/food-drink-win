@@ -20,6 +20,8 @@ export default class Homepage extends Component {
         }
     }
     render() {
+        // let token = JSON.parse(localStorage.getItem('token'));
+        // console.log(token)
         return (
             <div>
                 <TopNav changepage={this.whichpages} />
