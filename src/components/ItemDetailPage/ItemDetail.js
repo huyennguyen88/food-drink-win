@@ -1,5 +1,6 @@
 import React from 'react';
 import './ItemDetail.css';
+import Quantity from "./Quantity";
 import Comment from './Comment'
 import { connect } from 'react-redux'
 import * as actions from './../../actions/index'
@@ -14,6 +15,7 @@ class ItemDetail extends React.Component {
         this.props.productShow(id);
         this.props.loadReviews(id);
         this.props.loadReviewUsers(id);
+
     }
     render() {
         var { product, reviews, users } = this.props;
@@ -63,6 +65,7 @@ class Preview extends React.Component {
     }
 }
 class DetailInfo extends React.Component {
+
     constructor(props)
     {
         super(props)
@@ -111,7 +114,9 @@ class DetailInfo extends React.Component {
             [name]: value
         })
     }
+
     render() {
+
         var { product } = this.props
         var rate = product.rate
         var rating = [false, false, false, false, false]
@@ -133,7 +138,6 @@ class DetailInfo extends React.Component {
                 <p className="product-description">{product.description}</p>
                 <h4 className="price">current price: <span>${product.price}</span></h4>
                 <p className="vote"><strong>91%</strong> of buyers enjoyed this product! <strong>(87 votes)</strong></p>
-
                 <div>
                     <div className="quantity input-group mb-3">
                         <button className="btn btn-info" type="button" name="button" onClick={this.plus}>
