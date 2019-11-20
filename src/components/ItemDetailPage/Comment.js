@@ -14,7 +14,7 @@ class Comment extends React.Component {
                     </a>
                     <div className="media-body">
                         <p className="text-muted pull-right">
-                            <small className="text-muted">26/11/2019</small>
+                            <small className="text-muted">{review.created_at.slice(0,10)}</small>
                         </p>
                         <strong className="text-success">@{user ? user.name : ""}</strong>
 

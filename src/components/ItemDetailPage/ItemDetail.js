@@ -5,7 +5,8 @@ import Comment from './Comment'
 import { connect } from 'react-redux'
 import * as actions from './../../actions/index'
 import classNames from "classnames";
-
+import { Route, Switch } from "react-router-dom";
+import ReviewForm from './ReviewForm';
 class ItemDetail extends React.Component {
     constructor(props) {
         super(props)
@@ -33,11 +34,10 @@ class ItemDetail extends React.Component {
                     </div>
                 </div>
                 <p className="h4 text-info">{reviews.length} Comments</p>
-                <div className="d-flex  mt-3">
-                    <div className="comment-wrapper">
-                        <div className="card ">
+                <div className="mt-3">
+                    <div className="mb-3">
+                        <div className="card">
                             <div className="card-body">
-
                                 {
                                     reviews.map((item, index) => {
                                         var cmtUser = users.find((u) => {
@@ -46,15 +46,12 @@ class ItemDetail extends React.Component {
                                         return <Comment key={index} review={item} user={cmtUser} />
                                     })
                                 }
-
-                                <textarea className="form-control border-info" placeholder="Write a comment..." rows="3"></textarea>
-                                <br />
-                                <button type="button" className="btn btn-info float-right">Post</button>
-                                <div className="clearfix"></div>
                             </div>
                         </div>
                     </div>
+                    <ReviewForm/>
                 </div>
+                
 
             </div>
 
@@ -122,6 +119,7 @@ class DetailInfo extends React.Component {
     }
 }
 const mapStateToProps = (state) => {
+
     return {
         product: state.products,
         reviews: state.reviews,
