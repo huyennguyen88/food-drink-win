@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-// import './UserProfileStyle.css';
 import {connect} from 'react-redux'
 import * as actions from './../../actions/index'
 import img from '../../image/avatar.jpg'
@@ -26,9 +25,8 @@ class UserProfile extends Component {
                 phone: profile.phone,
                 avatar: profile.avatar,
         },(()=>{
-            console.log(this.state.profile) //callback
+            // console.log(this.state.profile) //callback
         }))
-        
     }
     onChange =(e) => {
         let target = e.target
@@ -40,13 +38,33 @@ class UserProfile extends Component {
     }
     onSubmit = async (e)=>{
         e.preventDefault();
-        let user = this.state;
+        let user;
+        if(this.state.password !== ''){
+            user = this.state;
+        }
+        else{
+             user = {
+                userName: this.state.userName,
+                email: this.state.email,
+                phone: this.state.phone,
+            }
+        }
         if(user.password !== user.passwordConfirm){
             alert("password to password confirmation ga onaji janai!!!")
             return;
         }
+        if(this.state.userName === '' ){
+            alert("name can't be blank")
+            return;
+        }
         else{
             await this.props.updateProfile(user)
+            alert("Update sucess")
+            this.setState({
+                userName: user.userName,
+                email: user.email,
+                phone: user.phone,
+            })
         }
     }
     render() {
@@ -60,7 +78,7 @@ class UserProfile extends Component {
                     <div className="col-sm-4">
 
                         <div className="text-center">
-                            <img style={{width: "90%"}} src={img} className="avatar img-circle img-thumbnail"/>
+                            <img style={{width: "90%"}} src={img} className="avatar img-circle img-thumbnail" alt="abc"/>
                             
                             <h6>Upload a different photo...</h6>
                             <input type="file" style={{marginLeft: "20%"}}/>
@@ -100,7 +118,7 @@ class UserProfile extends Component {
                                                         className="form-control" 
                                                         name="userName" 
                                                         defaultValue={profile.userName} 
-                                                        placeholder= {"username"}
+                                                        placeholder="User name" 
                                                         onKeyUp={this.onChange}
                                                     />
                                                 </div>
@@ -188,12 +206,11 @@ class UserProfile extends Component {
     }
 }
 const mapStateToProps = (state)=>{
-    console.log(state )
     return{
       profile: state.user
     }
   }
-  const mapDispatchToProps = (dispatch, props)=>{
+  const mapDispatchToProps = (dispatch)=>{
     return{
       watchProfile: (token) => {
         dispatch(actions.profileRequest(token));

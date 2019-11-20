@@ -3,14 +3,19 @@ var initialState = []
 var myReducer = (state= initialState, action)=>{
     switch (action.type) {
         case types.GET_CART:
-            state =JSON.parse(localStorage.getItem('cartItem'));
-            state = [...action.ADD_CART]
-            state = action.GET_CART
-            return [...state]
-        // case types.ADD_CART:
-        //     state =JSON.parse(localStorage.getItem('cartItem'));
-        //     state = [...action.ADD_CART]
-        //     return [...state]
+            state = action.cart
+            // console.log(state)
+            return state
+        case types.DELETE:
+                // console.log(state)
+            state = action.cart
+            // console.log(state)
+            return state
+        case types.ADD_CART:
+            // return null
+        case types.UP_CART:
+            state = action.cart
+            return state
         default:
             return state
     }

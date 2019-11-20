@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
-import callApi from './../../../../utils/apiCaller'
 import { connect } from 'react-redux';
 import * as actions from './../../../../actions/index'
 import { Link,withRouter } from "react-router-dom";
 class Login extends Component {
-
     constructor(props){
         super(props);
         this.state ={
@@ -22,15 +20,13 @@ class Login extends Component {
         this.setState({
             [name]: value
         })
-        // console.log(this.state)
     }
     onSubmit = async (e) => {
         e.preventDefault();
-        // console.log(this.state)
         let {email,password} = this.state
         await this.props.logIn(email,password)
         let {user} = this.props.state
-        if(user === null || user === undefined)  
+        if(user === null || user.authentication_token === undefined)  
         {
             alert("invalid email or password")
             return;

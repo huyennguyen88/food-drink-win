@@ -1,45 +1,20 @@
 import React from 'react';
 import './App.css';
+import Manager from './components/Admin/Manager'
 import {
   BrowserRouter as Router,
 } from 'react-router-dom';
-import {connect} from 'react-redux'
-import * as actions from './actions/index'
 import Homepage from './components/Homepage/Homepage'
-import { create } from 'domain';
 class App extends React.Component {
-  constructor(props){
-    super(props)
-    this.state = {
-      products: []
-    }
-  }
-  componentDidMount(){
-    // this.props.fetchAPI();
-    // this.setState({
-    //   products: this.props.products
-    // })
-  }
   render() {
     return (
       <Router>
         <div className="App container">
           <Homepage />
         </div>
+        <Manager/>
       </Router>
     );
   }
 }
-const mapStateToProps = (state)=>{
-  return{
-    products: state
-  }
-}
-const mapDispatchToProps = (dispatch, props)=>{
-  return{
-    fetchAPI: () => {
-      dispatch(actions.fetchProductsRequest());
-    }
-  }
-}
-export default connect(mapStateToProps,mapDispatchToProps)(App);
+export default App;
