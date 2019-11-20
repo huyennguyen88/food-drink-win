@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import Manager from './components/Admin/Manager'
 import {
   BrowserRouter as Router,
 } from 'react-router-dom';
@@ -12,7 +11,6 @@ class App extends React.Component {
         <div className="App container">
           <Homepage />
         </div>
-        <Manager/>
       </Router>
     );
   }
