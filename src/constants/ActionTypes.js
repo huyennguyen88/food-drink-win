@@ -1,6 +1,12 @@
 export const FETCH_PRODUCTS ='FETCH_PRODUCTS';
 export const PRODUCT_SHOW = 'PRODUCT_SHOW';
 export const CREATE_PRODUCT = 'CREATE_PRODUCT';
+export const EDIT_PRODUCT = 'EDIT_PRODUCT';
+export const GET_PRODUCT = 'GET_PRODUCT';
+export const CLEAR_PRODUCT = 'CLEAR_PRODUCT';
+export const DELETE_PRODUCT = 'DELETE_PRODUCT';
+export const SEARCH_PRODUCT = 'SEARCH_PRODUCT';
+export const SORT_PRODUCT = 'SORT_PRODUCT';
 export const FETCH_CATEGORY = 'FETCH_CATEGORY';
 export const LOG_IN = 'LOG_IN';
 export const LOG_OUT = 'LOG_OUT';

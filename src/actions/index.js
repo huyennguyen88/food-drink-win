@@ -1,6 +1,7 @@
 import * as types from './../constants/ActionTypes'
 import callApi from './../utils/apiCaller'
 import { type } from 'os'
+// product
 export const fetchProductsRequest = (dispatch)=>{
     return (dispatch) => {
         return callApi('products','GET',null).then(res=>{
@@ -66,6 +67,64 @@ export const productCreate = (product) =>{
         product
     }
 }
+export const productDeleteRequest = (id)=>{
+    return (dispatch) =>{
+        callApi("products/"+id,"DELETE",null).then(res=>{
+            if (res) dispatch(productDelete(id))
+        })
+    }
+}
+export const productDelete = (id)=>{
+    return{
+        type: types.DELETE_PRODUCT,
+        id
+    }
+}
+export const productEditRequest = (product)=>{
+    return (dispatch)=>{
+        callApi('products/'+product.id,'PUT',{
+            name: product.name,
+            image: product.image,
+            price: product.price,
+            classify: product.classify,
+            category_id: product.category_id,
+            quantity: product.quantity,
+            description: product.description,
+        }).then(res=>{
+            if(res) dispatch(productEdit(res.data))
+        })
+    }
+}
+export const productEdit = (product)=>{
+    return{
+        type: types.EDIT_PRODUCT,
+        product
+    }
+}
+export const getProduct = (product)=>{
+    return{
+        type: types.GET_PRODUCT,
+        product
+    }
+}
+export const productClear = ()=>{
+    return{
+        type: types.CLEAR_PRODUCT,
+    }
+}
+export const productSearch = (keyword)=> {
+    return{
+        type: types.SEARCH_PRODUCT,
+        keyword
+    }
+}
+export const productSort = (sort)=>{
+    return{
+        type: types.SORT_PRODUCT,
+        sort
+    }
+}
+//user 
 export const logInRequest = (email,password) =>{
     return (dispatch)=>{
         return callApi("users/sign_in","POST",{
@@ -92,10 +151,10 @@ export const logOut = () => {
 }
 export const profileRequest = (token)=>{
     return (dispatch) =>{
-        return callApi("/users/"+token,"GET",{
+        return callApi("users/"+token,"GET",{
             authentication_token: token
         }).then(res=>{
-            dispatch(profile(res.data));
+            if(res) dispatch(profile(res.data));
         })
     }
 }

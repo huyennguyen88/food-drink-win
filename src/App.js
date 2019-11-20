@@ -24,9 +24,9 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        {/* <div className="App container">
+        <div className="App container">
           <Homepage />
-        </div> */}
+        </div>
         <Manager/>
       </Router>
     );

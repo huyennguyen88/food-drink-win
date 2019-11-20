@@ -20,8 +20,8 @@ class Manager extends React.Component {
                 <h1 style={style}>Manager page</h1>
             </div>
             <div className="row">    
-                <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                    <Control/>  
+                <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    {displayForm? '' : <Control/> } 
                 </div>
             </div>
             <div className="row">
