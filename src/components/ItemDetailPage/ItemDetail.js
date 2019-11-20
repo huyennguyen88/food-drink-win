@@ -5,18 +5,16 @@ import Comment from './Comment'
 import { connect } from 'react-redux'
 import * as actions from './../../actions/index'
 import classNames from "classnames";
-import { Route, Switch } from "react-router-dom";
 import ReviewForm from './ReviewForm';
 class ItemDetail extends React.Component {
     constructor(props) {
         super(props)
+    }
+    componentDidMount(){
         var id = this.props.match.params.id
         this.props.productShow(id);
         this.props.loadReviews(id);
         this.props.loadReviewUsers(id);
-
-    }
-    componentDidMount() {
 
     }
     render() {
@@ -29,7 +27,7 @@ class ItemDetail extends React.Component {
                     <div className="container">
                         <div className="wrapper row">
                             <Preview img={product.image} />
-                            <DetailInfo product={product} />
+                            <DetailInfo product={product} add = {this.props.add}/>
                         </div>
                     </div>
                 </div>
@@ -51,10 +49,7 @@ class ItemDetail extends React.Component {
                     </div>
                     <ReviewForm/>
                 </div>
-                
-
             </div>
-
         );
     }
 }
@@ -71,15 +66,53 @@ class Preview extends React.Component {
 }
 class DetailInfo extends React.Component {
 
-    addToCart = () => {
+    constructor(props)
+    {
+        super(props)
+        this.state={
+            quantity:0
+        }
+    }
+    addToCart = async () => {
+        let token = JSON.parse(localStorage.getItem('token'))
         let { product } = this.props
-        var Cart = JSON.parse(localStorage.getItem('cartItem'))
-        var item = Cart.find((item) => {
-            if (item.name === product.name) return item
-            return false
+        let item = {
+            id: product.id,
+            price: product.price,
+            quantity:this.state.quantity,
+            name: product.name,
+            image: product.img
+        }
+        if(token){
+            await this.props.add(token,item)
+        }
+        else{
+            let cart = JSON.parse(localStorage.getItem('cartItem'))
+            cart.push(item)
+            localStorage.setItem('cartItem',JSON.stringify(cart))
+        }
+    }
+    plus = () => {
+        var num = this.state.quantity + 1
+
+        this.setState({
+            quantity: num
         })
-        item == null ? Cart.push(product) : item.quantity++
-        localStorage.setItem('cartItem', JSON.stringify(Cart));
+    }
+    minus = () => {
+        var num = this.state.quantity - 1
+        if (num < 0) num = 0
+        this.setState
+            ({
+                quantity: num
+            })
+    }
+    changeForm = (event) => {
+        var name = event.target.name
+        var value = event.target.value
+        this.setState({
+            [name]: value
+        })
     }
 
     render() {
@@ -105,13 +138,23 @@ class DetailInfo extends React.Component {
                 <p className="product-description">{product.description}</p>
                 <h4 className="price">current price: <span>${product.price}</span></h4>
                 <p className="vote"><strong>91%</strong> of buyers enjoyed this product! <strong>(87 votes)</strong></p>
+                <div>
+                    <div className="quantity input-group mb-3">
+                        <button className="btn btn-info" type="button" name="button" onClick={this.plus}>
+                            <i className="fa fa-plus" aria-hidden="true"></i>
+                        </button>
+                        <input type="text" name="quantity" value={this.state.quantity} onChange={this.changeForm} />
+                        <button className="btn btn-info" type="button" name="button" onClick={this.minus}>
+                            <i className="fa fa-minus" aria-hidden="true"></i>
+                        </button>
 
-                <Quantity current={0}/>
+                    </div>
+                </div>
                 <div>
                     <button className="btn btn-outline-success mx-1" type="button" onClick={this.addToCart}>
                     <i className="fas fa-shopping-cart" aria-hidden="true"></i>
-                         Add to cart</button>
-                    <button className="btn btn-warning mx-1" type="button" onClick={this.addToCart}>Bye now</button>
+                    Add to cart</button>
+                    <button className="btn btn-warning mx-1" type="button" onClick={this.addToCart}>buy now</button>
                     <button className="btn btn-danger" type="button"><span className="fa fa-heart"></span></button>
                 </div>
             </div>
@@ -126,7 +169,7 @@ const mapStateToProps = (state) => {
         users: state.users
     }
 }
-const mapDispatchToProps = (dispatch, props) => {
+const mapDispatchToProps = (dispatch) => {
     return {
         productShow: (id) => {
             dispatch(actions.productShowRequest(id))
@@ -136,6 +179,9 @@ const mapDispatchToProps = (dispatch, props) => {
         },
         loadReviewUsers: (id) => {
             dispatch(actions.fetchReviewUsers(id))
+        },
+        add: (id,item) =>{
+            dispatch(actions.addToCart(id,item))
         }
     }
 }

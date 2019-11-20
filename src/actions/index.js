@@ -1,14 +1,13 @@
-
 import * as types from './../constants/ActionTypes'
 import callApi from './../utils/apiCaller'
+import { type } from 'os'
+// product
 export const fetchProductsRequest = (dispatch)=>{
     return (dispatch) => {
         return callApi('products','GET',null).then(res=>{
-            dispatch(fetchProducts(res.data));
-        })
-    }
-}
-
+            if(res){
+                dispatch(fetchProducts(res.data));
+            }
 export const fetchFoodsRequest = (dispatch)=>{
     return (dispatch) => {
         return callApi('products','GET',null).then(res=>{
@@ -64,6 +63,100 @@ export const productShow = (product)=>{
         product
     }
 }
+export const categoriesRequest = ()=>{
+    return (dispatch) => {
+        return callApi('categories','GET',null).then(res=>{
+            if(res) dispatch(categories(res.data));
+        })
+    }
+}
+export const categories = (categories)=>{
+    return{
+        type: types.FETCH_CATEGORY,
+        categories
+    }
+}
+export const productCreateRequest = (product) =>{
+    return (dispatch) => {
+        return callApi('products/','POST',{
+            name: product.name,
+            image: product.image,
+            price: product.price,
+            classify: product.classify,
+            category_id: product.category_id,
+            quantity: product.quantity,
+            description: product.description,
+        }).then(res=>{
+            if(res) {
+                dispatch(productCreate(res.data))
+            }
+        })
+    }
+}
+export const productCreate = (product) =>{
+    return{
+        type: types.CREATE_PRODUCT,
+        product
+    }
+}
+export const productDeleteRequest = (id)=>{
+    return (dispatch) =>{
+        callApi("products/"+id,"DELETE",null).then(res=>{
+            if (res) dispatch(productDelete(id))
+        })
+    }
+}
+export const productDelete = (id)=>{
+    return{
+        type: types.DELETE_PRODUCT,
+        id
+    }
+}
+export const productEditRequest = (product)=>{
+    return (dispatch)=>{
+        callApi('products/'+product.id,'PUT',{
+            name: product.name,
+            image: product.image,
+            price: product.price,
+            classify: product.classify,
+            category_id: product.category_id,
+            quantity: product.quantity,
+            description: product.description,
+        }).then(res=>{
+            if(res) dispatch(productEdit(res.data))
+        })
+    }
+}
+export const productEdit = (product)=>{
+    return{
+        type: types.EDIT_PRODUCT,
+        product
+    }
+}
+export const getProduct = (product)=>{
+    return{
+        type: types.GET_PRODUCT,
+        product
+    }
+}
+export const productClear = ()=>{
+    return{
+        type: types.CLEAR_PRODUCT,
+    }
+}
+export const productSearch = (keyword)=> {
+    return{
+        type: types.SEARCH_PRODUCT,
+        keyword
+    }
+}
+export const productSort = (sort)=>{
+    return{
+        type: types.SORT_PRODUCT,
+        sort
+    }
+}
+//user 
 export const logInRequest = (email,password) =>{
     return (dispatch)=>{
         return callApi("users/sign_in","POST",{
@@ -90,10 +183,10 @@ export const logOut = () => {
 }
 export const profileRequest = (token)=>{
     return (dispatch) =>{
-        return callApi("/users/"+token,"GET",{
+        return callApi("users/"+token,"GET",{
             authentication_token: token
         }).then(res=>{
-            dispatch(profile(res.data));
+            if(res) dispatch(profile(res.data));
         })
     }
 }
@@ -124,7 +217,64 @@ export const signUp  = (newUser) =>{
         newUser
     }
 }
+export const UPCart = (token,id,q) =>{
+    return (dispatch) =>{
+        return callApi("carts/" + token +"/update","POST",{
+            Item_id:id,
+            quantity:q
+        }).then(res =>{
+            if(res)dispatch(UPcart(res.data))
+        })
+    }
+}
+export const UPcart = (cart) =>{
+    return{
+        type: types.UP_CART,
+        cart
+    }
+}
+export const getCartReq = (id) =>{
+    return (dispatch) =>{
+        return callApi("carts/" + id +"/getCart","GET",null).then(res =>{
+            if(res)dispatch(getCart(res.data))
+        })
+    }
+}
+export const getCart = (cart) =>{
+    return{
+        type: types.GET_CART,
+        cart
+    }
+}
+export const deleteItemReq = (token,id) =>{
+    return (dispatch) =>{
+        return callApi("carts/" + token +"/delete","POST",{Item_id:id}).then(res => {
+            if(res)dispatch(DelItemfromCart(res.data))
+        })
+    }
+}
+export const DelItemfromCart = (cart) =>{
+    return{
+        type: types.DELETE,
+        cart
+    }
+}
+export const addToCart = (id,item) =>{
+    return (dispatch) =>{
+        return callApi("carts/" + id + "/addProduct","POST",{
+            product_id:item.id,
+            quantity:item.quantity
+        })
+    }
+}
+export const addCart = (cart) =>{
+    return{
+        type:types.ADD_CART,
+        cart
+    }
+}
 export const updateProfileRequest = (user) =>{
+    console.log(user)
     return (dispatch) =>{
         return callApi("users/update", "PUT",{
             name: user.userName,
@@ -144,6 +294,19 @@ export const updateProfile = (user) =>{
         user
     }
 }
+export const toggleForm = () =>{
+    return{
+        type: types.TOOGLE_FORM
+    }
+}
+export const openForm = () =>{
+    return{
+        type: types.OPEN_FORM
+    }
+}
+export const closeForm = () =>{
+    return{
+        type: types.CLOSE_FORM
 export const fetchCategoriesRequest =(dispatch)=>{
     return (dispatch) =>{
         return callApi('categories','GET',null).then(res=>{

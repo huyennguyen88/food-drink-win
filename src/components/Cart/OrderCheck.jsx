@@ -1,14 +1,30 @@
 import React from 'react';
-
-
+import { connect } from 'react-redux'
+import * as actions from './../../actions/index'
 class OrderCheck extends React.Component {
+    constructor(props)
+    {
+        super(props)
+        this.state = {
+            Cart: null
+        }
+    }
+    componentWillReceiveProps(nextProps){
+        let token = JSON.parse(localStorage.getItem('token'))
+        let miniCart = nextProps.cart
+        if(token){
+        let localCart = JSON.parse(localStorage.getItem('cartItem'))
+        if(localCart)miniCart.push(localCart)
+        this.setState({
+            Cart:miniCart
+        }) 
+        }
+    }
     render() {
-        var cartItem = [] 
-        cartItem = JSON.parse(localStorage.getItem('cartItem'))
         var total = 0
         var quantity=0 
-        if(cartItem!=null){
-            cartItem.map((item) =>{
+        if(this.state.Cart!=null){
+            this.state.Cart.map((item) =>{
                 total+=item.price*item.quantity;
                 quantity+=item.quantity;
             })
@@ -34,4 +50,10 @@ class OrderCheck extends React.Component {
         );
     }
 }
-export default OrderCheck;
+const mapStateToProps = (NextProps) => {
+
+    return {
+        cart: NextProps.cart
+    }
+}
+export default connect(mapStateToProps,null)(OrderCheck);
