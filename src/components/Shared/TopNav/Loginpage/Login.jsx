@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import callApi from './../../../../utils/apiCaller'
 import { connect } from 'react-redux';
 import * as actions from './../../../../actions/index'
 import { Link,withRouter } from "react-router-dom";

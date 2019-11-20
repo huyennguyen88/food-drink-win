@@ -1,18 +1,26 @@
 import {combineReducers} from 'redux';
 import products from './products'
-import user from './users'
-import displayForm from './displayForm'
-import categories from './categories'
+import categories from './categories';
 import getProduct from './getProduct'
+import displayForm from './displayForm'
+import items from './items';
+import users from './users';
+import user from './user';
+import cart from './cart';
+import reviews from './reviews';
 import searchProduct from './searchProduct'
 import sortProduct from './sortProduct'
 const myReducer = combineReducers({
     products,
-    user,
     displayForm,
-    categories,
-    getProduct,
     searchProduct,
     sortProduct,
+    getProduct,
+    items,
+    users,
+    categories,
+    reviews,
+    user,
+    cart
 });
 export default myReducer
