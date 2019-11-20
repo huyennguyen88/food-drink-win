@@ -3,14 +3,14 @@ import ItemList from './ItemList';
 import * as actions from '../../actions/index'
 import { connect } from "react-redux";
 class TabList extends React.Component {
-  ChooseFood =()=>{
-    this.props.onChooseFood();
+  ChooseFood = ()=>{
+     this.props.onChooseFood();
   }
-  ChooseDrink=()=>{
-    this.props.onChooseDrink();
+  ChooseDrink=  ()=>{
+     this.props.onChooseDrink();
   }
-  componentDidMount(){
-    this.props.onChooseFood();
+  componentWillMount(){
+     this.props.onChooseFood();
   }
   render() {
     return (
@@ -38,7 +38,7 @@ class TabList extends React.Component {
 }
 const mapStateToProps = state =>{
   return{
-
+    products: state.products
   }
 }
 const mapDispatchToProps = (dispatch,props)=>{

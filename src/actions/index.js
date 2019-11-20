@@ -53,7 +53,6 @@ export const fetchDrinks = (drinks)=>{
 export const productShowRequest = (id)=>{
     return (dispatch) => {
         return callApi('products/'+id,'GET',null).then(res=>{
-            // console.log(res.data)
             dispatch(productShow(res.data));
         }).catch(err=>{
             console.log(err)
@@ -95,7 +94,6 @@ export const profileRequest = (token)=>{
         return callApi("/users/"+token,"GET",{
             authentication_token: token
         }).then(res=>{
-            // console.log(res)
             dispatch(profile(res.data));
         })
     }
@@ -129,9 +127,8 @@ export const signUp  = (newUser) =>{
 }
 export const getCartReq = (id) =>{
     return (dispatch) =>{
-        return callApi("carts/" + id,"GET",{
-
-        }).then(res =>{
+        return callApi("carts/" + id +"getCart","GET",null).then(res =>{
+            console.log(res.data)
             dispatch(getCart(res.data))
         })
     }
@@ -142,21 +139,20 @@ export const getCart = (cart) =>{
         cart
     }
 }
-// export const getCartReq = (cart) =>{
-//     return (dispatch) =>{
-//         return callApi("carts/" + id,"POST",{
-
-//         }).then(res =>{
-//             dispatch(getCart(res.data))
-//         })
-//     }
-// }
-// export const addCart = (cart) =>{
-//     return{
-//         type:types.ADD_CART,
-//         cart
-//     }
-// }
+export const addToCart = (id,item) =>{
+    return (dispatch) =>{
+        return callApi("carts/" + id + "/addProduct","POST",{
+            product_id:item.id,
+            quantity:item.quantity
+        })
+    }
+}
+export const addCart = (cart) =>{
+    return{
+        type:types.ADD_CART,
+        cart
+    }
+}
 export const updateProfileRequest = (user) =>{
     console.log(user)
     return (dispatch) =>{
@@ -166,8 +162,9 @@ export const updateProfileRequest = (user) =>{
             phone: user.phone,
             password: user.password,
         }).then(res=>{
-            // console.log(res)
-            dispatch(updateProfile(res.data))
+            if(res){
+                dispatch(updateProfile(res.data))
+            }
         })
     }
 }
@@ -175,7 +172,7 @@ export const updateProfile = (user) =>{
     return{
         type: types.UPDATE_PROFILE,
         user
-        }
+    }
 }
 export const fetchCategoriesRequest =(dispatch)=>{
     return (dispatch) =>{
@@ -189,5 +186,46 @@ export const showCategories =(categories)=>{
     return {
         type: types.ALL_CATEGORIES,
         categories
+    }
+}
+export const fetchReviews =(product_id)=>{
+    return (dispatch)=>{
+        return callApi('products/'+product_id+'/reviews','GET',null).then((res)=>{
+            dispatch(loadReviews(res.data));
+        })
+    }
+}
+export const loadReviews =(reviews)=>{
+    return{
+        type: types.LOAD_REVIEWS,
+        reviews
+    }
+}
+export const fetchUser = (id)=>{
+    return (dispatch)=>{
+        return callApi('users/mini/'+id,'GET',null).then((res)=>{
+            console.log("alo",res.data)
+            dispatch(getUser(res.data));
+        })
+    }
+}
+export const getUser =(user)=>{
+    return{
+        type : types.GET_USER,
+        user
+    }
+}
+
+export const fetchReviewUsers = (product_id)=>{
+    return (dispatch)=>{
+        return callApi('products/'+product_id+'/commentedUsers','GET',null).then((res)=>{
+            dispatch(getReviewUsers(res.data));
+        })
+    }
+}
+export const getReviewUsers =(users)=>{
+    return{
+        type : types.GET_REVIEW_USERS,
+        users
     }
 }

@@ -1,13 +1,9 @@
 import * as types from "./../constants/ActionTypes"
-var initialState = []
-
+var initialState = [];
 var myReducer = (state = initialState, action) => {
     switch (action.type) {
-        case types.GET_USER:
-            state = action.user;
-            return state;
-        case types.GET_REVIEW_USERS:
-            state = action.users;
+        case types.LOAD_REVIEWS:
+            state = action.reviews;
             return [...state];
         default: return state;
     }
