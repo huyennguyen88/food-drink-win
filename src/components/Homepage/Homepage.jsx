@@ -19,11 +19,8 @@ export default class Homepage extends Component {
             token: ''
         }
     }
-    componentDidMount(){
-    }
     render() {
         return (
-            <Router>
             <div>
                 <TopNav changepage={this.whichpages} />
                 <Switch>
@@ -47,7 +44,6 @@ export default class Homepage extends Component {
                 </Switch>
                 <Footer />
             </div>
-            </Router>
         )
     }
 }

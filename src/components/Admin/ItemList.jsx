@@ -48,7 +48,7 @@ class ItemList extends React.Component {
         
 
         return (
-            <div className="">
+            <div className="my-products">
                 <table  className="table table-bordered table-hover">
                 <thead>
                 <tr>

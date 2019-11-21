@@ -8,7 +8,7 @@ class AddForm extends React.Component {
         this.state ={
             id: '',
             name: '',
-            image: 'dong2.gif',
+            image: 'https://nhanlucquocte.net/wp-content/uploads/2019/04/mi-ramen.jpg',
             price: '',
             classify: true,
             category_id: null,

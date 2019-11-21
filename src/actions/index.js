@@ -1,13 +1,33 @@
 import * as types from './../constants/ActionTypes'
 import callApi from './../utils/apiCaller'
-import { type } from 'os'
-// product
 export const fetchProductsRequest = (dispatch)=>{
     return (dispatch) => {
         return callApi('products','GET',null).then(res=>{
-            if(res){
-                dispatch(fetchProducts(res.data));
-            }
+            dispatch(fetchProducts(res.data));
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
+}
+export const fetchFoodsRequest = (dispatch)=>{
+    return (dispatch) => {
+        return callApi('products','GET',null).then(res=>{
+            var products = res.data;
+            var foods = products.filter((item)=>{
+                return item.classify===true
+            })
+            dispatch(fetchFoods(foods));
+        })
+    }
+}
+export const fetchDrinksRequest = (dispatch)=>{
+    return (dispatch) => {
+        return callApi('products','GET',null).then(res=>{
+            var products = res.data;
+            var drinks = products.filter((item)=>{
+                return item.classify===false
+            })
+            dispatch(fetchDrinks(drinks));
         })
     }
 }
@@ -17,12 +37,26 @@ export const fetchProducts = (products)=>{
         products
     }
 }
+export const fetchFoods = (foods)=>{
+    return {
+        type: types.SHOW_FOOD,
+        foods
+    }
+}
+export const fetchDrinks = (drinks)=>{
+    return {
+        type: types.SHOW_DRINK,
+        drinks
+    }
+}
 export const productShowRequest = (id)=>{
     return (dispatch) => {
         return callApi('products/'+id,'GET',null).then(res=>{
-            // console.log(res.data);
+            console.log(res.data)
             dispatch(productShow(res.data));
-        })
+        }).catch(err=>{
+            console.log(err)
+        })                                                                                                                                                                                        
     }
 }
 export const productShow = (product)=>{
@@ -185,7 +219,64 @@ export const signUp  = (newUser) =>{
         newUser
     }
 }
+export const UPCart = (token,id,q) =>{
+    return (dispatch) =>{
+        return callApi("carts/" + token +"/update","POST",{
+            Item_id:id,
+            quantity:q
+        }).then(res =>{
+            if(res)dispatch(UPcart(res.data))
+        })
+    }
+}
+export const UPcart = (cart) =>{
+    return{
+        type: types.UP_CART,
+        cart
+    }
+}
+export const getCartReq = (id) =>{
+    return (dispatch) =>{
+        return callApi("carts/" + id +"/getCart","GET",null).then(res =>{
+            if(res)dispatch(getCart(res.data))
+        })
+    }
+}
+export const getCart = (cart) =>{
+    return{
+        type: types.GET_CART,
+        cart
+    }
+}
+export const deleteItemReq = (token,id) =>{
+    return (dispatch) =>{
+        return callApi("carts/" + token +"/delete","POST",{Item_id:id}).then(res => {
+            if(res)dispatch(DelItemfromCart(res.data))
+        })
+    }
+}
+export const DelItemfromCart = (cart) =>{
+    return{
+        type: types.DELETE,
+        cart
+    }
+}
+export const addToCart = (id,item) =>{
+    return (dispatch) =>{
+        return callApi("carts/" + id + "/addProduct","POST",{
+            product_id:item.id,
+            quantity:item.quantity
+        })
+    }
+}
+export const addCart = (cart) =>{
+    return{
+        type:types.ADD_CART,
+        cart
+    }
+}
 export const updateProfileRequest = (user) =>{
+    console.log(user)
     return (dispatch) =>{
         return callApi("users/update", "PUT",{
             name: user.userName,
@@ -205,7 +296,6 @@ export const updateProfile = (user) =>{
         user
     }
 }
-// toogle form
 export const toggleForm = () =>{
     return{
         type: types.TOOGLE_FORM
@@ -219,5 +309,59 @@ export const openForm = () =>{
 export const closeForm = () =>{
     return{
         type: types.CLOSE_FORM
+    }
+}
+export const fetchCategoriesRequest =(dispatch)=>{
+    return (dispatch) =>{
+        return callApi('categories','GET',null).then(res=>{
+       
+            dispatch(showCategories(res.data))
+        })
+    }
+}
+export const showCategories =(categories)=>{
+    return {
+        type: types.ALL_CATEGORIES,
+        categories
+    }
+}
+export const fetchReviews =(product_id)=>{
+    return (dispatch)=>{
+        return callApi('products/'+product_id+'/reviews','GET',null).then((res)=>{
+            dispatch(loadReviews(res.data));
+        })
+    }
+}
+export const loadReviews =(reviews)=>{
+    return{
+        type: types.LOAD_REVIEWS,
+        reviews
+    }
+}
+export const fetchUser = (id)=>{
+    return (dispatch)=>{
+        return callApi('users/mini/'+id,'GET',null).then((res)=>{
+            console.log("alo",res.data)
+            dispatch(getUser(res.data));
+        })
+    }
+}
+export const getUser =(user)=>{
+    return{
+        type : types.GET_USER,
+        user
+    }
+}
+export const fetchReviewUsers = (product_id)=>{
+    return (dispatch)=>{
+        return callApi('products/'+product_id+'/commentedUsers','GET',null).then((res)=>{
+            dispatch(getReviewUsers(res.data));
+        })
+    }
+}
+export const getReviewUsers =(users)=>{
+    return{
+        type : types.GET_REVIEW_USERS,
+        users
     }
 }

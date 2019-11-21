@@ -27,7 +27,7 @@ class Control extends React.Component {
     render() {
         return(
                 
-                <div className="input-group">
+                <div className="input-group control">
                     <input 
                         onChange ={this.onChange}
                         type="text" name="keyword" 
