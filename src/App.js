@@ -15,12 +15,6 @@ class App extends React.Component {
       products: []
     }
   }
-  componentDidMount(){
-    // this.props.fetchAPI();
-    // this.setState({
-    //   products: this.props.products
-    // })
-  }
   render() {
     return (
       <Router>
