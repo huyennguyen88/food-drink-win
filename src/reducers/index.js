@@ -4,23 +4,25 @@ import user from './user'
 import displayForm from './displayForm'
 import categories from './categories'
 import getProduct from './getProduct'
-import searchProduct from './searchProduct'
-import sortProduct from './sortProduct'
+import search from './search'
+import sort from './sort'
 import items from './items'
 import users from './users'
 import reviews from './reviews'
 import cart from './cart'
+import getUser from './getUser'
 const myReducer = combineReducers({
     products,
     displayForm,
-    searchProduct,
-    sortProduct,
+    search,
+    sort,
     getProduct,
     items,
-    users,
     categories,
     reviews,
     user,
-    cart 
+    users,
+    cart ,
+    getUser
 });
 export default myReducer

@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import * as actions from './../../actions/index'
+import * as actions from '../../../actions/index'
 class Sort extends React.Component{
     onClick = (by,value)=>{
         let sort = {
@@ -62,13 +62,13 @@ class Sort extends React.Component{
 }
 const mapStateToProps = (state)=>{
     return{
-        sortProductType: state.sortProduct
+        sortProductType: state.sort
     }
 }
 const mapDispatchToProps = (dispatch, props)=>{
     return{
         sortProduct: (sort)=>{
-            dispatch(actions.productSort(sort))
+            dispatch(actions.Sort(sort))
         }
     }
 }

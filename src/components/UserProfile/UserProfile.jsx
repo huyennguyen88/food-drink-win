@@ -14,8 +14,17 @@ class UserProfile extends Component {
         }
     }
     componentWillMount(){
-        let token = JSON.parse(localStorage.getItem('token'))
-        this.props.watchProfile(token);
+        // let token = JSON.parse(localStorage.getItem('token'))
+        // this.props.watchProfile(token);
+        let  profile =  this.props.profile;
+        this.setState({
+                userName: profile.name,
+                email: profile.email,
+                phone: profile.phone,
+                avatar: profile.avatar,
+        },(()=>{
+            // console.log(this.state.profile) //callback
+        }))
     }
     componentWillReceiveProps(nextProps){
         let  profile =  nextProps.profile;
@@ -212,9 +221,9 @@ const mapStateToProps = (state)=>{
   }
   const mapDispatchToProps = (dispatch)=>{
     return{
-      watchProfile: (token) => {
-        dispatch(actions.profileRequest(token));
-      },
+    //   watchProfile: (token) => {
+    //     dispatch(actions.profileRequest(token));
+    //   },
       updateProfile: (user) => {
         dispatch(actions.updateProfileRequest(user))
       }

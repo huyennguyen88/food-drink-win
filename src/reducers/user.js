@@ -5,10 +5,11 @@ var myReducer = (state =initialState,action)=>{
     switch(action.type){
         case types.LOG_IN:
             state = action.user;
-            console.log(state)
             localStorage.setItem('token',JSON.stringify(state.authentication_token))
             localStorage.setItem('role',JSON.stringify(state.role))
             return state;
+        case types.SESSION:
+            return state
         case types.LOG_OUT:
             localStorage.removeItem('token');
             localStorage.removeItem('role');

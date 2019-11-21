@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import * as actions from './../../actions/index'
+import * as actions from '../../../actions/index'
 
 class AddForm extends React.Component {
     constructor(props){
@@ -9,7 +9,7 @@ class AddForm extends React.Component {
             id: '',
             name: '',
             image: 'https://nhanlucquocte.net/wp-content/uploads/2019/04/mi-ramen.jpg',
-            price: '',
+            price: 0.0,
             classify: true,
             category_id: null,
             description: '',

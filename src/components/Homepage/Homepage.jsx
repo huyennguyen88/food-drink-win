@@ -10,14 +10,22 @@ import {
     Route,
     BrowserRouter as Router,
 } from 'react-router-dom';
+import {connect} from 'react-redux'
 import ItemDetail from '../ItemDetailPage/ItemDetail'
 import UserProfile from '../UserProfile/UserProfile'
-export default class Homepage extends Component {
+import ManagerProduct from '../Admin/Products/ManagerProduct'
+import * as actions from './../../actions/index'
+import ManagerUser from '../Admin/Users/ManagerUser'
+class Homepage extends Component {
     constructor(props){
         super(props)
         this.state = {
             token: ''
         }
+    }
+    componentWillMount(){
+        let token = JSON.parse(localStorage.getItem('token'));
+        // this.props.watchProfile(token);
     }
     render() {
         return (
@@ -38,6 +46,14 @@ export default class Homepage extends Component {
                     <Route path="/profile">
                         <UserProfile/>
                     </Route>
+                    <Route path="/admin/products">
+                        <ManagerProduct/>
+                    </Route>
+                    <Route path="/admin/users">
+                        <ManagerUser/>
+                    </Route>
+                    <Route path="/admin/categories">
+                    </Route>
                     <Route path="/">
                         <Main/>
                     </Route>
@@ -47,3 +63,11 @@ export default class Homepage extends Component {
         )
     }
 }
+const mapDispatchToProps = (dispatch)=>{
+    return{
+        watchProfile: (token) => {
+            dispatch(actions.profileRequest(token));
+        },
+    }
+}
+export default connect(null,null)(Homepage)

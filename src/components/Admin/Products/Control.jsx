@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import * as actions from './../../actions/index'
+import * as actions from '../../../actions/index'
 import Sort from './Sort';
 class Control extends React.Component {
     constructor(props){
@@ -67,7 +67,7 @@ const mapDispatchToProps = (dispatch, props)=>{
             dispatch(actions.productClear())
         },
         productSearch: (keyword)=>{
-            dispatch(actions.productSearch(keyword))
+            dispatch(actions.Search(keyword))
         }
     }
 }
