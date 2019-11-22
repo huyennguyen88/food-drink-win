@@ -1,11 +1,10 @@
 import React from 'react';
 import './ItemDetail.css';
-import Quantity from "./Quantity";
 import Comment from './Comment'
 import { connect } from 'react-redux'
 import * as actions from './../../actions/index'
-import classNames from "classnames";
 import ReviewForm from './ReviewForm';
+import DetailInfo from './DetailInfo'
 class ItemDetail extends React.Component {
     constructor(props) {
         super(props)
@@ -23,7 +22,7 @@ class ItemDetail extends React.Component {
                     <div className="container">
                         <div className="wrapper row">
                             <Preview img={product.image} />
-                            <DetailInfo product={product} />
+                            <DetailInfo product_id={product.id} />
                         </div>
                     </div>
                 </div>
@@ -35,6 +34,7 @@ class ItemDetail extends React.Component {
                                 {
                                     reviews.map((item, index) => {
                                         var cmtUser = users.find((u) => {
+                                            console.log("users",users)
                                             return u.id === item.user_id
                                         })
                                         return <Comment key={index} review={item} user={cmtUser} />
@@ -45,8 +45,6 @@ class ItemDetail extends React.Component {
                     </div>
                     <ReviewForm />
                 </div>
-
-
 
             </div>
         );
@@ -63,55 +61,7 @@ class Preview extends React.Component {
         );
     }
 }
-class DetailInfo extends React.Component {
 
-    addToCart = () => {
-        let { product } = this.props
-        var Cart = JSON.parse(localStorage.getItem('cartItem'))
-        var item = Cart.find((item) => {
-            if (item.name === product.name) return item
-            return false
-        })
-        item == null ? Cart.push(product) : item.quantity++
-        localStorage.setItem('cartItem', JSON.stringify(Cart));
-    }
-
-    render() {
-       
-        var { product } = this.props
-        var rate = product.rate
-        var rating = [false, false, false, false, false]
-        for (let i = 0; i < rate; i++) {
-            rating[i] = true
-        }
-        var stars = rating.map((item, index) => {
-            return <span key={index} className={classNames('fa', 'fa-star', { checked: item })}></span>
-        })
-        return (
-            <div className="details col-md-6">
-                <p className="h2">{product.name}</p>
-                <div className="rating">
-                    <div className="stars">
-                        {stars}
-                    </div>
-                    <span className="review-no">{product.reviews}</span>
-                </div>
-                <p className="product-description">{product.description}</p>
-                <h4 className="price">current price: <span>${product.price}</span></h4>
-                <p className="vote"><strong>91%</strong> of buyers enjoyed this product! <strong>(87 votes)</strong></p>
-
-                <Quantity current={0} />
-                <div>
-                    <button className="btn btn-outline-success mx-1" type="button" onClick={this.addToCart}>
-                        <i className="fas fa-shopping-cart" aria-hidden="true"></i>
-                        Add to cart</button>
-                    <button className="btn btn-warning mx-1" type="button" onClick={this.addToCart}>Bye now</button>
-                    <button className="btn btn-danger" type="button"><span className="fa fa-heart"></span></button>
-                </div>
-            </div>
-        );
-    }
-}
 const mapStateToProps = (state) => {
 
     return {

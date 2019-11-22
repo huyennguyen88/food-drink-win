@@ -76,8 +76,6 @@ class ReviewForm extends Component
     }
     render() 
     {
-        console.log("render st",this.state)
-        console.log("render pr",this.props)
         var {comment, rate} = this.state
         return (
             <div className="row">

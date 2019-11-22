@@ -17,6 +17,7 @@ class Comment extends React.Component {
     render() {
         
         var { review, user, current_user} = this.props
+        console.log("user",user)
         var edit_delete =
                 <>
                     <button type="button" className="btn btn-info btn-sm mx-2" title="Edit" onClick={()=> this.getReview(review.id)}>
