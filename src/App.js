@@ -17,6 +17,7 @@ class App extends React.Component {
     let token = JSON.parse(localStorage.getItem('token'));
     this.props.watchProfile(token);
     this.props.loadMenu();
+    this.props.fetchAllProduct();
     // this.props.getCart();
   }
   render() {
@@ -40,7 +41,9 @@ const mapDispatchToProps = (dispatch)=>{
       getCart:()=>{
         dispatch(actions.getAdCart())
       },
-    
+      fetchAllProduct: ()=>{
+        return dispatch(actions.fetchProductsRequest());
+      }
       // onChooseFood: ()=>{
       //   dispatch(actions.fetchFoodsRequest());
       // },

@@ -8,9 +8,6 @@ class ItemfromCart extends React.Component {
             product:[]
         }
     }
-    componentWillMount(){
-        this.props.fetchAllProduct();
-    }
     render() {
         let products = this.props.product
         let product =products.find((p,i) =>{
@@ -32,11 +29,4 @@ const  mapStateToProps =(state) => {
         product: state.allProduct,
     }
 }
-const mapDispatchToProps = (dispatch, props)=>{
-    return{
-       fetchAllProduct: ()=>{
-           return dispatch(actions.fetchProductsRequest());
-       }
-    }
-}
-export default connect(mapStateToProps,mapDispatchToProps)(ItemfromCart);
+export default connect(mapStateToProps,null)(ItemfromCart);
