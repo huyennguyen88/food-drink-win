@@ -9,15 +9,12 @@ class CartList extends React.Component {
             Carts: []
         }
     }
-    componentWillMount(){
-    }
     componentWillReceiveProps(nextProps){
         this.setState({
             Carts: nextProps.Carts
         })
     }
     render() {
-        let sort = this.props.sortProductType
         let {Carts} = this.state;
         Carts.sort((a,b)=>{
             if(a.status < b.status) return -1;

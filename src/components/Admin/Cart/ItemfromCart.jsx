@@ -13,7 +13,7 @@ class ItemfromCart extends React.Component {
             if(p.id == this.props.item.product_id)return p
         })
         return (
-                 <tr className="row-admin " >
+                <tr className="row-admin" >
                     <td className="text-center">{product.id}</td>
                     <td className="text-center">{product.name}</td>
                     <td className="text-center">{product.price}</td>

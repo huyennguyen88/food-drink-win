@@ -373,6 +373,7 @@ export const UPcart = (cart) =>{
 export const getCartReq = (id) =>{
     return (dispatch) =>{
         return callApi("carts/" + id +"/getCart","GET",null).then(res =>{
+            console.log(res)
             if(res)dispatch(getCart(res.data))
         })
     }

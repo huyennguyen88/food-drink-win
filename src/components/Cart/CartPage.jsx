@@ -7,8 +7,9 @@ import * as actions from './../../actions/index'
 class CartPage extends React.Component {
     componentWillMount (){
         let token= JSON.parse(localStorage.getItem('token'))
-        this.props.getCart(token)
+        this.Cart(token)
     }
+    Cart = this.props.getCart
     render() {
         return (
             <div >

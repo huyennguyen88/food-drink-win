@@ -30,11 +30,9 @@ class Cart extends React.Component {
             <th className="text-center">Stock</th>
         </>)
     }
-    details = () =>{
-        return <div className="dropdown-menu">{this.log()}{this.items()}</div>
-    }
     render() {
         let cart = this.props.cart
+        console.log(cart)
         let c = () => {
             switch(cart.status){
                 case 0:
@@ -48,7 +46,7 @@ class Cart extends React.Component {
         
         return (
             <>
-             <tr className="row-admin h4 ml-4 nav-item dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id={cart.id} onClick ={this.details}>
+             <tr className="row-admin">
                     <th className="text-center">{cart.id}</th>
                     <th className="text-center">{cart.username}</th>
                     <th className="text-center">{c()}</th>
@@ -66,8 +64,7 @@ class Cart extends React.Component {
                         >Decline
                         </button>
                     </td>:<td></td>}
-                    <td><a key = {this.props.key} className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{this.details()}
-                    </a></td>
+                
             </tr>
             </>
         );

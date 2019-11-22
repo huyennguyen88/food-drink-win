@@ -84,6 +84,7 @@ class DetailInfo extends React.Component {
         }
         if(token){
             await this.props.add(token,item)
+            alert('add to cart')
         }
         else{
             let cart = JSON.parse(localStorage.getItem('cartItem'))
@@ -113,9 +114,7 @@ class DetailInfo extends React.Component {
             [name]: value
         })
     }
-
     render() {
-
         var { product } = this.props
         var rate = product.rate
         var rating = [false, false, false, false, false]
