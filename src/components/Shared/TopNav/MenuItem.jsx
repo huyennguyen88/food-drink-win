@@ -1,9 +1,10 @@
 import React from 'react';
+import {Link} from 'react-router-dom'
 class MenuItem extends React.Component {
     render() {
         var {name} = this.props
         return (
-        <a className="dropdown-item text-success" href="abc">{name}</a>
+        <Link className="dropdown-item text-success" to={"/"+name.toLowerCase()}>{name}</Link>
         );
     }
 }

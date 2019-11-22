@@ -1,31 +1,33 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import * as actions from './../../actions/index'
+import * as actions from '../../../actions/index'
 
 class Item extends React.Component {
     constructor(props){
         super(props)
     }
     onDelete = ()=>{
-        this.props.deleteProduct(this.props.product.id)
+        this.props.deleteUser(this.props.user.authentication_token)
     }
-    onEdit = (id)=>{
+    onEdit =  (id)=>{
         this.props.openForm();
-        this.props.getProduct(this.props.product)
+        this.props.getUser(this.props.user)
     }
     componentWillReceiveProps(nextProps){
     }
     render() {
-        let {product} = this.props
+        let {user} = this.props
         return (
                  <tr className="row-admin">
-                    <td>{product.id}</td>
-                    <td>{product.name}</td>
+                    <td>{user.id}</td>  
+                    <td>{user.name}</td>
+                    <td>{user.email}</td>
+                    <td>{user.phone}</td>
                     <td>
                         <button 
                             type="button" 
                             className="btn btn-warning"
-                            onClick={()=>this.onEdit(product.id)}
+                            onClick={()=>this.onEdit(user.id)}
                         >Edit
                         </button>
                         <button 
@@ -41,11 +43,20 @@ class Item extends React.Component {
 }
 const mapStateToProps = (state)=>{
     return{
-        CartDetail:state.Cart
+        // productDetail: state
     }
 }
 const mapDispatchToProps = (dispatch, props)=>{
     return{
+        deleteUser: (token)=>{
+            dispatch(actions.userDeleteRequest(token))
+        },
+        openForm: ()=>{
+            dispatch(actions.openForm())   
+        },
+        getUser:  (user)=>{
+            dispatch(actions.getUserEdit(user))
+        }
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Item);

@@ -52,6 +52,7 @@ export const fetchDrinks = (drinks)=>{
 export const productShowRequest = (id)=>{
     return (dispatch) => {
         return callApi('products/'+id,'GET',null).then(res=>{
+            console.log(res.data)
             dispatch(productShow(res.data));
         }).catch(err=>{
         })                                                                                                                                                                                        
@@ -61,19 +62,6 @@ export const productShow = (product)=>{
     return{
         type: types.PRODUCT_SHOW,
         product
-    }
-}
-export const categoriesRequest = ()=>{
-    return (dispatch) => {
-        return callApi('categories','GET',null).then(res=>{
-            if(res) dispatch(categories(res.data));
-        })
-    }
-}
-export const categories = (categories)=>{
-    return{
-        type: types.FETCH_CATEGORY,
-        categories
     }
 }
 export const productCreateRequest = (product) =>{
@@ -144,15 +132,15 @@ export const productClear = ()=>{
         type: types.CLEAR_PRODUCT,
     }
 }
-export const productSearch = (keyword)=> {
+export const Search = (keyword)=> {
     return{
-        type: types.SEARCH_PRODUCT,
+        type: types.SEARCH,
         keyword
     }
 }
-export const productSort = (sort)=>{
+export const Sort = (sort)=>{
     return{
-        type: types.SORT_PRODUCT,
+        type: types.SORT,
         sort
     }
 }
@@ -195,6 +183,27 @@ export const profile = (user)=>{
         user
     }
 }
+export const updateProfileRequest = (user) =>{
+    console.log(user)
+    return (dispatch) =>{
+        return callApi("users/update", "PUT",{
+            name: user.userName,
+            email: user.email,
+            phone: user.phone,
+            password: user.password,
+        }).then(res=>{
+            if(res){
+                dispatch(updateProfile(res.data))
+            }
+        })
+    }
+}
+export const updateProfile = (user) =>{
+    return{
+        type: types.UPDATE_PROFILE,
+        user
+    }
+}
 export const signUpRequest  = (newUser) =>{
     return (dispatch) => {
         return callApi("users","POST",{
@@ -216,6 +225,135 @@ export const signUp  = (newUser) =>{
         newUser
     }
 }
+export const fetchUsersRequest = ()=>{
+    return (dispatch)=>{
+       return callApi('users','GET',null).then(res=>{
+            if(res) dispatch(fetchUsers(res.data)); 
+        })
+    }
+}
+export const fetchUsers = (users)=>{
+    return{
+        type: types.FETCH_USERS,
+        users
+    }
+}
+export const userDeleteRequest = (token)=>{
+    return (dispatch)=>{
+       return callApi('users/'+token,'DELETE',{
+           authentication_token: token
+       }).then(res=>{
+            if(res) dispatch(userDelete(token)); 
+        })
+    }
+}
+export const userDelete = (token)=>{
+    return{
+        type: types.DELETE_USER,
+        token
+    }
+}
+export const userEditRequest = (user)=>{
+    console.log(user)
+    return (dispatch)=>{
+       return callApi('users/update','PUT',{
+            email: user.email,
+            name: user.userName,
+            phone: user.phone,
+            password: user.password
+       }).then(res=>{
+            if(res) dispatch(userEdit(res.data)); 
+        })
+    }
+}
+export const userEdit = (user)=>{
+    return{
+        type: types.EDIT_USER,
+        user
+    }
+}
+export const getUserEdit = (user)=>{
+    return{
+        type: types.GET_USER_EDIT,
+        user
+    }
+}
+export const userClear = ()=>{
+    return{
+        type: types.CLEAR_USER
+    }
+}
+//category
+export const categoriesRequest = ()=>{
+    return (dispatch) => {
+        return callApi('categories','GET',null).then(res=>{
+            if(res) dispatch(categories(res.data));
+        })
+    }
+}
+export const categories = (categories)=>{
+    return{
+        type: types.FETCH_CATEGORY,
+        categories
+    }
+}
+export const categoryCreateRequest = (category)=>{ 
+    return (dispatch) => {
+        return callApi('categories','POST',{
+            name: category.name,
+            classify: category.classify 
+        }).then(res=>{
+            if(res) dispatch(categoryCreate(res.data));
+        })
+    }
+}
+export const categoryCreate = (category)=>{
+    return{
+        type: types.CREATE_CATEGORY,
+        category
+    }
+}
+export const categoryDeleteRequest = (id)=>{
+    return (dispatch)=>{
+        return callApi('categories/'+id,'DELETE',null).then(res=>{
+            if(res) dispatch(categoryDelete(id));
+        })
+    }
+}
+export const categoryDelete = (id)=>{
+    return {
+        type: types.DELETE_CATEGORY,
+        id
+    }
+}
+export const getCategory = (category)=>{
+    return{
+        type: types.GET_CATEGORY,
+        category
+    }
+}
+export const categoryClear = ()=>{
+    return{
+        type: types.CLEAR_CATEGORY
+    }
+}
+export const categoryEditRequest = (category)=>{
+    return (dispatch) =>{
+        return callApi('categories/'+category.id,'PUT',{
+            name: category.name,
+            classify: category.classify
+        }).then(res=>{
+            if (res) dispatch(categoryEdit(category))
+        })
+    }
+}
+export const categoryEdit = (category)=>{
+    return{
+        type: types.EDIT_CATEGORY,
+        category
+    }
+}
+//cart
 export const UPCart = (token,id,q) =>{
     return (dispatch) =>{
         return callApi("carts/" + token +"/update","POST",{
@@ -272,26 +410,6 @@ export const addCart = (cart) =>{
         cart
     }
 }
-export const updateProfileRequest = (user) =>{
-    return (dispatch) =>{
-        return callApi("users/update", "PUT",{
-            name: user.userName,
-            email: user.email,
-            phone: user.phone,
-            password: user.password,
-        }).then(res=>{
-            if(res){
-                dispatch(updateProfile(res.data))
-            }
-        })
-    }
-}
-export const updateProfile = (user) =>{
-    return{
-        type: types.UPDATE_PROFILE,
-        user
-    }
-}
 export const toggleForm = () =>{
     return{
         type: types.TOOGLE_FORM
@@ -307,10 +425,9 @@ export const closeForm = () =>{
         type: types.CLOSE_FORM
     }
 }
-export const fetchCategoriesRequest =(dispatch)=>{
+export const fetchCategoriesRequest =()=>{
     return (dispatch) =>{
         return callApi('categories','GET',null).then(res=>{
-       
             dispatch(showCategories(res.data))
         })
     }
@@ -337,7 +454,7 @@ export const loadReviews =(reviews)=>{
 export const fetchUser = (id)=>{
     return (dispatch)=>{
         return callApi('users/mini/'+id,'GET',null).then((res)=>{
-            dispatch(getUser(res.data));
+            if(res) dispatch(getUser(res.data));
         })
     }
 }

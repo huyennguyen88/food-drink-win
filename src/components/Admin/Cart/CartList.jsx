@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import * as actions from './../../actions/index'
+import * as actions from '../../../actions'
 import Cart from './Cart';
 class CartList extends React.Component {
     constructor(props){
@@ -10,8 +10,6 @@ class CartList extends React.Component {
         }
     }
     componentWillMount(){
-        this.props.getCart()
-        this.props.getProduct()
     }
     componentWillReceiveProps(nextProps){
         this.setState({
@@ -52,18 +50,9 @@ class CartList extends React.Component {
     }
 }
 const mapStateToProps = (nextProps)=>{
+    console.log(nextProps)
     return{
         Carts: nextProps.Adcart
     }
 }
-const mapDispatchToProps = (dispatch)=>{
-    return{
-        getCart:()=>{
-            dispatch(actions.getAdCart())
-        },
-        getProduct:()=>{
-            dispatch(actions.fetchProductsRequest())
-        }
-    }
-}
-export default connect(mapStateToProps,mapDispatchToProps)(CartList);
+export default connect(mapStateToProps,null)(CartList);

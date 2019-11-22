@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import * as actions from './../../actions/index'
+import * as actions from '../../../actions/index'
 import Sort from './Sort';
 class Control extends React.Component {
     constructor(props){
@@ -10,7 +10,7 @@ class Control extends React.Component {
         }
     }
     onToggleForm = ()=>{
-        this.props.productlear();
+        this.props.userClear();
         this.props.toggleForm();
     }
     onChange = (e)=>{
@@ -22,12 +22,12 @@ class Control extends React.Component {
         })
     }
     onSearch = ()=>{
-        this.props.productSearch(this.state.keyword);
+        this.props.userSearch(this.state.keyword);
     }
     render() {
         return(
                 
-                <div className="input-group">
+                <div className="input-group control">
                     <input 
                         onChange ={this.onChange}
                         type="text" name="keyword" 
@@ -44,14 +44,7 @@ class Control extends React.Component {
                         className="btn btn-outline-primary"
                         style={mg5x}
                         onClick={this.onToggleForm}
-                    >New product
-                    </button> 
-                    <button 
-                        type="button" 
-                        className="btn btn-outline-primary"
-                        style={mg5x}
-                        onClick={this.onToggleForm}
-                    >Cart Request
+                    >New Product
                     </button> 
                     <Sort/>
                 </div>
@@ -70,11 +63,11 @@ const mapDispatchToProps = (dispatch, props)=>{
         toggleForm: ()=>{  
             dispatch(actions.toggleForm());
         },
-        productClear: ()=>{
-            dispatch(actions.productClear())
+        userClear: ()=>{
+            dispatch(actions.userClear())
         },
-        productSearch: (keyword)=>{
-            dispatch(actions.productSearch(keyword))
+        userSearch: (keyword)=>{
+            dispatch(actions.Search(keyword))
         }
     }
 }

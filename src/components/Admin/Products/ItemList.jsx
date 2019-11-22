@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import * as actions from './../../actions/index'
+import * as actions from '../../../actions/index'
 import Item from './Item';
 class ItemList extends React.Component {
     constructor(props){
@@ -28,8 +28,8 @@ class ItemList extends React.Component {
         })
         if(sort.by === 'name'){
             products.sort((a,b)=>{
-                a.name = a.name.toLowerCase()
-                b.name = b.name.toLowerCase()
+                a.name = a.name.toLowerCase();
+                b.name = b.name.toLowerCase();
                 if(a.name > b.name) return sort.value;
                 else if(a.name < b.name) return -sort.value;
                 else return 0;
@@ -50,7 +50,7 @@ class ItemList extends React.Component {
         
 
         return (
-            <div className="">
+            <div className="my-products">
                 <table  className="table table-bordered table-hover">
                 <thead>
                 <tr>
@@ -74,8 +74,8 @@ class ItemList extends React.Component {
 const mapStateToProps = (state)=>{
     return{
       products: state.products,
-      searchKeywordProduct: state.searchProduct,
-      sortProductType: state.sortProduct
+      searchKeywordProduct: state.search,
+      sortProductType: state.sort
     }
 }
   const mapDispatchToProps = (dispatch, props)=>{

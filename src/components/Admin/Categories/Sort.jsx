@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import * as actions from './../../actions/index'
+import * as actions from '../../../actions/index'
 class Sort extends React.Component{
     onClick = (by,value)=>{
         let sort = {
@@ -37,20 +37,20 @@ class Sort extends React.Component{
                         </li>
                         <li role="separator" className="divider">
                         </li>
-                        <li onClick={()=> this.onClick('price',1)}>
+                        <li onClick={()=> this.onClick('classify',1)}>
                             <a 
                                 role="button" 
-                                className={sortProductType.by === "price" && sortProductType.value === 1 ? "sort_selected" : ""}
+                                className={sortProductType.by === "classify" && sortProductType.value === 1 ? "sort_selected" : ""}
                             >
-                                <span className="fa fa-sort-alpha-desc pr-5">Price low-high</span>
+                                <span className="fa fa-sort-alpha-desc pr-5">Classify A-Z</span>
                             </a>
                         </li>
-                        <li onClick={()=> this.onClick('price',-1)}>
+                        <li onClick={()=> this.onClick('classify',-1)}>
                             <a 
                                 role="button" 
-                                className={sortProductType.by === "price" && sortProductType. value === -1 ? "sort_selected" : ""}
+                                className={sortProductType.by === "classify" && sortProductType. value === -1 ? "sort_selected" : ""}
                             >
-                                <span className="fa fa-sort-alpha-desc pr-5">Price high-low </span>
+                                <span className="fa fa-sort-alpha-desc pr-5">Classify Z-A </span>
                             </a>
                         </li>
                     </ul>
@@ -62,13 +62,13 @@ class Sort extends React.Component{
 }
 const mapStateToProps = (state)=>{
     return{
-        sortProductType: state.sortProduct
+        sortProductType: state.sort
     }
 }
 const mapDispatchToProps = (dispatch, props)=>{
     return{
         sortProduct: (sort)=>{
-            dispatch(actions.productSort(sort))
+            dispatch(actions.Sort(sort))
         }
     }
 }

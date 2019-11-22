@@ -26,6 +26,7 @@ class Login extends Component {
         let {email,password} = this.state
         await this.props.logIn(email,password)
         let {user} = this.props.state
+        console.log(user)
         if(user === null || user.authentication_token === undefined)  
         {
             alert("invalid email or password")
@@ -86,9 +87,7 @@ class Login extends Component {
                  :
                  <h1>Dang nhap roi</h1>
                 }
-
                </div>
-
         )
     }
 }

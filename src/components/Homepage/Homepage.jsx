@@ -10,39 +10,76 @@ import {
     Route,
     BrowserRouter as Router,
 } from 'react-router-dom';
+import {connect} from 'react-redux'
 import ItemDetail from '../ItemDetailPage/ItemDetail'
 import UserProfile from '../UserProfile/UserProfile'
-export default class Homepage extends Component {
+import ManagerProduct from '../Admin/Products/ManagerProduct'
+import * as actions from './../../actions/index'
+import ManagerUser from '../Admin/Users/ManagerUser'
+import ManagerCategory from '../Admin/Categories/ManagerCategory'
+import CartManager from '../Admin/Cart/CartManager'
+class Homepage extends Component {
     constructor(props){
         super(props)
         this.state = {
             token: ''
         }
     }
+    componentWillMount(){
+        let token = JSON.parse(localStorage.getItem('token'));
+        this.props.getProduct()
+        // this.props.watchProfile(token);
+    }
     render() {
         return (
             <div>
                 <TopNav/>
-                <Switch>
-                    <Route path="/products/:id" component={ItemDetail} />
-                    <Route path="/cart">
-                        <CartPage/>
-                    </Route>
-                    <Route path="/login">
-                        <Login/>
-                    </Route>
-                    <Route path="/signup">
-                        <Signup/>
-                    </Route>
-                    <Route path="/profile">
-                        <UserProfile/>
-                    </Route>
-                    <Route path="/">
-                        <Main/>
-                    </Route>
-                </Switch>
+                    <Switch>
+                        <Route path="/products/:id" component={ItemDetail} />
+                        <Route path="/cart">
+                            <CartPage/>
+                        </Route>
+                        <Route path="/login">
+                            <Login/>
+                        </Route>
+                        <Route path="/signup">
+                            <Signup/>
+                        </Route>
+                        <Route path="/profile">
+                            <UserProfile/>
+                        </Route>
+                        <Route path="/admin/products">
+                            <ManagerProduct/>
+                        </Route>
+                        <Route path="/admin/users">
+                            <ManagerUser/>
+                        </Route>
+                        <Route path="/admin/categories">
+                            <ManagerCategory/>
+                        </Route>
+                        <Route path="/admin/categories">
+                            <ManagerCategory/>
+                        </Route>
+                        <Route path="/admin/cart">
+                            <CartManager/>
+                        </Route>
+                        <Route path="/">
+                            <Main/>
+                        </Route>
+                    </Switch>
                 <Footer />
             </div>
         )
     }
 }
+const mapDispatchToProps = (dispatch)=>{
+    return{
+        watchProfile: (token) => {
+            dispatch(actions.profileRequest(token));
+        },
+        getProduct:()=>{
+            dispatch(actions.fetchProductsRequest())
+        },
+    }
+}
+export default connect(null,mapDispatchToProps)(Homepage)

@@ -5,14 +5,48 @@ import {
 import * as actions from '../../../actions/index'
 import { connect } from "react-redux";
 import MenuItem from './MenuItem';
+import AdminMenuItem from './AdminMenuItem';
+import logo from './../../../image/logo.png'
 class Menu extends Component {
-    componentDidMount() {
-        this.props.loadMenu();
+    constructor(props){
+        super(props);
+        this.state = {
+            user: {
+                token: '',
+                role : null,
+            }
+        }
+    }
+    componentWillMount() {
+    }
+    componentWillReceiveProps(nextProps){
+        if(nextProps.user){
+            this.setState({
+                user: {
+                    token: nextProps.user.authentication_token,
+                    role: nextProps.user.role
+                }
+            })
+        }
+        else{
+            this.setState({
+                user: {
+                    token: '',
+                    role: null
+                }
+            })
+        }
     }
     render() {
         var { categories } = this.props
+        var {user} = this.state
+        
+        var manager = ["Products", "Categories","Users","Cart"]
+        var managerList = manager.map((item, index)=>{
+            return <AdminMenuItem key={index} name={item}/>
+        })
         var foodsCate = categories.filter((item) => {
-            return item.classify === true
+            return item;
         })
         var drinksCate = categories.filter((item) => {
             return item.classify === false
@@ -23,12 +57,12 @@ class Menu extends Component {
         var ListDrinkcate = drinksCate.map((item, index) => {
             return <MenuItem key={index} name={item.name} />
         })
-        return (
+            return (
             <div className="Menu">
                 <nav className="navbar navbar-expand-lg navbar-light bg-light" style={Style.Nav}>
-                    <a href="abc" className="navbar-brand">
-                        <img style={Style.Img} className="d-inline-block align-top" alt="anh" src="./image/logo.png"></img>
-                    </a>
+                    <Link to="/" className="navbar-brand">
+                        <img style={Style.Img} className="d-inline-block align-top" alt="anh" src={logo}></img>
+                    </Link>
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
@@ -54,6 +88,14 @@ class Menu extends Component {
                                     {ListDrinkcate}
                                 </div>
                             </li>
+                            <li style={{visibility: user.token && user.role === 1? "visible" : "hidden"}} className="h4 ml-4 nav-item dropdown">
+                            {/* <li className="h4 ml-4 nav-item dropdown"> */}
+                                <a className="nav-link dropdown-toggle" href="#abc" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i className="fas fa-user-cog"></i> Admin</a>
+                                <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    {managerList}
+                                </div>
+                            </li>
                         </ul>
                     </div>
                 </nav>
@@ -72,15 +114,16 @@ const Style = {
 }
 var mapStateToProps = (state) => {
     return {
-        categories: state.categories
+        categories: state.categories,
+        user: state.user,
     }
 
 }
-var mapDispatchToProps = (dispatch, state) => {
-    return {
-        loadMenu: () => {
-            dispatch(actions.fetchCategoriesRequest())
-        }
-    }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(Menu);
+// var mapDispatchToProps = (dispatch, state) => {
+//     return {
+//         loadMenu: () => {
+//             dispatch(actions.categoriesRequest())
+//         },
+//     }
+// }
+export default connect(mapStateToProps, null)(Menu);

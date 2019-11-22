@@ -1,4 +1,7 @@
 import React from 'react';
+import coverimg from './../../image/coverimg.jpg'
+import mi from './../../image/mi.jpg'
+import cocktail from './../../image/cocktail.jpg'
 class BigImage extends React.Component {
   render(){
     return (
@@ -10,13 +13,13 @@ class BigImage extends React.Component {
           </ol>
           <div className="carousel-inner" role="listbox">
             <div className="carousel-item active">
-              <img style = {style} className="d-block img-fluid" src="./image/coverimg.jpg" alt="First slide"/>
+              <img style = {style} className="d-block img-fluid" src={coverimg} alt="First slide"/>
             </div>
             <div className="carousel-item">
-              <img style = {style} className="d-block img-fluid" src="./image/mi.jpg" alt="Second slide"/>
+              <img style = {style} className="d-block img-fluid" src={mi} alt="Second slide"/>
             </div>
             <div className="carousel-item">
-              <img style = {style} className="d-block img-fluid" src="./image/cocktail.jpg" alt="Third slide"/>
+              <img style = {style} className="d-block img-fluid" src={cocktail} alt="Third slide"/>
             </div>
           </div>
           <a className="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
