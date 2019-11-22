@@ -1,10 +1,9 @@
 import React from 'react';
 import './ItemDetail.css';
-import Quantity from "./Quantity";
 import Comment from './Comment'
 import { connect } from 'react-redux'
-import * as actions from './../../actions/index'
 import classNames from "classnames";
+import * as actions from './../../actions/index'
 import ReviewForm from './ReviewForm';
 class ItemDetail extends React.Component {
     constructor(props) {

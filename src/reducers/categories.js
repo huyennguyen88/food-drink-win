@@ -3,6 +3,9 @@ var initialState = []
 var myReducer = (state= initialState, action)=>{
     let index = null;
     switch (action.type) {
+        case types.FETCH_CATEGORY:
+            state = action.categories
+            return state
         case types.ALL_CATEGORIES:
             state = action.categories
             return [...state]

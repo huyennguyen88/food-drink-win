@@ -1,6 +1,6 @@
-import * as types from './../constants/ActionTypes'
-import callApi from './../utils/apiCaller'
-export const fetchProductsRequest = (dispatch)=>{
+import * as types from '../constants/ActionTypes'
+import callApi from '../utils/apiCaller'
+export const fetchProductsRequest = ()=>{
     return (dispatch) => {
         return callApi('products','GET',null).then(res=>{
             dispatch(fetchProducts(res.data));
@@ -9,7 +9,7 @@ export const fetchProductsRequest = (dispatch)=>{
         })
     }
 }
-export const fetchFoodsRequest = (dispatch)=>{
+export const fetchFoodsRequest = ()=>{
     return (dispatch) => {
         return callApi('products','GET',null).then(res=>{
             var products = res.data;
@@ -20,7 +20,7 @@ export const fetchFoodsRequest = (dispatch)=>{
         })
     }
 }
-export const fetchDrinksRequest = (dispatch)=>{
+export const fetchDrinksRequest = ()=>{
     return (dispatch) => {
         return callApi('products','GET',null).then(res=>{
             var products = res.data;
@@ -55,7 +55,6 @@ export const productShowRequest = (id)=>{
             console.log(res.data)
             dispatch(productShow(res.data));
         }).catch(err=>{
-            console.log(err)
         })                                                                                                                                                                                        
     }
 }
@@ -145,7 +144,6 @@ export const Sort = (sort)=>{
         sort
     }
 }
-//user 
 export const logInRequest = (email,password) =>{
     return (dispatch)=>{
         return callApi("users/sign_in","POST",{
@@ -379,10 +377,10 @@ export const getCartReq = (id) =>{
         })
     }
 }
-export const getCart = (cart) =>{
+export const getCart = (cart,cart_id) =>{
     return{
         type: types.GET_CART,
-        cart
+        cart,
     }
 }
 export const deleteItemReq = (token,id) =>{
@@ -427,7 +425,7 @@ export const closeForm = () =>{
         type: types.CLOSE_FORM
     }
 }
-export const fetchCategoriesRequest =()=>{
+export const fetchCategoriesRequest =(dispatch)=>{
     return (dispatch) =>{
         return callApi('categories','GET',null).then(res=>{
             dispatch(showCategories(res.data))
@@ -477,5 +475,57 @@ export const getReviewUsers =(users)=>{
     return{
         type : types.GET_REVIEW_USERS,
         users
+    }
+}
+export const getAdCart = () =>{
+    return (dispatch) =>{
+        return callApi('carts/','GET',null).then((res)=>{
+            dispatch(AdminCart(res.data));
+        })
+    }
+}
+export const AdminCart = (adcart) =>{
+    return {
+        type : types.AD_CART,
+        adcart
+    }
+}
+export const Decline = (id)=>{
+    return (dispatch)=>{
+        return callApi('carts/decline','POST',{cart_id:id}).then((res)=>{
+            dispatch(DeclineCart(res.data));
+        })
+    }
+}
+export const DeclineCart =(adcart)=>{
+    return{
+        type : types.DECLINE,
+        adcart
+    }
+}
+export const Confirm = (id)=>{
+    return (dispatch)=>{
+        return callApi('carts/confirm','POST',{cart_id:id}).then((res)=>{
+            console.log(res)
+            dispatch(ConfirmCart(res.data));
+        })
+    }
+}
+export const ConfirmCart =(adcart)=>{
+    return{
+        type : types.CONFIRM,
+        adcart
+    }
+}
+export const checkout = (id)=>{
+    return (dispatch)=>{
+        return callApi('carts/' + id + '/sendcart','POST',null).then((res)=>{
+            dispatch(Checkout());
+        })
+    }
+}
+export const Checkout =(cart)=>{
+    return{
+        type : types.CHECKOUT,
     }
 }

@@ -41,7 +41,7 @@ class Menu extends Component {
         var { categories } = this.props
         var {user} = this.state
         
-        var manager = ["Products", "Categories","Users"]
+        var manager = ["Products", "Categories","Users","Carts"]
         var managerList = manager.map((item, index)=>{
             return <AdminMenuItem key={index} name={item}/>
         })
@@ -57,6 +57,7 @@ class Menu extends Component {
         var ListDrinkcate = drinksCate.map((item, index) => {
             return <MenuItem key={index} name={item.name} />
         })
+        console.log(user.token && user.role === 1? "visible" : "hidden")
             return (
             <div className="Menu">
                 <nav className="navbar navbar-expand-lg navbar-light bg-light" style={Style.Nav}>
@@ -113,6 +114,7 @@ const Style = {
     }
 }
 var mapStateToProps = (state) => {
+    console.log(state)
     return {
         categories: state.categories,
         user: state.user,

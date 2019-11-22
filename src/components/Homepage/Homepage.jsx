@@ -17,6 +17,7 @@ import ManagerProduct from '../Admin/Products/ManagerProduct'
 import * as actions from './../../actions/index'
 import ManagerUser from '../Admin/Users/ManagerUser'
 import ManagerCategory from '../Admin/Categories/ManagerCategory'
+import ManagerCart from '../Admin/ManagerCart'
 class Homepage extends Component {
     constructor(props){
         super(props)
@@ -26,15 +27,15 @@ class Homepage extends Component {
     }
     componentWillMount(){
         let token = JSON.parse(localStorage.getItem('token'));
+        this.props.getProduct()
         // this.props.watchProfile(token);
     }
     render() {
         return (
             <div>
-                <TopNav changepage={this.whichpages} />
+                <TopNav/>
                 <Switch>
-                    <Route path="/products/:id" component={ItemDetail} >
-                    </Route>
+                    <Route path="/products/:id" component={ItemDetail} />
                     <Route path="/cart">
                         <CartPage/>
                     </Route>
@@ -56,6 +57,9 @@ class Homepage extends Component {
                     <Route path="/admin/categories">
                         <ManagerCategory/>
                     </Route>
+                    <Route path="/admin/carts">
+                        <ManagerCart/>
+                    </Route>
                     <Route path="/">
                         <Main/>
                     </Route>
@@ -67,9 +71,9 @@ class Homepage extends Component {
 }
 const mapDispatchToProps = (dispatch)=>{
     return{
-        watchProfile: (token) => {
-            dispatch(actions.profileRequest(token));
-        },
+        getProduct:()=>{
+            dispatch(actions.fetchProductsRequest())
+        }
     }
 }
-export default connect(null,null)(Homepage)
+export default connect(null,mapDispatchToProps)(Homepage)

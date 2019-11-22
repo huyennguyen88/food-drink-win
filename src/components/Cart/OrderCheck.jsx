@@ -20,10 +20,16 @@ class OrderCheck extends React.Component {
         }) 
         }
     }
+    checkout = async () =>
+    {
+        let token = JSON.parse(localStorage.getItem('token'))
+        await this.props.checkout(token)
+    }
     render() {
         var total = 0
         var quantity=0 
-        if(this.state.Cart!=null){
+        console.log(this.state.Cart)
+        if(this.state.Cart!=null && this.state.Cart!== []){
             this.state.Cart.map((item) =>{
                 total+=item.price*item.quantity;
                 quantity+=item.quantity;
@@ -42,18 +48,23 @@ class OrderCheck extends React.Component {
                             <li className="d-flex justify-content-between py-3 border-bottom"><strong className="text-muted">Total</strong>
                                 <h5 className="font-weight-bold">${total}</h5>
                             </li>
-                        </ul><a href="abc" className="btn btn-warning rounded-pill py-2 btn-block">Procceed to checkout</a>
+                        </ul><a onClick={this.checkout} className="btn btn-warning rounded-pill py-2 btn-block">Procceed to checkout</a>
                     </div>
                 </div>
-
             </>
         );
     }
 }
 const mapStateToProps = (NextProps) => {
-
     return {
-        cart: NextProps.cart
+        cart: NextProps.cart,
     }
 }
-export default connect(mapStateToProps,null)(OrderCheck);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        checkout : (token) =>{
+            dispatch(actions.checkout(token))
+        }
+    }
+  }
+export default connect(mapStateToProps,mapDispatchToProps)(OrderCheck);
