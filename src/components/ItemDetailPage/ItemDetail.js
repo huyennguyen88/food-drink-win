@@ -5,7 +5,6 @@ import Comment from './Comment'
 import { connect } from 'react-redux'
 import * as actions from './../../actions/index'
 import classNames from "classnames";
-import { Route, Switch } from "react-router-dom";
 import ReviewForm from './ReviewForm';
 class ItemDetail extends React.Component {
     constructor(props) {
@@ -14,15 +13,10 @@ class ItemDetail extends React.Component {
         this.props.productShow(id);
         this.props.loadReviews(id);
         this.props.loadReviewUsers(id);
-
-    }
-    componentDidMount() {
-
+  
     }
     render() {
-        var { product, reviews, users } = this.props;
-
-
+        var { product, reviews, users} = this.props;
         return (
             <div className="ItemDetail">
                 <div className="card card-detail">
@@ -34,10 +28,10 @@ class ItemDetail extends React.Component {
                     </div>
                 </div>
                 <p className="h4 text-info">{reviews.length} Comments</p>
-                <div className="mt-3">
+                <div className="container-fluid">
                     <div className="mb-3">
-                        <div className="card">
-                            <div className="card-body">
+                        <div >
+                            <div >
                                 {
                                     reviews.map((item, index) => {
                                         var cmtUser = users.find((u) => {
@@ -49,12 +43,12 @@ class ItemDetail extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <ReviewForm/>
+                    <ReviewForm />
                 </div>
-                
+
+
 
             </div>
-
         );
     }
 }
@@ -83,7 +77,7 @@ class DetailInfo extends React.Component {
     }
 
     render() {
-
+       
         var { product } = this.props
         var rate = product.rate
         var rating = [false, false, false, false, false]
@@ -106,11 +100,11 @@ class DetailInfo extends React.Component {
                 <h4 className="price">current price: <span>${product.price}</span></h4>
                 <p className="vote"><strong>91%</strong> of buyers enjoyed this product! <strong>(87 votes)</strong></p>
 
-                <Quantity current={0}/>
+                <Quantity current={0} />
                 <div>
                     <button className="btn btn-outline-success mx-1" type="button" onClick={this.addToCart}>
-                    <i className="fas fa-shopping-cart" aria-hidden="true"></i>
-                         Add to cart</button>
+                        <i className="fas fa-shopping-cart" aria-hidden="true"></i>
+                        Add to cart</button>
                     <button className="btn btn-warning mx-1" type="button" onClick={this.addToCart}>Bye now</button>
                     <button className="btn btn-danger" type="button"><span className="fa fa-heart"></span></button>
                 </div>
@@ -123,7 +117,9 @@ const mapStateToProps = (state) => {
     return {
         product: state.products,
         reviews: state.reviews,
-        users: state.users
+        users: state.users,
+        user : state.user,
+        review: state.review
     }
 }
 const mapDispatchToProps = (dispatch, props) => {

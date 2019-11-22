@@ -17,8 +17,7 @@ export default class Quantity extends Component {
     minus = () => {
         var num = this.state.quantity - 1
         if (num < 0) num = 0
-        this.setState
-            ({
+        this.setState({
                 quantity: num
             })
     }

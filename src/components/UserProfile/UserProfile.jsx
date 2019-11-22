@@ -207,7 +207,8 @@ class UserProfile extends Component {
 }
 const mapStateToProps = (state)=>{
     return{
-      profile: state.user
+      profile: state.user,
+      products: state.products
     }
   }
   const mapDispatchToProps = (dispatch, props)=>{

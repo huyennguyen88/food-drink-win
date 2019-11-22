@@ -171,21 +171,6 @@ export const loadReviews =(reviews)=>{
         reviews
     }
 }
-export const fetchUser = (id)=>{
-    return (dispatch)=>{
-        return callApi('users/mini/'+id,'GET',null).then((res)=>{
-            console.log("alo",res.data)
-            dispatch(getUser(res.data));
-        })
-    }
-}
-export const getUser =(user)=>{
-    return{
-        type : types.GET_USER,
-        user
-    }
-}
-
 export const fetchReviewUsers = (product_id)=>{
     return (dispatch)=>{
         return callApi('products/'+product_id+'/commentedUsers','GET',null).then((res)=>{
@@ -197,5 +182,67 @@ export const getReviewUsers =(users)=>{
     return{
         type : types.GET_REVIEW_USERS,
         users
+    }
+}
+export const createReviewRequest =(user_id,product_id,rate,comment)=>{
+    return (dispatch)=>{
+        return callApi('reviews','POST',{
+            user_id,
+            product_id,
+            rate,
+            comment
+        }).then(res=> { dispatch(createReview(res.data)) })
+    }
+}
+export const createReview=(review)=>{
+    return{
+        type: types.CREATE_REVIEW,
+        review
+    }
+}
+export const getReviewRequest =(review_id)=>{
+    return(dispatch)=>{
+        return callApi('reviews/'+review_id,'GET',null)
+        .then(res => dispatch(getReview(res.data)))
+    }
+}
+export const getReview =(review)=>{
+    return {
+        type: types.GET_REVIEW,
+        review
+    }
+}
+export const updateReviewRequest=(review_id,user_id,product_id,rate,comment)=>{
+    return(dispatch)=>{
+        console.log("goi update request")
+        return callApi('reviews/'+review_id,'PUT',{
+            user_id,
+            product_id,
+            rate,
+            comment
+        }).then(res =>dispatch(updateReview(res.data)))
+    }
+}
+export const updateReview =(review)=>{
+    return{
+        type: types.UPDATE_REVIEW,
+        review
+    }
+}
+export const clearReviewNow =()=>{
+    return{
+        type: types.CLEAR_REVIEW_NOW
+    }
+}
+export const deleteReviewRequest =(review_id)=>{
+    return (dispatch)=>{
+        return callApi('reviews/'+review_id,'DELETE',null)
+        .then(res => dispatch(deleteReview(res.data)))
+    }
+}
+export const deleteReview =(review)=>{
+    return {
+        type: types.DELETE_REVIEW,
+        review
     }
 }
