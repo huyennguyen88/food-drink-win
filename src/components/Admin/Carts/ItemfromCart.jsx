@@ -24,7 +24,6 @@ class ItemfromCart extends React.Component {
     }
 }
 const  mapStateToProps =(nextProps) => {
-    console.log(nextProps)
     return {
         product: nextProps.products,
     }

@@ -21,6 +21,12 @@ class Item extends React.Component {
                  <tr className="row-admin">
                     <td>{product.id}</td>
                     <td>{product.name}</td>
+                    <td>{product.price}</td>
+                    <td>{product.classify}</td>
+                    <td>{product.quantity}</td>
+                    <td>{product.description}</td>
+
+
                     <td>
                         <button 
                             type="button" 

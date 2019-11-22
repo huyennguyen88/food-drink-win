@@ -184,7 +184,6 @@ export const profile = (user)=>{
     }
 }
 export const updateProfileRequest = (user) =>{
-    console.log(user)
     return (dispatch) =>{
         return callApi("users/update", "PUT",{
             name: user.userName,
@@ -254,7 +253,6 @@ export const userDelete = (token)=>{
     }
 }
 export const userEditRequest = (user)=>{
-    console.log(user)
     return (dispatch)=>{
        return callApi('users/update','PUT',{
             email: user.email,
@@ -493,7 +491,7 @@ export const AdminCart = (adcart) =>{
 export const Decline = (id)=>{
     return (dispatch)=>{
         return callApi('carts/decline','POST',{cart_id:id}).then((res)=>{
-            dispatch(DeclineCart(res.data));
+            if (res) dispatch(DeclineCart(res.data));
         })
     }
 }
@@ -506,8 +504,7 @@ export const DeclineCart =(adcart)=>{
 export const Confirm = (id)=>{
     return (dispatch)=>{
         return callApi('carts/confirm','POST',{cart_id:id}).then((res)=>{
-            console.log(res)
-            dispatch(ConfirmCart(res.data));
+            if(res) dispatch(ConfirmCart(res.data));
         })
     }
 }

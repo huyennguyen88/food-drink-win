@@ -17,7 +17,7 @@ import ManagerProduct from '../Admin/Products/ManagerProduct'
 import * as actions from './../../actions/index'
 import ManagerUser from '../Admin/Users/ManagerUser'
 import ManagerCategory from '../Admin/Categories/ManagerCategory'
-import ManagerCart from '../Admin/ManagerCart'
+import ManagerCart from '../Admin/Carts/ManagerCart'
 class Homepage extends Component {
     constructor(props){
         super(props)

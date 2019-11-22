@@ -4,7 +4,7 @@ import React from 'react';
 // import AddForm from './';
 import CartList from './CartList';
 import {connect} from 'react-redux'
-import * as actions from '../../actions/index'
+import * as actions from '../../../actions/index'
 class ManagerCart extends React.Component {
     constructor(props){
         super(props)
@@ -14,7 +14,6 @@ class ManagerCart extends React.Component {
             textAlign: "center",
             margin: "3% 0"
         }
-        let {displayForm} = this.props 
         return (
            <div className="container">
             <div className="page-header">
@@ -22,13 +21,11 @@ class ManagerCart extends React.Component {
             </div>
             <div className="row">    
                 <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    {/* {displayForm? '' : <Control/> }  */}
                 </div>
             </div>
             <div className="row">
                 <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    {/* {displayForm? <AddForm/> : <ItemList/>}  */}
-                    <CartList></CartList>
+                    <CartList/>
                 </div>
             </div>
            </div>

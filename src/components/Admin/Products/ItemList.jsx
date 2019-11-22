@@ -22,6 +22,7 @@ class ItemList extends React.Component {
     render() {
         let sort = this.props.sortProductType
         let {products} = this.state;
+        console.log(products)
         let {searchKeywordProduct} = this.props
         products = products.filter((p,i)=>{
             return p.name.toLowerCase().indexOf(searchKeywordProduct.toLowerCase()) !== -1;
