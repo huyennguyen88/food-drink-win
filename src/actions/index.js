@@ -65,19 +65,6 @@ export const productShow = (product)=>{
         product
     }
 }
-export const categoriesRequest = ()=>{
-    return (dispatch) => {
-        return callApi('categories','GET',null).then(res=>{
-            if(res) dispatch(categories(res.data));
-        })
-    }
-}
-export const categories = (categories)=>{
-    return{
-        type: types.FETCH_CATEGORY,
-        categories
-    }
-}
 export const productCreateRequest = (product) =>{
     return (dispatch) => {
         return callApi('products/','POST',{
@@ -298,6 +285,76 @@ export const userClear = ()=>{
         type: types.CLEAR_USER
     }
 }
+//category
+export const categoriesRequest = ()=>{
+    return (dispatch) => {
+        return callApi('categories','GET',null).then(res=>{
+            if(res) dispatch(categories(res.data));
+        })
+    }
+}
+export const categories = (categories)=>{
+    return{
+        type: types.FETCH_CATEGORY,
+        categories
+    }
+}
+export const categoryCreateRequest = (category)=>{ 
+    return (dispatch) => {
+        return callApi('categories','POST',{
+            name: category.name,
+            classify: category.classify 
+        }).then(res=>{
+            if(res) dispatch(categoryCreate(res.data));
+        })
+    }
+}
+export const categoryCreate = (category)=>{
+    return{
+        type: types.CREATE_CATEGORY,
+        category
+    }
+}
+export const categoryDeleteRequest = (id)=>{
+    return (dispatch)=>{
+        return callApi('categories/'+id,'DELETE',null).then(res=>{
+            if(res) dispatch(categoryDelete(id));
+        })
+    }
+}
+export const categoryDelete = (id)=>{
+    return {
+        type: types.DELETE_CATEGORY,
+        id
+    }
+}
+export const getCategory = (category)=>{
+    return{
+        type: types.GET_CATEGORY,
+        category
+    }
+}
+export const categoryClear = ()=>{
+    return{
+        type: types.CLEAR_CATEGORY
+    }
+}
+export const categoryEditRequest = (category)=>{
+    return (dispatch) =>{
+        return callApi('categories/'+category.id,'PUT',{
+            name: category.name,
+            classify: category.classify
+        }).then(res=>{
+            if (res) dispatch(categoryEdit(category))
+        })
+    }
+}
+export const categoryEdit = (category)=>{
+    return{
+        type: types.EDIT_CATEGORY,
+        category
+    }
+}
 //cart
 export const UPCart = (token,id,q) =>{
     return (dispatch) =>{
@@ -370,10 +427,9 @@ export const closeForm = () =>{
         type: types.CLOSE_FORM
     }
 }
-export const fetchCategoriesRequest =(dispatch)=>{
+export const fetchCategoriesRequest =()=>{
     return (dispatch) =>{
         return callApi('categories','GET',null).then(res=>{
-       
             dispatch(showCategories(res.data))
         })
     }

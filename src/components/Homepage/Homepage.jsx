@@ -16,6 +16,7 @@ import UserProfile from '../UserProfile/UserProfile'
 import ManagerProduct from '../Admin/Products/ManagerProduct'
 import * as actions from './../../actions/index'
 import ManagerUser from '../Admin/Users/ManagerUser'
+import ManagerCategory from '../Admin/Categories/ManagerCategory'
 class Homepage extends Component {
     constructor(props){
         super(props)
@@ -53,6 +54,7 @@ class Homepage extends Component {
                         <ManagerUser/>
                     </Route>
                     <Route path="/admin/categories">
+                        <ManagerCategory/>
                     </Route>
                     <Route path="/">
                         <Main/>

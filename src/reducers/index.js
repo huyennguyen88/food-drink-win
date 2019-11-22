@@ -11,18 +11,20 @@ import users from './users'
 import reviews from './reviews'
 import cart from './cart'
 import getUser from './getUser'
+import getCategory from './getCategory'
 const myReducer = combineReducers({
     products,
     displayForm,
     search,
     sort,
-    getProduct,
     items,
     categories,
     reviews,
     user,
     users,
     cart ,
+    getProduct,
+    getCategory,
     getUser
 });
 export default myReducer

@@ -17,9 +17,8 @@ class Menu extends Component {
             }
         }
     }
-    componentDidMount() {
+    componentWillMount() {
         this.props.loadMenu();
-       
     }
     componentWillReceiveProps(nextProps){
         if(nextProps.user){
@@ -43,12 +42,12 @@ class Menu extends Component {
         var { categories } = this.props
         var {user} = this.state
         
-        var manager = ["Products", "Users", "Categories"]
+        var manager = ["Products", "Categories","Users"]
         var managerList = manager.map((item, index)=>{
             return <AdminMenuItem key={index} name={item}/>
         })
         var foodsCate = categories.filter((item) => {
-            return item.classify === true
+            return item;
         })
         var drinksCate = categories.filter((item) => {
             return item.classify === false
@@ -59,7 +58,7 @@ class Menu extends Component {
         var ListDrinkcate = drinksCate.map((item, index) => {
             return <MenuItem key={index} name={item.name} />
         })
-        return (
+            return (
             <div className="Menu">
                 <nav className="navbar navbar-expand-lg navbar-light bg-light" style={Style.Nav}>
                     <Link to="/" className="navbar-brand">
@@ -117,15 +116,15 @@ const Style = {
 var mapStateToProps = (state) => {
     return {
         categories: state.categories,
-        user: state.user
+        user: state.user,
     }
 
 }
 var mapDispatchToProps = (dispatch, state) => {
     return {
         loadMenu: () => {
-            dispatch(actions.fetchCategoriesRequest())
-        }
+            dispatch(actions.categoriesRequest())
+        },
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Menu);
