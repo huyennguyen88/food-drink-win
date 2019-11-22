@@ -57,7 +57,6 @@ class Menu extends Component {
         var ListDrinkcate = drinksCate.map((item, index) => {
             return <MenuItem key={index} name={item.name} />
         })
-        console.log(user.token && user.role === 1? "visible" : "hidden")
             return (
             <div className="Menu">
                 <nav className="navbar navbar-expand-lg navbar-light bg-light" style={Style.Nav}>
@@ -114,7 +113,6 @@ const Style = {
     }
 }
 var mapStateToProps = (state) => {
-    console.log(state)
     return {
         categories: state.categories,
         user: state.user,
