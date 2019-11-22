@@ -2,6 +2,7 @@ import React from 'react';
 import ItemList from './ItemList';
 import Control from './Control';
 import AddForm from './AddForm';
+import CartList from './CartList';
 import {connect} from 'react-redux'
 import * as actions from './../../actions/index'
 class Manager extends React.Component {
@@ -27,6 +28,7 @@ class Manager extends React.Component {
             <div className="row">
                 <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     {displayForm? <AddForm/> : <ItemList/>} 
+                    {/* <CartList></CartList> */}
                 </div>
             </div>
            </div>

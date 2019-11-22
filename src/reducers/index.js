@@ -10,6 +10,7 @@ import cart from './cart';
 import reviews from './reviews';
 import searchProduct from './searchProduct'
 import sortProduct from './sortProduct'
+import Adcart from './Adcart'
 const myReducer = combineReducers({
     products,
     displayForm,
@@ -21,6 +22,7 @@ const myReducer = combineReducers({
     categories,
     reviews,
     user,
-    cart
+    cart,
+    Adcart,
 });
 export default myReducer

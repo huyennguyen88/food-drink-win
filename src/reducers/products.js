@@ -30,7 +30,6 @@ var myReducer = (state =initialState,action)=>{
             index = findIndex(action.id,state)
             state.splice(index,1)
             return [...state]
-        default: return state; 
         case types.SHOW_FOOD:
             state = action.foods
             return [...state];

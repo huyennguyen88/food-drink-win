@@ -22,10 +22,9 @@ export default class Homepage extends Component {
     render() {
         return (
             <div>
-                <TopNav changepage={this.whichpages} />
+                <TopNav/>
                 <Switch>
-                    <Route path="/products/:id" component={ItemDetail} >
-                    </Route>
+                    <Route path="/products/:id" component={ItemDetail} />
                     <Route path="/cart">
                         <CartPage/>
                     </Route>

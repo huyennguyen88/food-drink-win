@@ -12,7 +12,7 @@ class App extends React.Component {
         <div className="App container">
           <Homepage />
         </div>
-        <Manager/>
+        {/* <Manager/> */}
       </Router>
     );
   }

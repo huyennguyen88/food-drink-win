@@ -28,6 +28,8 @@ class ItemList extends React.Component {
         })
         if(sort.by === 'name'){
             products.sort((a,b)=>{
+                a.name = a.name.toLowerCase()
+                b.name = b.name.toLowerCase()
                 if(a.name > b.name) return sort.value;
                 else if(a.name < b.name) return -sort.value;
                 else return 0;

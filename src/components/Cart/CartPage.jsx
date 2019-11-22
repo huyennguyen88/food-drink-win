@@ -54,5 +54,5 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.getCartReq(id))
         }
     }
-  }
-  export default connect(null, mapDispatchToProps)(CartPage);
+}
+export default connect(null, mapDispatchToProps)(CartPage);

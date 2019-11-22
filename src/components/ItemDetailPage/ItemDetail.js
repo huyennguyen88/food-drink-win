@@ -2,6 +2,7 @@ import React from 'react';
 import './ItemDetail.css';
 import Comment from './Comment'
 import { connect } from 'react-redux'
+import classNames from "classnames";
 import * as actions from './../../actions/index'
 import ReviewForm from './ReviewForm';
 class ItemDetail extends React.Component {

@@ -28,17 +28,16 @@ class ItemCartList extends React.Component {
     this.setState({Cart:miniCart})
   }
   render() {
-    if(this.state.Cart===null || this.state.Cart === [])return (
+    return((this.state.Cart===null || this.state.Cart === [])?
       <div className="p-2">
         Cart is Empty
       </div>
-    );
-    else return(
+    :
       <>
        {
-           this.state.Cart.map((item,index)=>(
-           <CartItem Item = {item} UnMount ={this.delete} />
-           ))
+          this.state.Cart.map((item,index)=>(
+            <CartItem Item = {item} UnMount ={this.delete} key ={index} />
+          ))
        }
       </>
     )
