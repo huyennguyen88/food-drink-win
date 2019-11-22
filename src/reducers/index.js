@@ -13,6 +13,7 @@ import cart from './cart'
 import getUser from './getUser'
 import getCategory from './getCategory'
 import Adcart from './Adcart'
+import allProduct from './allProducts'
 const myReducer = combineReducers({
     products,
     displayForm,
@@ -28,5 +29,6 @@ const myReducer = combineReducers({
     getCategory,
     getUser,
     Adcart,
+    allProduct,
 });
 export default myReducer

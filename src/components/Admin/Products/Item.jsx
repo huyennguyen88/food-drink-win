@@ -21,12 +21,10 @@ class Item extends React.Component {
                  <tr className="row-admin">
                     <td>{product.id}</td>
                     <td>{product.name}</td>
-                    <td>{product.price}</td>
-                    <td>{product.classify}</td>
+                    <td>{product.price}$</td>
+                    <td>{product.classify? "Food" : "Drink"}</td>
                     <td>{product.quantity}</td>
                     <td>{product.description}</td>
-
-
                     <td>
                         <button 
                             type="button" 
@@ -47,11 +45,23 @@ class Item extends React.Component {
 }
 const mapStateToProps = (state)=>{
     return{
-        CartDetail:state.Cart
+        productDetail: state
     }
 }
 const mapDispatchToProps = (dispatch, props)=>{
     return{
+       deleteProduct: (id)=>{
+            dispatch(actions.productDeleteRequest(id))
+       },
+       productShow : (id)=>{
+            dispatch(actions.productShowRequest(id))
+       },
+       openForm: ()=>{
+            dispatch(actions.openForm())   
+       },
+       getProduct: (product)=>{
+            dispatch(actions.getProduct(product))
+       }
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Item);

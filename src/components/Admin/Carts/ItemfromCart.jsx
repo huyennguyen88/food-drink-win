@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux'
+import * as actions from './../../../actions/index'
 class ItemfromCart extends React.Component {
     constructor(props){
         super(props)
@@ -7,10 +8,13 @@ class ItemfromCart extends React.Component {
             product:[]
         }
     }
+    componentWillMount(){
+        this.props.fetchAllProduct();
+    }
     render() {
         let products = this.props.product
-        let product =products.find(p =>{
-            if(p.id == this.props.item.product_id)return p
+        let product =products.find((p,i) =>{
+            if(p.id == this.props.item.product_id) return p
         })
         return (
                  <tr className="row-admin " >
@@ -23,9 +27,16 @@ class ItemfromCart extends React.Component {
         );
     }
 }
-const  mapStateToProps =(nextProps) => {
+const  mapStateToProps =(state) => {
     return {
-        product: nextProps.products,
+        product: state.allProduct,
     }
 }
-export default connect(mapStateToProps,null)(ItemfromCart);
+const mapDispatchToProps = (dispatch, props)=>{
+    return{
+       fetchAllProduct: ()=>{
+           return dispatch(actions.fetchProductsRequest());
+       }
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(ItemfromCart);
