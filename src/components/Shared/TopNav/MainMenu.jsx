@@ -18,7 +18,6 @@ class Menu extends Component {
         }
     }
     componentWillMount() {
-        this.props.loadMenu();
     }
     componentWillReceiveProps(nextProps){
         if(nextProps.user){
@@ -120,11 +119,11 @@ var mapStateToProps = (state) => {
     }
 
 }
-var mapDispatchToProps = (dispatch, state) => {
-    return {
-        loadMenu: () => {
-            dispatch(actions.categoriesRequest())
-        },
-    }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(Menu);
+// var mapDispatchToProps = (dispatch, state) => {
+//     return {
+//         loadMenu: () => {
+//             dispatch(actions.categoriesRequest())
+//         },
+//     }
+// }
+export default connect(mapStateToProps, null)(Menu);

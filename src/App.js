@@ -16,6 +16,7 @@ class App extends React.Component {
   componentWillMount(){
     let token = JSON.parse(localStorage.getItem('token'));
     this.props.watchProfile(token);
+    this.props.loadMenu();
   }
   render() {
     return (
@@ -31,6 +32,9 @@ const mapDispatchToProps = (dispatch)=>{
   return{
       watchProfile: (token) => {
           dispatch(actions.profileRequest(token));
+      },
+      loadMenu: () => {
+        dispatch(actions.categoriesRequest())
       },
   }
 }
