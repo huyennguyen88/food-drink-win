@@ -110,11 +110,11 @@ class ReviewForm extends Component
     }
 }
 const mapStateToProps = state => {
-    console.log(state)
     return {
         product: state.products,
         user: state.user,
         review: state.review
+
     }
 }
 const mapDispatchToProps = (dispatch)=>

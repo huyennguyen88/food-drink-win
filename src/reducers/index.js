@@ -37,6 +37,6 @@ const myReducer = combineReducers({
     Adcart,
     allProduct,
     HistoryCart,
-    review
+    review,
 });
 export default myReducer

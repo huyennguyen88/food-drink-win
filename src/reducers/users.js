@@ -24,6 +24,9 @@ var myReducer = (state = initialState, action) => {
         case types.GET_REVIEW_USERS:
             state = action.users;
             return [...state];
+        case types.WHO:
+            state.push(action.user)
+            return [...state]
         default: return state;
     }
 }

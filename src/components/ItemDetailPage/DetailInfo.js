@@ -12,18 +12,7 @@ class DetailInfo extends React.Component {
             quantity:0
         }
     }
-    // componentWillReceiveProps(nextProps) {
-    //     var { product_id ,reviews} = nextProps
-    //     this.props.productShow(product_id)
-    //     var { product } = nextProps
-    //     if (product) {
-    //         this.setState({
-    //             rate: product.rate,
-    //             product
-    //         })
-    //     }
-    //     console.log("goi1")
-    // }
+
     componentWillReceiveProps(nextProps) {
 
         let { reviews } = nextProps
@@ -59,7 +48,7 @@ class DetailInfo extends React.Component {
                 dem++
             }
         });
-        rate_avr = tong / dem
+        rate_avr = Math.round(tong / dem) 
         return rate_avr
     }
     addToCart = async () => {

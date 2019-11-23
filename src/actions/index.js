@@ -547,13 +547,26 @@ export const createReviewRequest =(user_id,product_id,rate,comment)=>{
             product_id,
             rate,
             comment
-        }).then(res=> { dispatch(createReview(res.data)) })
+        }).then(res=> { 
+            if (res){
+                dispatch(Who(res.data.user))
+                dispatch(createReview(res.data.review)) 
+            } 
+
+        })
     }
 }
 export const createReview=(review)=>{
     return{
         type: types.CREATE_REVIEW,
         review
+    }
+}
+export const Who=(user)=>{
+    // console.log(user)
+    return{
+        type: types.WHO,
+        user
     }
 }
 export const getReviewRequest =(review_id)=>{

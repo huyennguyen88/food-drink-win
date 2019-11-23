@@ -6,6 +6,7 @@ import classNames from "classnames";
 import * as actions from './../../actions/index'
 import ReviewForm from './ReviewForm';
 import DetailInfo from './DetailInfo'
+import srcRamen from './../../image/ramen.jpg'
 class ItemDetail extends React.Component {
     constructor(props) {
         super(props)
@@ -33,10 +34,9 @@ class ItemDetail extends React.Component {
                     <div className="mb-3">
                         <div >
                             <div >
-                                {
+                                {    
                                     reviews.map((item, index) => {
                                         var cmtUser = users.find((u) => {
-                                            console.log("users",users)
                                             return u.id === item.user_id
                                         })
                                         return <Comment key={index} review={item} user={cmtUser} />
@@ -56,7 +56,8 @@ class Preview extends React.Component {
         return (
             <div className="preview col-md-6">
                 <div className="preview-pic tab-content">
-                    <div className="tab-pane active" id="pic-1"><img alt="abc" src={this.props.img} /></div>
+                    <div className="tab-pane active" id="pic-1"><img alt="abc" src={srcRamen} /></div>
+                    {/* src={this.props.img}  */}
                 </div>
             </div>
         );
@@ -69,7 +70,7 @@ const mapStateToProps = (state) => {
         reviews: state.reviews,
         users: state.users,
         user : state.user,
-        review: state.review
+        review: state.review,
     }
 }
 const mapDispatchToProps = (dispatch) => {

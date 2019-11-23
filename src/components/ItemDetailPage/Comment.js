@@ -17,7 +17,6 @@ class Comment extends React.Component {
     render() {
         
         var { review, user, current_user} = this.props
-        console.log("user",user)
         var edit_delete =
                 <>
                     <button type="button" className="btn btn-info btn-sm mx-2" title="Edit" onClick={()=> this.getReview(review.id)}>
@@ -33,7 +32,7 @@ class Comment extends React.Component {
         return (
             <div>
                 <div className="media">
-                    <a href="abc" className="float-left">
+                    <a href="" className="float-left">
                         <img src="https://bootdey.com/img/Content/user_1.jpg" alt="" className="rounded-circle mr-3" />
                     </a>
                     <div className="media-body">

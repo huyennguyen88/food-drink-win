@@ -14,7 +14,7 @@ class Item extends React.Component {
                         <Link to={"/products/"+this.props.id}><img className="card-img-top" src={this.props.img} alt="" /></Link>
                         <div className="card-body">
                             <h4 className="card-title ">
-                                <a className="text-success" href="abc">{this.props.name}</a>
+                                <Link to={"/products/"+this.props.id}>{this.props.name}</Link>
                             </h4>
                             <p className="h5 text-danger">${this.props.price}</p>
                             <p className="card-text">BuyNow</p>

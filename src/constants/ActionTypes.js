@@ -57,3 +57,5 @@ export const UPDATE_REVIEW = 'UPDATE_REVIEW'
 export const GET_REVIEW = 'GET_REVIEW'
 export const CLEAR_REVIEW_NOW = 'CLEAR_REVIEW_NOW'
 export const DELETE_REVIEW = 'DELETE_REVIEW'
+//WHO
+export const WHO = 'WHO'
