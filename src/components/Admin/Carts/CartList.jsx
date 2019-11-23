@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import * as actions from '../../../actions'
+import * as actions from '../../../actions/index'
 import Cart from './Cart';
 class CartList extends React.Component {
     constructor(props){
@@ -9,12 +9,18 @@ class CartList extends React.Component {
             Carts: []
         }
     }
+    componentWillMount(){
+        this.props.getCart()
+    }
     componentWillReceiveProps(nextProps){
         this.setState({
             Carts: nextProps.Carts
+        },()=>{
+            // console.log(this.state.Carts)
         })
     }
     render() {
+        // let sort = this.props.sortProductType
         let {Carts} = this.state;
         Carts.sort((a,b)=>{
             if(a.status < b.status) return -1;
@@ -30,13 +36,13 @@ class CartList extends React.Component {
             <div className="">
                 <table  className="table table-bordered table-hover">
                 <thead>
-                <tr>
-                    <th className="text-center">ID</th>
-                    <th className="text-center">Username</th>
-                    <th className="text-center">Status</th>
-                    <th className="text-center">Option</th>
-                    <th className="text-center">Detail</th>
-                </tr>
+                    <tr>
+                        <th className="text-center">ID</th>
+                        <th className="text-center">Username</th>
+                        <th className="text-center">Status</th>
+                        <th className="text-center">Option</th>
+                        <th className="text-center">Detail</th>
+                    </tr>
                 </thead>
                 <tbody>
                     {listCarts}
@@ -46,10 +52,17 @@ class CartList extends React.Component {
         );
     }
 }
-const mapStateToProps = (nextProps)=>{
-    console.log(nextProps)
+const mapStateToProps = (state)=>{
     return{
-        Carts: nextProps.Adcart
+        Carts: state.Adcart
     }
 }
-export default connect(mapStateToProps,null)(CartList);
+const mapDispatchToProps = (dispatch)=>{
+    return{
+        getCart:()=>{
+            dispatch(actions.getAdCart())
+        },
+        
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(CartList);

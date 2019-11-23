@@ -10,7 +10,7 @@ class Control extends React.Component {
         }
     }
     onToggleForm = ()=>{
-        this.props.productlear();
+        this.props.productClear();
         this.props.toggleForm();
     }
     onChange = (e)=>{
@@ -45,13 +45,6 @@ class Control extends React.Component {
                         style={mg5x}
                         onClick={this.onToggleForm}
                     >New product
-                    </button> 
-                    <button 
-                        type="button" 
-                        className="btn btn-outline-primary"
-                        style={mg5x}
-                        onClick={this.onToggleForm}
-                    >Cart Request
                     </button> 
                     <Sort/>
                 </div>

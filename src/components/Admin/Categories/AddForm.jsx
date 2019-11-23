@@ -34,11 +34,15 @@ class AddForm extends React.Component {
             let category = this.state
             let editCategory = category;
             this.props.categoryEdit(editCategory);
-            this.props.closeForm();            
+            this.props.closeForm();        
+            this.props.categoryClear()
+
         }
         else{
             this.props.categoryCreate(this.state);
             this.props.closeForm();
+            this.props.categoryClear()
+
         }
     }
     componentWillMount(){
@@ -58,7 +62,7 @@ class AddForm extends React.Component {
             <div className="card border-primary add-form">
                 <div className="card-body">
                     <h4 className="card-title" style={{textAlign: "center"}}>
-                        {getCategory? "New Category" : "Update Category"}
+                        {getCategory? "Update Category" : "New Category"}
                         <span>
                             <i onClick={this.oncloseForm} className="fas fa-times-circle" style={{float: "right"}}></i>
                         </span>

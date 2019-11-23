@@ -5,22 +5,22 @@ var myReducer = (state= initialState, action)=>{
         case types.CHECKOUT:
             state = []
             // console.log(state)
-            return state
+            return [...state]
         case types.GET_CART:
             state = action.cart
             // console.log(state)
-            // return state
+            return [...state]
         case types.DELETE:
             state = action.cart
             // console.log(state)
-            return state
+            return [...state]
         case types.ADD_CART:
             // return null
         case types.UP_CART:
             state = action.cart
-            return state
+            return [...state]
         default:
-            return state
+            return [...state]
     }
 }
 export default myReducer;

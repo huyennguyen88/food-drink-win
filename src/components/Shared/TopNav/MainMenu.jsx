@@ -41,7 +41,7 @@ class Menu extends Component {
         var { categories } = this.props
         var {user} = this.state
         
-        var manager = ["Products", "Categories","Users","Cart"]
+        var manager = ["Products", "Categories","Users","Carts"]
         var managerList = manager.map((item, index)=>{
             return <AdminMenuItem key={index} name={item}/>
         })

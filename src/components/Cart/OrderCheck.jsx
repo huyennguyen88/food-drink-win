@@ -28,7 +28,6 @@ class OrderCheck extends React.Component {
     render() {
         var total = 0
         var quantity=0 
-        console.log(this.state.Cart)
         if(this.state.Cart!=null && this.state.Cart!== []){
             this.state.Cart.map((item) =>{
                 total+=item.price*item.quantity;

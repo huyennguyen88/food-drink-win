@@ -17,7 +17,8 @@ import ManagerProduct from '../Admin/Products/ManagerProduct'
 import * as actions from './../../actions/index'
 import ManagerUser from '../Admin/Users/ManagerUser'
 import ManagerCategory from '../Admin/Categories/ManagerCategory'
-import CartManager from '../Admin/Cart/CartManager'
+import ManagerCart from '../Admin/Carts/ManagerCart'
+import historyCart from '../Cart/HistoryCart'
 class Homepage extends Component {
     constructor(props){
         super(props)
@@ -34,39 +35,39 @@ class Homepage extends Component {
         return (
             <div>
                 <TopNav/>
-                    <Switch>
-                        <Route path="/products/:id" component={ItemDetail} />
-                        <Route path="/cart">
-                            <CartPage/>
-                        </Route>
-                        <Route path="/login">
-                            <Login/>
-                        </Route>
-                        <Route path="/signup">
-                            <Signup/>
-                        </Route>
-                        <Route path="/profile">
-                            <UserProfile/>
-                        </Route>
-                        <Route path="/admin/products">
-                            <ManagerProduct/>
-                        </Route>
-                        <Route path="/admin/users">
-                            <ManagerUser/>
-                        </Route>
-                        <Route path="/admin/categories">
-                            <ManagerCategory/>
-                        </Route>
-                        <Route path="/admin/categories">
-                            <ManagerCategory/>
-                        </Route>
-                        <Route path="/admin/cart">
-                            <CartManager/>
-                        </Route>
-                        <Route path="/">
-                            <Main/>
-                        </Route>
-                    </Switch>
+                <Switch>
+                    <Route path="/products/:id" component={ItemDetail} />
+                    <Route path="/cart">
+                        <CartPage/>
+                    </Route>
+                    <Route path="/login">
+                        <Login/>
+                    </Route>
+                    <Route path="/signup">
+                        <Signup/>
+                    </Route>
+                    <Route path="/profile">
+                        <UserProfile/>
+                    </Route>
+                    <Route path="/admin/products">
+                        <ManagerProduct/>
+                    </Route>
+                    <Route path="/admin/users">
+                        <ManagerUser/>
+                    </Route>
+                    <Route path="/admin/categories">
+                        <ManagerCategory/>
+                    </Route>
+                    <Route path="/admin/carts">
+                        <ManagerCart/>
+                    </Route>
+                    <Route path="/historyCart">
+                        <historyCart/>
+                    </Route>
+                    <Route path="/">
+                        <Main/>
+                    </Route>
+                </Switch>
                 <Footer />
             </div>
         )
@@ -74,12 +75,9 @@ class Homepage extends Component {
 }
 const mapDispatchToProps = (dispatch)=>{
     return{
-        watchProfile: (token) => {
-            dispatch(actions.profileRequest(token));
-        },
         getProduct:()=>{
             dispatch(actions.fetchProductsRequest())
-        },
+        }
     }
 }
 export default connect(null,mapDispatchToProps)(Homepage)

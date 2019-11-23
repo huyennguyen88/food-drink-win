@@ -1,6 +1,5 @@
 import {combineReducers} from 'redux';
 import products from './products'
-import user from './user'
 import displayForm from './displayForm'
 import items from './items';
 import users from './users';
@@ -9,12 +8,14 @@ import reviews from './reviews';
 import searchProduct from './searchProduct'
 import sortProduct from './sortProduct'
 import Adcart from './Adcart'
+import user from './user'
 import categories from './categories'
 import getProduct from './getProduct'
 import search from './search'
 import sort from './sort'
 import getUser from './getUser'
 import getCategory from './getCategory'
+import allProduct from './allProducts'
 const myReducer = combineReducers({
     products,
     displayForm,
@@ -29,8 +30,9 @@ const myReducer = combineReducers({
     getCategory,
     getUser,
     cart,
-    Adcart,
     searchProduct,
-    sortProduct
+    sortProduct,
+    Adcart,
+    allProduct,
 });
 export default myReducer

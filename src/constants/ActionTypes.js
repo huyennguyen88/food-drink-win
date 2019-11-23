@@ -18,6 +18,7 @@ export const AD_CART = 'AD_CART'
 export const CONFIRM = 'CONFIRM'
 export const DECLINE = 'DECLINE'
 export const CHECKOUT = 'CHECKOUT'
+export const HISCART = 'HISCART'
 //USER
 export const FETCH_USERS ='FETCH_USERS'
 export const DELETE_USER = 'DELETE_USER';

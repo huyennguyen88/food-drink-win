@@ -16,10 +16,12 @@ class Cart extends React.Component {
         await this.props.decline(this.props.cart.id)
     }
     items = () =>{
-            
+        if(this.props.cart.item){
             return this.props.cart.item.map((i,index) =>{
-            return <ItemfromCart item= {i} key ={i.id +index}/>
-        })
+                return <ItemfromCart item= {i} key ={i.id +index}/>
+            })
+        }
+        else return
     }
     log =()=>{
         return (<>
@@ -30,9 +32,11 @@ class Cart extends React.Component {
             <th className="text-center">Stock</th>
         </>)
     }
+    details = () =>{
+        return <div className="dropdown-menu">{this.log()}{this.items()}</div>
+    }
     render() {
         let cart = this.props.cart
-        console.log(cart)
         let c = () => {
             switch(cart.status){
                 case 0:
@@ -46,7 +50,7 @@ class Cart extends React.Component {
         
         return (
             <>
-             <tr className="row-admin">
+             <tr className="row-admin h4 ml-4 nav-item dropdown"  aria-haspopup="true" aria-expanded="false" id={cart.id} onClick ={this.details}>
                     <th className="text-center">{cart.id}</th>
                     <th className="text-center">{cart.username}</th>
                     <th className="text-center">{c()}</th>
@@ -64,7 +68,10 @@ class Cart extends React.Component {
                         >Decline
                         </button>
                     </td>:<td></td>}
-                
+                    <td>
+                        <a key = {this.props.key} className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{this.details()}
+                        </a>
+                    </td>
             </tr>
             </>
         );

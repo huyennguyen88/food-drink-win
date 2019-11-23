@@ -17,6 +17,8 @@ class App extends React.Component {
     let token = JSON.parse(localStorage.getItem('token'));
     this.props.watchProfile(token);
     this.props.loadMenu();
+    this.props.fetchAllProduct();
+    // this.props.getCart();
   }
   render() {
     return (
@@ -36,6 +38,18 @@ const mapDispatchToProps = (dispatch)=>{
       loadMenu: () => {
         dispatch(actions.categoriesRequest())
       },
+      getCart:()=>{
+        dispatch(actions.getAdCart())
+      },
+      fetchAllProduct: ()=>{
+        return dispatch(actions.fetchProductsRequest());
+      }
+      // onChooseFood: ()=>{
+      //   dispatch(actions.fetchFoodsRequest());
+      // },
+      // onChooseDrink: ()=>{
+      //   dispatch(actions.fetchDrinksRequest());
+      // }
   }
 }
 export default connect(null,mapDispatchToProps)(App)
