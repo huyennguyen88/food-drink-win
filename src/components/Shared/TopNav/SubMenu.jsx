@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 import LogSign from './LogSign'
-export default class SubMenu extends Component {
+import {connect} from 'react-redux'
+import * as actions from './../../../actions/index'
+class SubMenu extends Component {
     constructor(props){
         super(props);
         this.state = {
-            token:''
+            token:'',
+            search:''
         }
     }
     componentWillMount(){
@@ -12,6 +15,17 @@ export default class SubMenu extends Component {
         this.setState({
             token: token
         })
+    }
+    onChange = (e)=>{  
+        let target = e.target;
+        let name = target.name;
+        let value = target.value
+        this.setState({
+            [name]: value
+        })
+    }
+    onSubmit = ()=>{
+       this.props.search(this.state.search)
     }
     render() {
         
@@ -35,9 +49,9 @@ export default class SubMenu extends Component {
                                 </select>
 
                             </div>
-                            <input type="text" className="form-control border-success" placeholder="I want to eat..." aria-label="Text input with dropdown button" />
+                            <input name="search" onKeyUp={this.onChange} type="text" className="form-control border-success" placeholder="I want to eat..." aria-label="Text input with dropdown button" />
                         </div>
-                        <button className="btn btn-success my-2 my-sm-0" type="submit">Search</button>
+                        <button onClick={this.onSubmit} className="btn btn-success my-2 my-sm-0" type="button">Search</button>
                     </form>
                 </div>
                 <LogSign/>
@@ -45,3 +59,16 @@ export default class SubMenu extends Component {
         );
     }
 }
+const mapStateToProps = (state)=>{
+    return{
+        
+    }
+}
+const mapDispatchToProps = (dispatch, props)=>{
+    return{
+        search: (keyword)=>{
+            dispatch(actions.Search(keyword))
+        }
+    }
+}
+export default connect (mapStateToProps,mapDispatchToProps)(SubMenu)

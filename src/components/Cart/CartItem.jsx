@@ -6,16 +6,14 @@ class CartItem extends React.Component {
     {
         super(props)
         this.state = {
-            quantity:this.props.Item.quantity
+            Cart:JSON.parse(localStorage.getItem('cartItem')),
+            quantity:this.props.Item.quantity,
+            Item: this.props.Item
         }
     }
     remove = async () =>{
         let token = JSON.parse(localStorage.getItem('token'))
-        await this.props.delete(token,this.props.Item.id)
-        var Cart = []
-        Cart = JSON.parse(localStorage.getItem('cartItem'));
-        if(Cart){Cart.pop(this.props.Item);localStorage.setItem('cartItem',JSON.stringify(Cart));}
-        this.props.delete(this.props.Item)
+        if(token)await this.props.delete(token,this.props.Item.id)
     }
     plus = () => {
         var num = this.state.quantity + 1
@@ -49,17 +47,18 @@ class CartItem extends React.Component {
         }
     }
     render() {
+        let token = JSON.parse(localStorage.getItem('token'))
         return (
             <tr>
                 <th scope="row" className="border-0">
                     <div className="p-2">
                         <img src="./image/dong1.gif" alt="" width="70" className="img-fluid rounded shadow-sm" />
                         <div className="ml-3 d-inline-block align-middle">
-                        <h5 className="mb-0"> <a href="abc" className="text-dark d-inline-block align-middle">{this.props.Item.name}</a></h5>
+                        <h5 className="mb-0"> <a href="abc" className="text-dark d-inline-block align-middle">{this.state.Item.name}</a></h5>
                         </div>
                     </div>
                 </th>
-                <td className="border-0 align-middle"><strong>${this.props.Item.price}</strong></td>
+                <td className="border-0 align-middle"><strong>${this.state.Item.price}</strong></td>
                 <td className="border-0 align-middle">
                 <div>
                 <div className="quantity input-group mb-3">
@@ -75,9 +74,9 @@ class CartItem extends React.Component {
             </div>
                 </td>
                 <td className="border-0 align-middle"><a onClick ={this.save} className="text-dark"><i className="fa fa-save"></i></a></td>
-                <td className="border-0 align-middle"><a onClick ={this.remove} className="text-dark"><i className="fa fa-trash"></i></a></td>
+                <td className="border-0 align-middle"><a onClick ={token!=null?this.remove:()=>this.props.UnMount(this.props.Item)} className="text-dark"><i className="fa fa-trash"></i></a></td>
             </tr>
-        );
+        )
     }
 }
 const mapDispatchToProps = (dispatch) => {

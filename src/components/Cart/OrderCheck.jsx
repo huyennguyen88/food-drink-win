@@ -9,15 +9,23 @@ class OrderCheck extends React.Component {
             Cart: null
         }
     }
+    componentWillMount()
+    {
+        let token = JSON.parse(localStorage.getItem('token'))
+        if(!token)this.setState({Cart:JSON.parse(localStorage.getItem('cartItem'))})
+    }
     componentWillReceiveProps(nextProps){
         let token = JSON.parse(localStorage.getItem('token'))
         let miniCart = nextProps.cart
         if(token){
-        let localCart = JSON.parse(localStorage.getItem('cartItem'))
-        if(localCart)miniCart.push(localCart)
-        this.setState({
-            Cart:miniCart
-        }) 
+            let localCart = JSON.parse(localStorage.getItem('cartItem'))
+            if(localCart)miniCart.push(localCart)
+            this.setState({
+                Cart:miniCart
+            }) 
+        }
+        else{
+            this.setState({Cart:JSON.parse(localStorage.getItem('cartItem'))})
         }
     }
     checkout = async () =>
@@ -28,7 +36,8 @@ class OrderCheck extends React.Component {
     render() {
         var total = 0
         var quantity=0 
-        if(this.state.Cart!=null && this.state.Cart!== []){
+        let token = JSON.parse(localStorage.getItem('token'))
+        if(this.state.Cart){
             this.state.Cart.map((item) =>{
                 total+=item.price*item.quantity;
                 quantity+=item.quantity;
@@ -47,7 +56,7 @@ class OrderCheck extends React.Component {
                             <li className="d-flex justify-content-between py-3 border-bottom"><strong className="text-muted">Total</strong>
                                 <h5 className="font-weight-bold">${total}</h5>
                             </li>
-                        </ul><a onClick={this.checkout} className="btn btn-warning rounded-pill py-2 btn-block">Procceed to checkout</a>
+                        </ul>{token?<a onClick={this.checkout} className="btn btn-warning rounded-pill py-2 btn-block">Procceed to checkout</a>:<></>}
                     </div>
                 </div>
             </>

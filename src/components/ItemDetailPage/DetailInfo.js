@@ -67,7 +67,8 @@ class DetailInfo extends React.Component {
         }
         else{
             let cart = JSON.parse(localStorage.getItem('cartItem'))
-            cart.push(item)
+            if(cart)cart.push(item)
+            else cart = [item]
             localStorage.setItem('cartItem',JSON.stringify(cart))
         }
     }

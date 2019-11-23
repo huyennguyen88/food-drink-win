@@ -40,6 +40,9 @@ class Login extends Component {
                 password: '???????',
                 token: user.authentication_token
             })
+            let token=JSON.parse(localStorage.getItem('token'))
+            let localCart = JSON.parse(localStorage.getItem('cartItem'))
+            if(localCart)await localCart.map(i => {if(i)this.props.add(token,i)})
             // user = null;
             // console.log(user)
             this.props.history.push("/");
@@ -105,6 +108,9 @@ const mapDispatchToProps = (dispatch,props)=>{
     return{
         logIn: (email,password) => {
             return dispatch(actions.logInRequest(email,password));
+        },
+        add: (id,item) =>{
+            dispatch(actions.addToCart(id,item))
         }
     }
 }

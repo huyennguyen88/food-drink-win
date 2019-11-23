@@ -6,7 +6,7 @@ class ItemCartList extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      Cart: null,
+      Cart: JSON.parse(localStorage.getItem('cartItem')),
       token: JSON.parse(localStorage.getItem('token'))
     }
   }
@@ -26,6 +26,7 @@ class ItemCartList extends React.Component {
     let miniCart = this.state.Cart
     miniCart.pop(item)
     this.setState({Cart:miniCart})
+    localStorage.setItem('cartItem',JSON.stringify(miniCart))
   }
   render() {
     return((this.state.Cart===null || this.state.Cart === [])?
@@ -35,9 +36,9 @@ class ItemCartList extends React.Component {
     :
       <>
        {
-          this.state.Cart.map((item,index)=>(
+          this.state.Cart?this.state.Cart.map((item,index)=>(
             <CartItem Item = {item} UnMount ={this.delete} key ={index} />
-          ))
+          )):<></>
        }
       </>
     )
