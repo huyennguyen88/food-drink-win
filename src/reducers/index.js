@@ -16,6 +16,7 @@ import sort from './sort'
 import getUser from './getUser'
 import getCategory from './getCategory'
 import allProduct from './allProducts'
+import HistoryCart from './HisCart'
 const myReducer = combineReducers({
     products,
     displayForm,
@@ -34,5 +35,6 @@ const myReducer = combineReducers({
     sortProduct,
     Adcart,
     allProduct,
+    HistoryCart
 });
 export default myReducer

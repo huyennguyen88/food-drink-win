@@ -18,7 +18,7 @@ import * as actions from './../../actions/index'
 import ManagerUser from '../Admin/Users/ManagerUser'
 import ManagerCategory from '../Admin/Categories/ManagerCategory'
 import ManagerCart from '../Admin/Carts/ManagerCart'
-import historyCart from '../Cart/HistoryCart'
+import HistoryCart from '../Cart/HistoryCart'
 class Homepage extends Component {
     constructor(props){
         super(props)
@@ -62,8 +62,8 @@ class Homepage extends Component {
                         <ManagerCart/>
                     </Route>
                     <Route path="/historyCart">
-                        <historyCart/>
-                    </Route>
+                            <HistoryCart/>
+                        </Route>
                     <Route path="/">
                         <Main/>
                     </Route>

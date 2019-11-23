@@ -60,12 +60,14 @@ class HistoryCartList extends Component {
     }
     render() {
         let {HistoryCart} = this.props
+        console.log(HistoryCart)
         return (<>
             {HistoryCart?HistoryCart.map(i =>{return this.renderCart(i)}):''}           
         </>)
     }
 }
 const mapStateToProps = (state) =>{
+    console.log(state)
     return { 
         HistoryCart: state.HistoryCart
     }
