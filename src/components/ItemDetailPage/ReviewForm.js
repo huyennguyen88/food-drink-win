@@ -1,114 +1,137 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import * as actions from "../../actions/index"
-import Rating from "react-rating";
-class ReviewForm extends Component {
-    constructor(props) {
-        super(props);
+import BeautyStars from 'beauty-stars';
+class ReviewForm extends Component 
+{
+    constructor(props) 
+    {
+        super(props)
+        let token = JSON.parse(localStorage.getItem('token'))
+        this.props.currentUser(token);
         this.state = {
             id: '',
-            name: '',
-            status: true
+            comment: '',
+            rate: 0,
+            clearform: false
         }
     }
-    UNSAFE_componentWillMount() {
-        if (this.props.taskEditing) {
-            this.setState({
-                id: this.props.taskEditing.id,
-                name: this.props.taskEditing.name,
-                status: this.props.taskEditing.status
-            })
-        }
-
-    }
-
-    UNSAFE_componentWillReceiveProps(nextProps) {
-        if (nextProps && nextProps.taskEditing) {
-            this.setState({
-                id: nextProps.taskEditing.id,
-                name: nextProps.taskEditing.name,
-                status: nextProps.taskEditing.status
-            })
-        }
-        else if (!nextProps.taskEditing) {
+    componentWillReceiveProps(nextProps)
+    {
+        var {review} = nextProps
+        if(review instanceof Array || review ===null ){
             this.setState({
                 id: '',
-                name: '',
-                status: true
+                comment: '',
+                rate: 0,
+                clearform: false
             })
         }
+        else if(review){
+            this.setState({
+                id: review.id,
+                comment: review.comment,
+                rate: review.rate,
+                clearform: false
+            })
+        }
+        if(this.state.clearform){
+            this.props.clearReviewNow()   
+        }
     }
-    onClose = () => {
-        this.props.closeFunc();
-    }
-    changeForm = (event) => {
+    changeComment = (event) => {
         var name = event.target.name
         var value = event.target.value
-        if (name === "status") value = value === 'true'
         this.setState({
             [name]: value
         })
     }
-    OnCancel = () => {
+    changeRate = (value) => {
         this.setState({
-            name: '',
-            status: true
+            rate: value
         })
     }
-    SubmitForm = (event) => {
-        event.preventDefault();
-        this.props.onAddTask(this.state)
-        this.onClose();
-
+    SubmitForm= async(event)=>
+    {
+        event.preventDefault()
+        var {product,user, review} = this.props
+        var {comment, rate} =this.state
+        if(user){
+            if(this.state.id){
+               await this.props.updateReview(review.id, user.id, product.id, rate, comment)
+            }
+            else {
+             await this.props.addReview(user.id, product.id, rate, comment)
+            }
+            this.setState({
+                id: '',
+                comment: '',
+                rate: 0,
+                clearform: true
+             })
+        }
+        else{
+            alert("Đăng nhập để bình luận")
+        } 
     }
-    render() {
-        var { id, name, status } = this.state
+    render() 
+    {
+        var {comment, rate} = this.state
         return (
-            <>
-                <div className="card card-danger">
-                    <div className="card-header bg-info">
+            <div className="row">
+                <div className="card">
+                    <div className="card-header ">
                         <div className=" row d-flex justify-content-between">
-                            <p className="h5">{id !== '' ? "Update" : "Add"}
-                            </p>
-                            <i onClick={this.onClose} className="fas fa-times-circle"></i>
+                            <p className="h5">Review</p>
                         </div>
                     </div>
                     <div className="card-body">
                         <form onSubmit={this.SubmitForm}>
                             <div className="form-group">
                                 <label>Bình luận</label>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                <textarea className="form-control" name="comment" rows="3" cols="50" value={comment} onChange={this.changeComment}></textarea>
                             </div>
                             <div className="form-group">
                                 <label>Đánh giá</label>
-                                <p>
-                                    <Rating
-                                        emptySymbol="fa fa-star-o"
-                                        fullSymbol="fa fa-star text-warning "
-                                    />
-                                </p>
-                                
-                            </div>
+                                <BeautyStars
+                                    value={rate}
+                                    size={25}
+                                    onChange={value => this.changeRate(value)}
+                                />
 
-                            <button  type="submit" className="btn btn-success mx-3"><i className="fas fa-plus"></i>Lưu lại</button>
-                            <button onClick={this.OnCancel} type="reset" className="btn btn-danger"><i className="fas fa-times"></i>Hủy bỏ</button>
+                            </div>
+                            <button type="submit" className="btn btn-success"><i className="fas fa-plus"></i>Lưu</button>
+
                         </form>
                     </div>
                 </div>
-            </>
+            </div>
         )
     }
 }
 const mapStateToProps = state => {
+    console.log(state)
     return {
-
+        product: state.products,
+        user: state.user,
+        review: state.review
     }
 }
-const mapDispatchToProps = (dispatch, props) => {
-    return {
-        //   onAddTask :(task)=>{
-        //     dispatch(actions.addTask(task));
-        //   }
+const mapDispatchToProps = (dispatch)=>
+{
+    return{
+      currentUser: (token) => {
+        dispatch(actions.profileRequest(token));
+      },
+      addReview: (user_id, product_id, rate, comment)=>{
+          dispatch(actions.createReviewRequest(user_id, product_id, rate, comment))
+      },
+      updateReview: (review_id,user_id,product_id,rate,comment)=>{
+            dispatch(actions.updateReviewRequest(review_id,user_id,product_id,rate,comment))
+      },
+      clearReviewNow: ()=>{
+          dispatch(actions.clearReviewNow());
+      }
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ReviewForm);

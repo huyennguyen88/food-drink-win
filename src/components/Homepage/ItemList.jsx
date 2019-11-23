@@ -17,7 +17,7 @@ class ItemList extends React.Component {
     })
   }
   render() {
-    // console.log(this.state);
+  //console.log(this.props)
     var {products} = this.state
     if (products.length > 0) {
       var listItem = products.map((p, index) => {
@@ -34,7 +34,9 @@ class ItemList extends React.Component {
 }
 const mapStateToProps = (state) => {
   return {
-    products: state.products
+    products: state.products,
+    user: state.user
+    
   }
 }
 export default connect(mapStateToProps, null)(ItemList);
