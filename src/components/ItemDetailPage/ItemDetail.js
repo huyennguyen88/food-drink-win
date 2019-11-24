@@ -2,7 +2,6 @@ import React from 'react';
 import './ItemDetail.css';
 import Comment from './Comment'
 import { connect } from 'react-redux'
-import classNames from "classnames";
 import * as actions from './../../actions/index'
 import ReviewForm from './ReviewForm';
 import DetailInfo from './DetailInfo'
@@ -45,7 +44,7 @@ class ItemDetail extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <ReviewForm />
+                    <ReviewForm id = {this.props.match.params.id}/>
                 </div>
             </div>
         );
@@ -64,7 +63,7 @@ class Preview extends React.Component {
     }
 }
 const mapStateToProps = (state) => {
-
+    console.log(state)
     return {
         product: state.products,
         reviews: state.reviews,

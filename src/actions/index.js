@@ -541,6 +541,7 @@ export const cartHistory = (cartHistory) => {
     }
 }
 export const createReviewRequest =(user_id,product_id,rate,comment)=>{
+    console.log(product_id)
     return (dispatch)=>{
         return callApi('reviews','POST',{
             user_id,

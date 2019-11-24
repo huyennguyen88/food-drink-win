@@ -54,14 +54,15 @@ class ReviewForm extends Component
     SubmitForm= async(event)=>
     {
         event.preventDefault()
-        var {product,user, review} = this.props
+        var {product, user, review} = this.props
         var {comment, rate} =this.state
         if(user){
             if(this.state.id){
+              
                await this.props.updateReview(review.id, user.id, product.id, rate, comment)
             }
             else {
-             await this.props.addReview(user.id, product.id, rate, comment)
+               await this.props.addReview(user.id, this.props.id, rate, comment)
             }
             this.setState({
                 id: '',
@@ -76,6 +77,7 @@ class ReviewForm extends Component
     }
     render() 
     {
+        // console.log(this.props.id)
         var {comment, rate} = this.state
         return (
             <div className="row">
@@ -110,11 +112,11 @@ class ReviewForm extends Component
     }
 }
 const mapStateToProps = state => {
+    console.log(state)
     return {
         product: state.products,
         user: state.user,
         review: state.review
-
     }
 }
 const mapDispatchToProps = (dispatch)=>

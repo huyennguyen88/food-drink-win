@@ -6,13 +6,17 @@ import * as actions from './../../actions/index'
 class DetailInfo extends React.Component {
     constructor(props) {
         super(props)
+       
         this.state = {
             rate: 0,
             product: null,
             quantity:0
         }
     }
+    componentDidMount(){
 
+        this.props.productShow(this.props.id)
+    }
     componentWillReceiveProps(nextProps) {
 
         let { reviews } = nextProps
@@ -50,6 +54,13 @@ class DetailInfo extends React.Component {
         });
         rate_avr = Math.round(tong / dem) 
         return rate_avr
+    }
+    changeForm = (event) => {
+        var name = event.target.name
+        var value = event.target.value
+        this.setState({
+            [name]: value
+        })
     }
     addToCart = async () => {
         let token = JSON.parse(localStorage.getItem('token'))

@@ -12,7 +12,8 @@ class Comment extends React.Component {
         this.props.getReview(review_id)
     }
     deleteReview =(review_id)=>{
-        this.props.deleteReview(review_id)
+        console.log("delete",review_id)
+        this.props.deleteReview(review_id)  
     }
     render() {
         
