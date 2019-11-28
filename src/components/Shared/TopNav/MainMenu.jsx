@@ -46,7 +46,7 @@ class Menu extends Component {
             return <AdminMenuItem key={index} name={item}/>
         })
         var foodsCate = categories.filter((item) => {
-            return item;
+            return item.classify === true
         })
         var drinksCate = categories.filter((item) => {
             return item.classify === false

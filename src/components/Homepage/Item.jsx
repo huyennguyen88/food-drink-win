@@ -11,7 +11,7 @@ class Item extends React.Component {
     
                 <div className="Item col-lg-3 col-md-6 mb-4">
                     <div className="card h-100 border-warning">
-                        <Link to={"/products/"+this.props.id}><img className="card-img-top" src={this.props.img} alt="" /></Link>
+                        <Link to={"/products/"+this.props.id}><img className="card-img-top" style={style} src={this.props.img} alt="" /></Link>
                         <div className="card-body">
                             <h4 className="card-title ">
                                 <Link to={"/products/"+this.props.id}>{this.props.name}</Link>
@@ -25,9 +25,10 @@ class Item extends React.Component {
                     </div>
                 </div>
                 
-  
-        
         );
     }
 }
 export default Item;
+const style ={
+    height : "190px"
+}
