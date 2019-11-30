@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { connect } from 'react-redux'
 import * as actions from './../../actions/index'
@@ -37,10 +38,8 @@ class OrderCheck extends React.Component {
         var total = 0
         var quantity=0 
         let token = JSON.parse(localStorage.getItem('token'))
-        console.log("cart",this.state.cart)
         if(this.state.Cart){
             this.state.Cart.map((item) =>{
-                
                 total+=item.price*item.quantity;
                 quantity+=item.quantity;
             })
@@ -65,9 +64,9 @@ class OrderCheck extends React.Component {
         );
     }
 }
-const mapStateToProps = (state) => {
+const mapStateToProps = (NextProps) => {
     return {
-        cart: state.cart,
+        cart: NextProps.cart,
     }
 }
 const mapDispatchToProps = (dispatch) => {

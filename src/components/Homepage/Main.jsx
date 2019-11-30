@@ -29,6 +29,7 @@ class Main extends React.Component {
         <div className="row">
           <MainM />
           <ItemListHome list = {bestRate}/>
+          <TabList/>
 
         </div>
       </div>
