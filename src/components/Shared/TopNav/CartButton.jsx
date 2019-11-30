@@ -15,7 +15,7 @@ class CartButton extends React.Component {
                     </Link>
                     {token?
                     (<Link to="/historyCart">
-                        <button type="button" className="btn btn-outline-info">History Carts <i class="fa fa-history" aria-hidden="true"></i>
+                        <button type="button" className="btn btn-outline-info">History Carts <i className="fa fa-history" aria-hidden="true"></i>
                         </button></Link>):''}
                 </div>
 

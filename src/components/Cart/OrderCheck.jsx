@@ -37,8 +37,10 @@ class OrderCheck extends React.Component {
         var total = 0
         var quantity=0 
         let token = JSON.parse(localStorage.getItem('token'))
+        console.log("cart",this.state.cart)
         if(this.state.Cart){
             this.state.Cart.map((item) =>{
+                
                 total+=item.price*item.quantity;
                 quantity+=item.quantity;
             })
@@ -63,9 +65,9 @@ class OrderCheck extends React.Component {
         );
     }
 }
-const mapStateToProps = (NextProps) => {
+const mapStateToProps = (state) => {
     return {
-        cart: NextProps.cart,
+        cart: state.cart,
     }
 }
 const mapDispatchToProps = (dispatch) => {

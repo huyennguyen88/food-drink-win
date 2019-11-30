@@ -370,13 +370,12 @@ export const UPcart = (cart) =>{
 }
 export const getCartReq = (id) =>{
     return (dispatch) =>{
-        return callApi("carts/" + id +"/getCart","GET",null).then(res =>{
-            console.log(res)
-            if(res)dispatch(getCart(res.data))
+        return callApi("carts/" + id ,"GET",null).then(res =>{
+            dispatch(getCart(res.data))
         })
     }
 }
-export const getCart = (cart,cart_id) =>{
+export const getCart = (cart) =>{
     return{
         type: types.GET_CART,
         cart,
@@ -525,6 +524,7 @@ export const checkout = (id)=>{
 export const Checkout =(cart)=>{
     return{
         type : types.CHECKOUT,
+        cart
     }
 }
 export const historyCartReq = (token) =>{
@@ -614,5 +614,18 @@ export const deleteReview =(review)=>{
     return {
         type: types.DELETE_REVIEW,
         review
+    }
+}
+export const bestRatingProductsRequest =()=>{
+    return (dispatch)=>{
+        return callApi('products/best/rate','GET',null)
+        .then(res => dispatch(bestRatingProducts(res.data)))
+    }
+}
+export const bestRatingProducts =(products)=>{
+    
+    return {
+        type: types.BEST_RATING,
+        products
     }
 }
