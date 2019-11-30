@@ -370,7 +370,7 @@ export const UPcart = (cart) =>{
 }
 export const getCartReq = (id) =>{
     return (dispatch) =>{
-        return callApi("carts/" + id ,"GET",null).then(res =>{
+        return callApi("carts/" + id +"/getCart","GET",null).then(res =>{
             dispatch(getCart(res.data))
         })
     }
@@ -523,8 +523,7 @@ export const checkout = (id)=>{
 }
 export const Checkout =(cart)=>{
     return{
-        type : types.CHECKOUT,
-        cart
+        type : types.CHECKOUT
     }
 }
 export const historyCartReq = (token) =>{
