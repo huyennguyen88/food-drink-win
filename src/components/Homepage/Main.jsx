@@ -18,8 +18,8 @@ class MainM extends React.Component {
     return (
       <div className="Main ">
             <BigImage />
-            <TabList />
-            <Pagination />
+          
+
       </div>
     );
   }

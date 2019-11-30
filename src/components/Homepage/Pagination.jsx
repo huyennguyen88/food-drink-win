@@ -11,7 +11,7 @@ class Pagination extends React.Component {
                                 <span className="sr-only">Previous</span>
                             </a>
                         </li>
-                        <li className="page-item active"><a className="page-link" href="abc">1</a></li>
+                        <li className="page-item"><a className="page-link" href="abc">1</a></li>
                         <li className="page-item"><a className="page-link" href="abc">2</a></li>
                         <li className="page-item"><a className="page-link" href="abc">3</a></li>
                         <li className="page-item">
