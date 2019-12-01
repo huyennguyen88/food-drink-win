@@ -5,9 +5,6 @@ import AddForm from './AddForm';
 import {connect} from 'react-redux'
 import * as actions from '../../../actions/index'
 class ManagerUser extends React.Component {
-    constructor(props){
-        super(props)
-    }
     render() {
         let style = {
             textAlign: "center",

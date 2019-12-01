@@ -46,10 +46,7 @@ class Sort extends React.Component{
                             </a>
                         </li>
                         <li onClick={()=> this.onClick('price',-1)}>
-                            <a 
-                                role="button" 
-                                className={sortProductType.by === "price" && sortProductType. value === -1 ? "sort_selected" : ""}
-                            >
+                            <a role="button" className={sortProductType.by === "price" && sortProductType. value === -1 ? "sort_selected" : ""}>
                                 <span className="fa fa-sort-alpha-desc pr-5">Price high-low </span>
                             </a>
                         </li>

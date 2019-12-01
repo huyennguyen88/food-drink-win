@@ -7,9 +7,6 @@ import ReviewForm from './ReviewForm';
 import DetailInfo from './DetailInfo'
 import srcRamen from './../../image/ramen.jpg'
 class ItemDetail extends React.Component {
-    constructor(props) {
-        super(props)
-    }
     componentDidMount(){
         var id = this.props.match.params.id
         this.props.productShow(id);

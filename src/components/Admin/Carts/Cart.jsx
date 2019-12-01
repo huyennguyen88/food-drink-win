@@ -54,7 +54,7 @@ class Cart extends React.Component {
                     <th className="text-center">{cart.id}</th>
                     <th className="text-center">{cart.username}</th>
                     <th className="text-center">{c()}</th>
-                    {cart.status==0?<td>
+                    {cart.status===0?<td>
                         <button 
                             type="button" 
                             className="btn btn-warning"

@@ -9,9 +9,6 @@ var myReducer = (state= initialState, action)=>{
         case types.ALL_CATEGORIES:
             state = action.categories
             return [...state]
-        case types.FETCH_CATEGORY:
-            state = action.categories
-            return [...state]   
         case types.CREATE_CATEGORY:
             state.unshift(action.category)
             return [...state]

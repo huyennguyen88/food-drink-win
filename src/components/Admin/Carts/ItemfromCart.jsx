@@ -11,7 +11,7 @@ class ItemfromCart extends React.Component {
     render() {
         let products = this.props.product
         let product =products.find((p,i) =>{
-            if(p.id == this.props.item.product_id) return p
+            if(p.id === this.props.item.product_id) return p
         })
         return (
                  <tr className="row-admin " >

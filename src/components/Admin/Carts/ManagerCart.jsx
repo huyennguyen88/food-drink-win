@@ -1,14 +1,8 @@
 import React from 'react';
-// import ItemList from './ItemList';
-// import Control from './Control';
-// import AddForm from './';
 import CartList from './CartList';
 import {connect} from 'react-redux'
 import * as actions from '../../../actions/index'
 class ManagerCart extends React.Component {
-    constructor(props){
-        super(props)
-    }
     render() {
         let style = {
             textAlign: "center",

@@ -2,6 +2,7 @@ import * as types from "./../constants/ActionTypes"
 var initialState = []
 
 var myReducer = (state = initialState, action) => {
+    var index =0;
     switch (action.type) {
         case types.GET_USER:
             state = action.user;
@@ -10,13 +11,13 @@ var myReducer = (state = initialState, action) => {
             state = action.users;
             return [...state];
         case types.DELETE_USER:
-            var index = state.findIndex((u)=>{
+            index = state.findIndex((u)=>{
                 return u.authentication_token === action.token;
             })
             state.splice(index,1);
             return [...state]
         case types.EDIT_USER:
-            var index = state.findIndex((u)=>{
+            index = state.findIndex((u)=>{
                 return u.id === action.user.id
             })
             state[index] = action.user

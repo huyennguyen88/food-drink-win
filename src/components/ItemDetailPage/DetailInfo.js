@@ -1,5 +1,4 @@
 import React from 'react';
-import Quantity from "./Quantity";
 import { connect } from 'react-redux'
 import BeautyStars from 'beauty-stars';
 import * as actions from './../../actions/index'

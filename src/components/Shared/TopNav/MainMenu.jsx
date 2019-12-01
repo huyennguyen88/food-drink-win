@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import {
     Link
 } from 'react-router-dom';
-import * as actions from '../../../actions/index'
 import { connect } from "react-redux";
 import MenuItem from './MenuItem';
 import AdminMenuItem from './AdminMenuItem';

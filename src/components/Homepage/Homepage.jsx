@@ -8,7 +8,6 @@ import CartPage from '../Cart/CartPage'
 import {
     Switch,
     Route,
-    BrowserRouter as Router,
 } from 'react-router-dom';
 import {connect} from 'react-redux'
 import ItemDetail from '../ItemDetailPage/ItemDetail'
@@ -20,17 +19,6 @@ import ManagerCategory from '../Admin/Categories/ManagerCategory'
 import ManagerCart from '../Admin/Carts/ManagerCart'
 import HistoryCart from '../Cart/HistoryCart'
 class Homepage extends Component {
-    constructor(props){
-        super(props)
-        this.state = {
-            token: ''
-        }
-    }
-    componentWillMount(){
-        let token = JSON.parse(localStorage.getItem('token'));
-        this.props.getProduct()
-        // this.props.watchProfile(token);
-    }
     render() {
         return (
             <div>

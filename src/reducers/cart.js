@@ -14,8 +14,7 @@ var myReducer = (state= initialState, action)=>{
             state = action.cart
             // console.log(state)
             return [...state]
-        case types.ADD_CART:
-            // return null
+
         case types.UP_CART:
             state = action.cart
             return [...state]

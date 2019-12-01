@@ -3,9 +3,6 @@ import {connect} from 'react-redux'
 import * as actions from '../../../actions/index'
 
 class Item extends React.Component {
-    constructor(props){
-        super(props)
-    }
     onDelete = ()=>{
         this.props.deleteUser(this.props.user.authentication_token)
     }
