@@ -27,20 +27,10 @@ class Main extends React.Component {
     return (
       <div className="Main container">
         <div className="row">
-          <MainM />
-          <ItemListHome list = {bestRate}/>
+          <BigImage/>
           <TabList/>
-
+          <ItemListHome list = {bestRate}/>
         </div>
-      </div>
-    );
-  }
-}
-class MainM extends React.Component {
-  render() {
-    return (
-      <div className="Main ">
-            <BigImage />
       </div>
     );
   }

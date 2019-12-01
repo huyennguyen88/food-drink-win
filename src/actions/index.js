@@ -371,11 +371,12 @@ export const UPcart = (cart) =>{
 export const getCartReq = (id) =>{
     return (dispatch) =>{
         return callApi("carts/" + id +"/getCart","GET",null).then(res =>{
-            dispatch(getCart(res.data))
+            console.log(res)
+            if(res)dispatch(getCart(res.data))
         })
     }
 }
-export const getCart = (cart) =>{
+export const getCart = (cart,cart_id) =>{
     return{
         type: types.GET_CART,
         cart,

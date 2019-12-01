@@ -17,7 +17,6 @@ class ItemList extends React.Component {
     })
   }
   render() {
-  //console.log(this.props)
     // console.log(this.props.search)
     var {products} = this.state
     if (products.length > 0) {
@@ -30,6 +29,7 @@ class ItemList extends React.Component {
     }
     return (
       <div className="ItemList row my-4">
+      
          {listItem}
       </div>
     );
