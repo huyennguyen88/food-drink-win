@@ -1,11 +1,9 @@
 import React from 'react';
-import coverimg from './../../image/coverimg.jpg'
 import mi from './../../image/mi.jpg'
-import cocktail from './../../image/cocktail.jpg'
 class BigImage extends React.Component {
   render(){
     return (
-      <div id="carouselExampleIndicators" className="BigImage carousel slide my-4" data-ride="carousel">
+      <div id="carouselExampleIndicators" className="BigImage carousel slide my-4 mx-2" data-ride="carousel">
           <ol className="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" className="active"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="1" className=""></li>
@@ -13,13 +11,13 @@ class BigImage extends React.Component {
           </ol>
           <div className="carousel-inner" role="listbox">
             <div className="carousel-item active">
-              <img style = {style} className="d-block img-fluid" src={coverimg} alt="First slide"/>
+              <img style = {style} className="d-block img-fluid" src="https://dcassetcdn.com/design_img/2772377/454551/454551_15161780_2772377_c84e32e7_image.jpg" alt="First slide"/>
             </div>
             <div className="carousel-item">
               <img style = {style} className="d-block img-fluid" src={mi} alt="Second slide"/>
             </div>
             <div className="carousel-item">
-              <img style = {style} className="d-block img-fluid" src={cocktail} alt="Third slide"/>
+              <img style = {style} className="d-block img-fluid" src="https://www.seacrestbeachhotel.com/~/media/parks/sea-crest/dine/reds/cocktail-menu/cocktail-menu-page-banner-desktop.jpg?mw=1500&hash=EDD6B7B601A989545EC25BC0E2C28051C41A4F1E"alt="Third slide"/>
             </div>
           </div>
           <a className="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -37,7 +35,7 @@ class BigImage extends React.Component {
 export default BigImage;
 const style = {
 
-    width:"100%",
-    height:"400px"
+    width:"1200px",
+    height:"500px"
           
 }

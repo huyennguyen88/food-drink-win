@@ -16,14 +16,12 @@ class App extends React.Component {
   componentWillMount(){
     let token = JSON.parse(localStorage.getItem('token'));
     this.props.watchProfile(token);
-    this.props.loadMenu();
     this.props.fetchAllProduct();
-    // this.props.getCart();
   }
   render() {
     return (
       <Router>
-        <div className="App container">
+        <div className="App container bg-light">
           <Homepage />
         </div>
       </Router>
@@ -35,21 +33,12 @@ const mapDispatchToProps = (dispatch)=>{
       watchProfile: (token) => {
           dispatch(actions.profileRequest(token));
       },
-      loadMenu: () => {
-        dispatch(actions.categoriesRequest())
-      },
       getCart:()=>{
         dispatch(actions.getAdCart())
       },
       fetchAllProduct: ()=>{
         return dispatch(actions.fetchProductsRequest());
       }
-      // onChooseFood: ()=>{
-      //   dispatch(actions.fetchFoodsRequest());
-      // },
-      // onChooseDrink: ()=>{
-      //   dispatch(actions.fetchDrinksRequest());
-      // }
   }
 }
 export default connect(null,mapDispatchToProps)(App)

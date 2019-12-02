@@ -37,24 +37,11 @@ class Menu extends Component {
         }
     }
     render() {
-        var { categories } = this.props
         var {user} = this.state
         
         var manager = ["Products", "Categories","Users","Carts"]
         var managerList = manager.map((item, index)=>{
             return <AdminMenuItem key={index} name={item}/>
-        })
-        var foodsCate = categories.filter((item) => {
-            return item.classify === true
-        })
-        var drinksCate = categories.filter((item) => {
-            return item.classify === false
-        })
-        var ListFoodcate = foodsCate.map((item, index) => {
-            return <MenuItem key={index} name={item.name} />
-        })
-        var ListDrinkcate = drinksCate.map((item, index) => {
-            return <MenuItem key={index} name={item.name} />
         })
             return (
             <div className="Menu">
@@ -72,20 +59,6 @@ class Menu extends Component {
                             </li>
                             <li className="h4 ml-4 nav-item">
                                 <a className="nav-link" href="#abc">About</a>
-                            </li>
-                            <li className="h4 ml-4 nav-item dropdown">
-                                <a className="nav-link dropdown-toggle" href="#abc" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Food</a>
-                                <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    {ListFoodcate}
-                                </div>
-                            </li>
-                            <li className="h4 ml-4 nav-item dropdown">
-                                <a className="nav-link dropdown-toggle" href="#abc" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Drink</a>
-                                <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    {ListDrinkcate}
-                                </div>
                             </li>
                             <li style={{visibility: user.token && user.role === 1? "visible" : "hidden"}} className="h4 ml-4 nav-item dropdown">
                             {/* <li className="h4 ml-4 nav-item dropdown"> */}
@@ -113,16 +86,8 @@ const Style = {
 }
 var mapStateToProps = (state) => {
     return {
-        categories: state.categories,
         user: state.user,
     }
 
 }
-// var mapDispatchToProps = (dispatch, state) => {
-//     return {
-//         loadMenu: () => {
-//             dispatch(actions.categoriesRequest())
-//         },
-//     }
-// }
 export default connect(mapStateToProps, null)(Menu);

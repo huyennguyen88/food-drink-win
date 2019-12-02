@@ -1,34 +1,38 @@
 import React from 'react';
 import {
     Link,
-    useParams
 } from 'react-router-dom';
-
+import BeautyStars from 'beauty-stars';
+import "./Item.css"
 class Item extends React.Component {
-    
     render() {
-            return (
-    
-                <div className="Item col-lg-3 col-md-6 mb-4">
-                    <div className="card h-100 border-warning">
-                        <Link to={"/products/"+this.props.id}><img className="card-img-top" style={style} src={this.props.img} alt="" /></Link>
-                        <div className="card-body">
-                            <h4 className="card-title ">
-                                <Link to={"/products/"+this.props.id}>{this.props.name}</Link>
-                            </h4>
-                            <p className="h5 text-danger">${this.props.price}</p>
-                            <p className="card-text">BuyNow</p>
+        var { id, name, price, image, rate } = this.props
+        return (
+            
+                <div className="Item col-lg-3 col-md-6 mb-3">
+                    <div className="card h-100 border-light">
+                        <Link to={"products/"+id}>
+                        <img className="card-img-top cardImg"  src={image} alt="" />
+                        <div  className="card-body cardBD">
+                            <p className="text-success">
+                                {name}
+                            </p>
+                            <p className="h5 text-danger pb-3">${price}</p>
                         </div>
-                        <div className="card-footer bg-warning">
-                            <small className="text-muted">★ ★ ★ ★ ☆</small>
+                        <div className="card-footer bg-success">
+                            <BeautyStars
+                                value={rate}
+                                size={13}
+                            />
                         </div>
+                        </Link>
+                        
                     </div>
                 </div>
-                
+          
+
+
         );
     }
 }
 export default Item;
-const style ={
-    height : "190px"
-}

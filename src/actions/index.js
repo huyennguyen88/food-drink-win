@@ -9,6 +9,12 @@ export const fetchProductsRequest = ()=>{
         })
     }
 }
+export const fetchProducts = (products)=>{
+    return{
+        type: types.FETCH_PRODUCTS,
+        products
+    }
+}
 export const fetchFoodsRequest = ()=>{
     return (dispatch) => {
         return callApi('products','GET',null).then(res=>{
@@ -31,12 +37,7 @@ export const fetchDrinksRequest = ()=>{
         })
     }
 }
-export const fetchProducts = (products)=>{
-    return{
-        type: types.FETCH_PRODUCTS,
-        products
-    }
-}
+
 export const fetchFoods = (foods)=>{
     return {
         type: types.SHOW_FOOD,
@@ -627,5 +628,12 @@ export const bestRatingProducts =(products)=>{
     return {
         type: types.BEST_RATING,
         products
+    }
+}
+export const getProductsWithCategory =(category_id,allProducts)=>{
+    return {
+        type: types.GET_PRODUCTS_WITH_CATEGORY,
+        category_id,
+        allProducts
     }
 }

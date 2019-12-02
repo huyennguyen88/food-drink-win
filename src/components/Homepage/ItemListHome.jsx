@@ -7,13 +7,12 @@ class ItemListHome extends Component {
     }
     render() {
         var {list} = this.props
-        console.log("5 pro",list)
         var listRen = list.map((product,index)=>{
             return <li key={index}>{product.name}</li>
         })
         return (
             <div>
-                <h1></h1>
+                <h1>Sản phẩm nổi bật</h1>
                 {listRen}
             </div>
         )

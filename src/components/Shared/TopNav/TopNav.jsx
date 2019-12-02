@@ -4,7 +4,7 @@ import SubMenu from './SubMenu'
 export default class TopNav extends Component {
     render() {
         return (
-            <div className="TopNav">
+            <div className="TopNav ">
                 <MainMenu />
                 <SubMenu {...this.props}/>
             </div>
