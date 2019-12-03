@@ -4,6 +4,9 @@
 .cardBD{
     height: 130px;
 }
+.Item {
+    font-family: 'Dosis', sans-serif;
+}
 .Item a{
     text-decoration: none;
   }

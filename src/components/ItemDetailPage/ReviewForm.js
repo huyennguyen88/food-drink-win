@@ -81,20 +81,15 @@ class ReviewForm extends Component
         var {comment, rate} = this.state
         return (
             <div className="row">
-                <div className="card">
-                    <div className="card-header ">
-                        <div className=" row d-flex justify-content-between">
-                            <p className="h5">Review</p>
-                        </div>
-                    </div>
+                <div>
                     <div className="card-body">
                         <form onSubmit={this.SubmitForm}>
                             <div className="form-group">
-                                <label>Bình luận</label>
-                                <textarea className="form-control" name="comment" rows="3" cols="50" value={comment} onChange={this.changeComment}></textarea>
+                                <label>Nhận xét</label>
+                                <textarea className="form-control" name="comment" rows="3" cols="50" placeholder="Tôi thấy món này..." value={comment} onChange={this.changeComment}></textarea>
                             </div>
                             <div className="form-group">
-                                <label>Đánh giá</label>
+                                <label>Chấm điểm</label>
                                 <BeautyStars
                                     value={rate}
                                     size={25}
@@ -112,7 +107,6 @@ class ReviewForm extends Component
     }
 }
 const mapStateToProps = state => {
-    console.log(state)
     return {
         product: state.products,
         user: state.user,

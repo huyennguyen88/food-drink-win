@@ -9,6 +9,7 @@
   .tab-content img 
   {
     width: 100%;
+    height: 330px;
     animation-name: opacity;
     animation-duration: .3s; }
 .card-detail {

@@ -5,14 +5,15 @@ import * as actions from './../../actions/index'
 class DetailInfo extends React.Component {
     constructor(props) {
         super(props)
-       
+
         this.state = {
             rate: 0,
             product: null,
-            quantity:0
+            quantity: 0,
+            rate: 0
         }
     }
-    componentDidMount(){
+    componentDidMount() {
 
         this.props.productShow(this.props.id)
     }
@@ -51,7 +52,7 @@ class DetailInfo extends React.Component {
                 dem++
             }
         });
-        rate_avr = Math.round(tong / dem) 
+        rate_avr = Math.round(tong / dem)
         return rate_avr
     }
     changeForm = (event) => {
@@ -67,28 +68,33 @@ class DetailInfo extends React.Component {
         let item = {
             id: product.id,
             price: product.price,
-            quantity:this.state.quantity,
+            quantity: this.state.quantity,
             name: product.name,
             image: product.img
         }
-        if(token){
-            await this.props.add(token,item)
+        if (token) {
+            await this.props.add(token, item)
             alert('add to cart')
         }
-        else{
+        else {
             let cart = JSON.parse(localStorage.getItem('cartItem'))
-            if(cart)cart.push(item)
+            if (cart) cart.push(item)
             else cart = [item]
-            localStorage.setItem('cartItem',JSON.stringify(cart))
+            localStorage.setItem('cartItem', JSON.stringify(cart))
         }
+    }
+    changeRate = (value) => {
+        this.setState({
+            rate: value
+        })
     }
     render() {
         var { product } = this.props
         var { rate } = this.state
-      
+
         return (
             <div className="details col-md-6">
-                <p className="h2">{product.name}</p>
+                <p style={style} className="h2">{product.name}</p>
                 <div className="rating">
                     <div className="stars">
                         <BeautyStars
@@ -99,28 +105,21 @@ class DetailInfo extends React.Component {
                     </div>
                     <span className="review-no">{product.reviews}</span>
                 </div>
-                
+                <h4 className="price"><span>{product.price}₫</span></h4>
                 <p className="product-description">{product.description}</p>
-                <h4 className="price">current price: <span>${product.price}</span></h4>
-                <p className="vote"><strong>91%</strong> of buyers enjoyed this product! <strong>(87 votes)</strong></p>
                 <div>
                     <div className="quantity input-group mb-3">
-                        <button className="btn btn-info" type="button" name="button" onClick={this.plus}>
-                            <i className="fa fa-plus" aria-hidden="true"></i>
-                        </button>
-                        <input type="text" name="quantity" value={this.state.quantity} onChange={this.changeForm} />
                         <button className="btn btn-info" type="button" name="button" onClick={this.minus}>
                             <i className="fa fa-minus" aria-hidden="true"></i>
                         </button>
-
+                        <input type="text" name="quantity" value={this.state.quantity} onChange={this.changeForm} />
+                        <button className="btn btn-info" type="button" name="button" onClick={this.plus}>
+                            <i className="fa fa-plus" aria-hidden="true"></i>
+                        </button>
+                        <button className="btn btn-outline-success mx-3" type="button" onClick={this.addToCart}>
+                            <i className="fas fa-shopping-cart" aria-hidden="true"></i>
+                            Thêm vào giỏ</button>
                     </div>
-                </div>
-                <div>
-                    <button className="btn btn-outline-success mx-1" type="button" onClick={this.addToCart}>
-                        <i className="fas fa-shopping-cart" aria-hidden="true"></i>
-                        Add to cart</button>
-                    <button className="btn btn-warning mx-1" type="button" onClick={this.addToCart}>Bye now</button>
-                    <button className="btn btn-danger" type="button"><span className="fa fa-heart"></span></button>
                 </div>
             </div>
         );
@@ -141,9 +140,14 @@ const mapDispatchToProps = (dispatch, props) => {
         productShow: (id) => {
             dispatch(actions.productShowRequest(id))
         },
-        add: (id,item) =>{
-            dispatch(actions.addToCart(id,item))
+        add: (id, item) => {
+            dispatch(actions.addToCart(id, item))
         }
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(DetailInfo);
+const style = {
+    fontFamily: "'Dosis', sans-serif",
+    fontWeight: "700",
+    fontSize: "33px",
+}

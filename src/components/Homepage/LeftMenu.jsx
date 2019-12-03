@@ -35,7 +35,7 @@ class LeftMenu extends Component {
         })
         var foodRend = foodArr.map((item, index) => <div key={index}  onClick={()=>this.onChooseCate(item.id)}>
             <div className="dropdown-divider"></div>
-            <Link  to="/" key={index} className="nav-link h5 text-warning" role="tab" aria-controls="v-pills-home" aria-selected="false">
+            <Link  to="/" key={index} className="nav-link h5 text-success" role="tab" aria-controls="v-pills-home" aria-selected="false">
                 {item.name}
                 <i className="fas fa-angle-right float-lg-right"></i>
             </Link>
@@ -43,13 +43,11 @@ class LeftMenu extends Component {
         var drinkRend = drinkArr.map((item, index) => {
             return <div key={index}  onClick={()=>this.onChooseCate(item.id)}>
                 <div className="dropdown-divider"></div>
-                <Link to="/" key={index} className="nav-link h5 text-warning" role="tab" aria-controls="v-pills-home" aria-selected="false">{item.name} <i className="fas fa-angle-right float-lg-right"></i></Link>
+                <Link to="/" key={index} className="nav-link h5 text-success" role="tab" aria-controls="v-pills-home" aria-selected="false">{item.name} <i className="fas fa-angle-right float-lg-right"></i></Link>
             </div>
         })
-        console.log("pro",this.props.allProduct)
-        console.log("pro w cate",this.props.productsWithCategory)
         return (
-            <div className="col-3 border bg-secondary ">
+            <div className="col-3 border bg-light ">
                 <div className="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                     <p className="h4 text-danger pt-2">FOOD
                     <i className="fas fa-hamburger ml-2"></i>

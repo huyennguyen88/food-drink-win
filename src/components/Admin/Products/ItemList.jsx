@@ -59,7 +59,6 @@ class ItemList extends React.Component {
                     <th className="text-center">Price</th>
                     <th className="text-center">Classify</th>
                     <th className="text-center">Quantity</th>
-                    <th className="text-center">Description</th>
                     <th className="text-center">Option</th>
                 </tr>
                 </thead>

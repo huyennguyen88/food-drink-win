@@ -21,7 +21,7 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <div className="App container bg-light">
+        <div className="App container ">
           <Homepage />
         </div>
       </Router>

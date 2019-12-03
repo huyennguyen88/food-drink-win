@@ -5,32 +5,39 @@ import { connect } from 'react-redux'
 import * as actions from './../../actions/index'
 import ReviewForm from './ReviewForm';
 import DetailInfo from './DetailInfo'
-import srcRamen from './../../image/ramen.jpg'
 class ItemDetail extends React.Component {
-    componentDidMount(){
+    constructor(props) {
+        super(props)
         var id = this.props.match.params.id
         this.props.productShow(id);
         this.props.loadReviews(id);
         this.props.loadReviewUsers(id);
     }
+    // componentDidMount(){
+    //     var id = this.props.match.params.id
+    //     this.props.productShow(id);
+    //     this.props.loadReviews(id);
+    //     this.props.loadReviewUsers(id);
+    // }
     render() {
-        var { product, reviews, users} = this.props;
+        var { product, reviews, users } = this.props;
         return (
             <div className="ItemDetail">
                 <div className="card card-detail">
                     <div className="container">
                         <div className="wrapper row">
-                            <Preview img={product.image} />
+                            <Preview image={product.image} />
                             <DetailInfo product_id={product.id} />
                         </div>
                     </div>
                 </div>
-                <p className="h4 text-info">{reviews.length} Comments</p>
-                <div className="container-fluid">
-                    <div className="mb-3">
-                        <div >
-                            <div >
-                                {    
+
+                <div >
+                    <div className="my-4">
+                        <div className="bg-light" >
+                            <div className="px-4 py-4">
+                                <p className="h5 text-info">{reviews.length} Bình luận</p>
+                                {
                                     reviews.map((item, index) => {
                                         var cmtUser = users.find((u) => {
                                             return u.id === item.user_id
@@ -41,8 +48,9 @@ class ItemDetail extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <ReviewForm id = {this.props.match.params.id}/>
+                    
                 </div>
+                <ReviewForm id={this.props.match.params.id} />
             </div>
         );
     }
@@ -52,20 +60,21 @@ class Preview extends React.Component {
         return (
             <div className="preview col-md-6">
                 <div className="preview-pic tab-content">
-                    <div className="tab-pane active" id="pic-1"><img alt="abc" src={srcRamen} /></div>
-                    {/* src={this.props.img}  */}
+                    <div className="tab-pane active" id="pic-1">
+                        <img alt="abc" src={this.props.image} />
+                    </div>
+
                 </div>
             </div>
         );
     }
 }
 const mapStateToProps = (state) => {
-    console.log(state)
     return {
         product: state.products,
         reviews: state.reviews,
         users: state.users,
-        user : state.user,
+        user: state.user,
         review: state.review,
     }
 }
@@ -80,8 +89,8 @@ const mapDispatchToProps = (dispatch) => {
         loadReviewUsers: (id) => {
             dispatch(actions.fetchReviewUsers(id))
         },
-        add: (id,item) =>{
-            dispatch(actions.addToCart(id,item))
+        add: (id, item) => {
+            dispatch(actions.addToCart(id, item))
         }
     }
 }

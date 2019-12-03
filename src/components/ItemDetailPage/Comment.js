@@ -2,6 +2,7 @@ import React from 'react';
 import './Comment.css';
 import { connect } from "react-redux";
 import * as actions from '../../actions/index'
+import BeautyStars from 'beauty-stars';
 class Comment extends React.Component {
     constructor(props) {
         super(props)
@@ -19,14 +20,14 @@ class Comment extends React.Component {
         
         var { review, user, current_user} = this.props
         var edit_delete =
-                <>
+                <div className="my-3">
                     <button type="button" className="btn btn-info btn-sm mx-2" title="Edit" onClick={()=> this.getReview(review.id)}>
                         <i className="fas fa-pencil-alt"></i>
                     </button>
                     <button type="button" className="btn btn-danger btn-sm" title="Delete" onClick={()=>this.deleteReview(review.id)}>
                         <i className="far fa-trash-alt"></i>
                     </button>
-                </>
+                </div>
         if (current_user && user) {
             var editDelElement = current_user.id=== user.id? edit_delete:''
         }
@@ -41,8 +42,11 @@ class Comment extends React.Component {
                             <small className="text-muted">{review.created_at.slice(0,10)}</small>
                         </p>
                         <strong className="text-success">@{user ? user.name : ""}</strong>
-                        <p>
-                            {review.comment} </p>
+                        <p>{review.comment}</p>
+                        <BeautyStars
+                                    value={review.rate}
+                                    size={15}
+                                />
                         <div className="action">
                             {editDelElement}
                         </div>
