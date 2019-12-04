@@ -8,19 +8,30 @@ import DetailInfo from './DetailInfo'
 class ItemDetail extends React.Component {
     constructor(props) {
         super(props)
-        var id = this.props.match.params.id
+        this.state ={
+            id: this.props.match.params.id
+        }
+    }
+    componentDidMount(){
+        var id = this.state.id
         this.props.productShow(id);
         this.props.loadReviews(id);
         this.props.loadReviewUsers(id);
     }
-    // componentDidMount(){
-    //     var id = this.props.match.params.id
-    //     this.props.productShow(id);
-    //     this.props.loadReviews(id);
-    //     this.props.loadReviewUsers(id);
-    // }
+    static getDerivedStateFromProps(nextProps, prevState){
+        if(nextProps.match.params.id === prevState.id){
+            return null
+        }else {
+            var id = nextProps.match.params.id 
+            nextProps.productShow(id);
+            nextProps.loadReviews(id);
+            nextProps.loadReviewUsers(id);
+            return {id: nextProps.match.params.id}
+        }
+    }
     render() {
         var { product, reviews, users } = this.props;
+        
         return (
             <div className="ItemDetail">
                 <div className="card card-detail">

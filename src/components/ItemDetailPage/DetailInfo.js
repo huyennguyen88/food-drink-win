@@ -10,7 +10,6 @@ class DetailInfo extends React.Component {
             rate: 0,
             product: null,
             quantity: 0,
-            rate: 0
         }
     }
     componentDidMount() {
@@ -83,11 +82,6 @@ class DetailInfo extends React.Component {
             localStorage.setItem('cartItem', JSON.stringify(cart))
         }
     }
-    changeRate = (value) => {
-        this.setState({
-            rate: value
-        })
-    }
     render() {
         var { product } = this.props
         var { rate } = this.state
@@ -100,7 +94,6 @@ class DetailInfo extends React.Component {
                         <BeautyStars
                             value={rate}
                             size={20}
-                            onChange={value => this.changeRate(value)}
                         />
                     </div>
                     <span className="review-no">{product.reviews}</span>

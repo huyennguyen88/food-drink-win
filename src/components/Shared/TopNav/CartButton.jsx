@@ -10,7 +10,7 @@ class CartButton extends React.Component {
 
                 <div className="d-flex mx-1">
                     <Link to="/cart">
-                        <button type="button" className="btn btn-outline-success">My cart <i className="fas fa-shopping-cart"></i>
+                        <button type="button" className="btn btn-outline-success mx-2">My cart <i className="fas fa-shopping-cart"></i>
                         </button>
                     </Link>
                     {token?

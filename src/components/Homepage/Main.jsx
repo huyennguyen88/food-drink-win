@@ -6,6 +6,7 @@ import ItemListHome from './ItemListHome';
 import { connect } from 'react-redux'
 import * as actions from '../../actions/index'
 import ProductCategory from './ProductCategory';
+import LiveSearch from './LiveSearch';
 class Main extends React.Component {
   constructor(props) {
     super(props)
@@ -27,10 +28,11 @@ class Main extends React.Component {
     var { bestRate } = this.state
     return (
       <div >
-        <div className="container" >
+        <div  >
           <BigImage />
-          <ProductCategory />
           <ItemListHome list={bestRate} />
+          <ProductCategory />
+          
         </div>
       </div>
     );

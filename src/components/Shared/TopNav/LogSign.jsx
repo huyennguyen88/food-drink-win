@@ -11,7 +11,6 @@ class LoginSign extends React.Component {
         }
     }
     logOut = ()=>{
-        // localStorage.removeItem('token');
         this.props.logOut();
         this.setState({
             token: ''

@@ -51,27 +51,27 @@ class CartItem extends React.Component {
             <tr>
                 <th scope="row" className="border-0">
                     <div className="p-2">
-                      
+
                         <img src={this.state.Item.image} alt="" width="70" height="50" className="rounded" />
                         <div className="ml-3 d-inline-block align-middle">
                             <h5 className="mb-0"> <p className="text-dark d-inline-block align-middle">{this.state.Item.name}</p></h5>
                         </div>
-                      
-                       
+
+
                     </div>
                 </th>
                 <td className="border-0 align-middle"><strong>${this.state.Item.price}</strong></td>
                 <td className="border-0 align-middle">
                     <div>
                         <div className="quantity input-group mb-3">
-                            <button className="btn btn-info" type="button" name="button" onClick={this.plus}>
-                                <i className="fa fa-plus" aria-hidden="true"></i>
-                            </button>
-                            <input type="text" name="quantity" value={this.state.quantity} onChange={this.changeForm} />
                             <button className="btn btn-info" type="button" name="button" onClick={this.minus}>
                                 <i className="fa fa-minus" aria-hidden="true"></i>
                             </button>
+                            <input type="text" name="quantity" value={this.state.quantity} onChange={this.changeForm} />
 
+                            <button className="btn btn-info" type="button" name="button" onClick={this.plus}>
+                                <i className="fa fa-plus" aria-hidden="true"></i>
+                            </button>
                         </div>
                     </div>
                 </td>

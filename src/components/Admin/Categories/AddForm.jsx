@@ -94,7 +94,7 @@ class AddForm extends React.Component {
                                 style={style.styleBtn}
                             >Save
                             </button>
-                            <button type="reset" className="btn btn-danger" style={style.styleBtn}>Cancel</button>
+                            <button type="reset" className="btn btn-danger" style={style.styleBtn} onClick={this.oncloseForm}>Cancel</button>
                         </div>
                     </form>
 

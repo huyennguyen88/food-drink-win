@@ -25,6 +25,7 @@ class Homepage extends Component {
                 <TopNav/>
                 <Switch>
                     <Route path="/products/:id" component={ItemDetail} />
+                    
                     <Route path="/cart">
                         <CartPage/>
                     </Route>

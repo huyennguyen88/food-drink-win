@@ -15,7 +15,7 @@ class ItemListHome extends Component {
 
         })
         return (
-            <div className="ItemListHome bg-light mt-4">
+            <div className="ItemListHome bg-light my-4 text-danger">
                 <p className="mx-2 my-2">Sản phẩm nổi bật</p>
                 <div className="row px-4">
                     {listRen}
