@@ -42,7 +42,6 @@ class ItemDetail extends React.Component {
                         </div>
                     </div>
                 </div>
-
                 <div >
                     <div className="my-4">
                         <div className="bg-light" >
@@ -59,7 +58,6 @@ class ItemDetail extends React.Component {
                             </div>
                         </div>
                     </div>
-                    
                 </div>
                 <ReviewForm id={this.props.match.params.id} />
             </div>
